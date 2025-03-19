@@ -1,0 +1,25 @@
+{
+  "name": "ai-study-buddy",
+  "version": "1.0.0",
+  "description": "AI-Powered Study Buddy - MERN Stack Project",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiao2560/AI-Study-Buddy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiao2560/AI-Study-Buddy/issues"
+  },
+  "homepage": "https://github.com/jiao2560/AI-Study-Buddy#readme",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
