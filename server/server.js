@@ -6,6 +6,8 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const studyMaterialRoutes = require("./routes/studyMaterialRoutes");
+app.use("/api/studyMaterials", studyMaterialRoutes);
 
 // Connect to MongoDB
 mongoose
