@@ -1,14 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from "react";
+import { fetchStudyMaterials } from "./services/api";
 
 function App() {
+  const [materials, setMaterials] = useState([]);
+
+  useEffect(() => {
+    fetchStudyMaterials().then((res) => setMaterials(res.data)).catch((err) => console.error(err));
+  }, []);
+
   return (
     <div>
-      <h1>Hello, World!</h1>
+      <h1>Study Materials</h1>
+      <ul>
+        {materials.map((material) => (
+          <li key={material._id}>{material.title}</li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export default App
+export default App;
