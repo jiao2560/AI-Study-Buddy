@@ -6,13 +6,14 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const userRoutes = require("./routes/userRoutes");
+app.use("/api/users", userRoutes);
 const studyMaterialRoutes = require("./routes/studyMaterialRoutes");
 app.use("/api/studyMaterials", studyMaterialRoutes);
 const quizRoutes = require("./routes/quizRoutes");
 app.use("/api/quizzes", quizRoutes);
 const adminReportRoutes = require("./routes/adminReportRoutes");
 app.use("/api/reports", adminReportRoutes);
-
 
 // Connect to MongoDB
 mongoose
