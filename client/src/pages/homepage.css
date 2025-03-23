@@ -102,9 +102,15 @@ button {
 
   .card {
     background-color: #ffffff;
-    color: #000; /* 🆕 Make sure content inside is readable */
-    /* ... existing styles ... */
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 30px 40px;
+    border-radius: 40px; /* 🎯 Oval corners */
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
   }
+
   .card h2 {
     margin-top: 0;
     color: #222;
