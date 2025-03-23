@@ -1,0 +1,76 @@
+.homepage {
+    padding: 40px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+
+  .top-buttons {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .login-button,
+  .signup-button {
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .login-button {
+    border: 1px solid #007bff;
+    background-color: #fff;
+    color: #007bff;
+  }
+
+  .signup-button {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .filter-toggle button {
+    padding: 8px 16px;
+    background: #444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .filter-section {
+    margin: 20px 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .filter-section input {
+    padding: 8px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .filter-section button {
+    padding: 8px 12px;
+    margin-left: 10px;
+  }
+
+  .sort-dropdown {
+    margin-top: 10px;
+  }
+
+  .sort-dropdown select {
+    padding: 6px;
+    margin-left: 10px;
+  }
+
+  .error {
+    color: red;
+  }
+
+  a {
+    color: #1a0dab;
+    text-decoration: underline;
+  }
