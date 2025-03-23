@@ -115,3 +115,42 @@ button {
     margin-top: 0;
     color: #222;
   }
+  .floating-robot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    width: 120px;
+    z-index: 999;
+    animation: dance 2.5s infinite ease-in-out;
+    cursor: pointer;
+  }
+
+  .robot-image {
+    width: 100px;
+    height: auto;
+    margin-bottom: 5px;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+
+
+  @keyframes dance {
+    0% {
+      transform: rotate(0deg) scale(1) translateY(0);
+    }
+    25% {
+      transform: rotate(10deg) scale(1.05) translateY(-4px);
+    }
+    50% {
+      transform: rotate(0deg) scale(1.1) translateY(0);
+    }
+    75% {
+      transform: rotate(-10deg) scale(1.05) translateY(-4px);
+    }
+    100% {
+      transform: rotate(0deg) scale(1) translateY(0);
+    }
+  }

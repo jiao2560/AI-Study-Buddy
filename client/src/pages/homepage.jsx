@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import robotImg from "../assets/robot.png"; // ✅ correct relative path
 import "./HomePage.css"; // ✅ Import external CSS
 
 const HomePage = () => {
@@ -114,6 +115,9 @@ const HomePage = () => {
           ))
         )}
       </ul>
+      </div>
+      <div className="floating-robot">
+        <img src={robotImg} alt="AI Study Bot" className="robot-image" />
       </div>
     </div>
   );
