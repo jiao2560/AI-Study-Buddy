@@ -86,6 +86,7 @@ const HomePage = () => {
         </div>
       )}
 
+    <div className="card">
       <h2>📈 Trending Topics from Wikipedia</h2>
       <ul>
         {sortedWikiTopics.length === 0 ? (
@@ -100,7 +101,9 @@ const HomePage = () => {
           ))
         )}
       </ul>
+    </div>
 
+    <div className="card">
       <h2>🤖 AI-Suggested Topics</h2>
       <ul>
         {aiSuggestions.length === 0 ? (
@@ -111,6 +114,7 @@ const HomePage = () => {
           ))
         )}
       </ul>
+      </div>
     </div>
   );
 };
