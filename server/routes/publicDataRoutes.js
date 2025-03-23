@@ -45,7 +45,7 @@ router.get("/homepage-data", async (req, res) => {
           {
             parts: [
               {
-                text: `Give me 5 trending study topics for: ${searchTerm}`,
+                text: `Give me 5 trending study topics for: ${searchTerm}, no more than one line`,
               },
             ],
           },
