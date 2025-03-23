@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/jiao2560/AI-Study-Buddy#readme",
   "dependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7"
   }
 }
