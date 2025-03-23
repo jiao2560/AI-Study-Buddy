@@ -45,6 +45,37 @@ const HomePage = () => {
 
   return (
     <div style={{ padding: "40px", fontFamily: "Arial, sans-serif", color: "#333" }}>
+        {/* 🔐 Top-right Login / Signup */}
+<div style={{
+  position: "absolute",
+  top: "20px",
+  right: "40px",
+  display: "flex",
+  gap: "12px"
+}}>
+  <button style={{
+    padding: "8px 16px",
+    border: "1px solid #007bff",
+    backgroundColor: "#fff",
+    color: "#007bff",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}>
+    Login
+  </button>
+  <button style={{
+    padding: "8px 16px",
+    border: "none",
+    backgroundColor: "#007bff",
+    color: "#fff",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}>
+    Sign Up
+  </button>
+</div>
       <h1>Welcome to AI Study Buddy</h1>
       <p>Summarize. Quiz. Master. Smarter studying starts here.</p>
 
