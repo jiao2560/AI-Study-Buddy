@@ -153,23 +153,24 @@ button {
       transform: rotate(0deg) scale(1) translateY(0);
     }
   }
-/* 🆕 并排显示两个卡片 */
+/* Path: client/src/pages/homepage.css */
+/* Compare this snippet from client/src/index.css: */
 .card-container {
   display: flex;
   justify-content: space-around;
   gap: 30px;
-  flex-wrap: wrap; /* ✅ 小屏幕自动换行 */
+  flex-wrap: wrap; /* Wrap to the next line if needed */
   margin-top: 30px;
 }
 
-/* 卡片宽度设置，防止撑太开 */
+/* Card width setting to prevent overstretching */
 .card {
   flex: 1;
   min-width: 300px;
   max-width: 500px;
 }
 
-/* ✅ 移动 Login / Sign Up 到页面底部 */
+/* Move Login / Sign Up to the bottom of the page */
 .auth-buttons {
   display: flex;
   justify-content: center;
@@ -206,7 +207,7 @@ button {
 .content-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px; /* ✅ 页面边缘空隙 + 上下留白 */
+  padding: 40px 20px; /* Page Edge Gaps + White space on top and bottom */
   box-sizing: border-box;
 
 }
@@ -214,4 +215,10 @@ button {
 .top-buttons {
   display: none !important;
   position: static !important;
+}
+.card-container-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
