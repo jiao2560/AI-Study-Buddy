@@ -4,14 +4,10 @@
   "description": "AI-Powered Study Buddy - MERN Stack Project",
   "main": "index.js",
   "scripts": {
-  "install-client": "npm install --prefix client",
-  "install-server": "npm install --prefix server",
-  "postinstall": "run-p install-client install-server",
-  "client": "cd client && npm run dev",
-  "server": "cd server && npm run dev",
-  "dev": "concurrently \"npm run server\" \"npm run client\""
-}
-,
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jiao2560/AI-Study-Buddy.git"
@@ -24,10 +20,10 @@
   },
   "homepage": "https://github.com/jiao2560/AI-Study-Buddy#readme",
   "dependencies": {
-    "concurrently": "^9.1.2",
-    "dotenv": "^16.4.7"
+    "concurrently": "^9.1.2"
   },
   "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "jest": "^29.7.0",
+    "supertest": "^7.1.0"
   }
 }
