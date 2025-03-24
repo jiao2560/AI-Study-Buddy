@@ -15,6 +15,9 @@ app.use("/api/quizzes", quizRoutes);
 const adminReportRoutes = require("./routes/adminReportRoutes");
 app.use("/api/reports", adminReportRoutes);
 
+const publicDataRoutes = require("./routes/publicDataRoutes");
+app.use("/api/public", publicDataRoutes);
+
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI, {
