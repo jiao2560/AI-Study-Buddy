@@ -1,13 +1,12 @@
 .homepage {
-    padding: 40px;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    min-height: 100vh;
-    width: 100%;                /* 🆕 Full width */
-    box-sizing: border-box;     /* 🆕 Prevent overflow */
-    background-color: transparent; /* 🆕 Let gradient show */
-  }
-
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  background-color: transparent;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  box-sizing: border-box;
+}
 
   .top-buttons {
     position: absolute;
@@ -154,3 +153,72 @@ button {
       transform: rotate(0deg) scale(1) translateY(0);
     }
   }
+/* Path: client/src/pages/homepage.css */
+/* Compare this snippet from client/src/index.css: */
+.card-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  flex-wrap: wrap; /* Wrap to the next line if needed */
+  margin-top: 30px;
+}
+
+/* Card width setting to prevent overstretching */
+.card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+/* Move Login / Sign Up to the bottom of the page */
+.auth-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+.login-btn,
+.signup-btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.login-btn {
+  background-color: #fff;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.signup-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+/* ✅ 隐藏旧的右上角按钮 */
+.top-buttons {
+  display: none;
+}
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px; /* Page Edge Gaps + White space on top and bottom */
+  box-sizing: border-box;
+
+}
+
+.top-buttons {
+  display: none !important;
+  position: static !important;
+}
+.card-container-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
