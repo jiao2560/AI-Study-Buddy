@@ -51,12 +51,11 @@ const HomePage = () => {
 
       <h1>Welcome to AI Study Buddy</h1>
       <p>Summarize. Quiz. Master. Smarter studying starts here.</p>
-      <NavBar />
-      <div className="filter-toggle">
-        <button onClick={() => setShowFilters((prev) => !prev)}>
-          {showFilters ? "🙈 Hide Filters" : "🔍 Show Filters"}
-        </button>
-      </div>
+      <NavBar
+        onToggleFilters={() => setShowFilters((prev) => !prev)} 
+        showFilters={showFilters} 
+      />
+      
 
       {showFilters && (
         <div className="filter-section">

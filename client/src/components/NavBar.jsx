@@ -1,14 +1,18 @@
 import React from "react";
-import "./NavBar.css"; // 我们等下会加样式
+import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({ onToggleFilters, showFilters }) => {
   return (
     <nav className="navbar">
-      <div className="logo">🤖 AI Study Buddy</div>
       <ul className="nav-links">
         <li><a href="#topics">Topics</a></li>
-        <li><a href="#ai-suggested">AI Suggestions</a></li>
-        {/* 你可以添加更多导航项 */}
+        <li><a href="#ai-suggested">Suggestions</a></li>
+        {/* Toggle filter button */}
+        <li>
+          <button className="filter-toggle-btn" onClick={onToggleFilters}>
+            {showFilters ? "🙈 Hide Filters" : "🔍 Show Filters"}
+          </button>
+        </li>
       </ul>
     </nav>
   );
