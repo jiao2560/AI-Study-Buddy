@@ -62,7 +62,7 @@ const DashPage = () => {
     <div className="homepage">
       <div className="content-container">
         <h1>Welcome back, {username || "User"}!</h1>
-        <p>Your personalized dashboard awaits ✨</p>
+        <p>Happy studying! 🎓✨</p>
 
         <NavBar onToggleFilters={() => setShowFilters((prev) => !prev)} showFilters={showFilters} />
 
@@ -93,35 +93,38 @@ const DashPage = () => {
           </div>
         )}
 
-        <div className="card-container-wrapper">
-          <div className="card-container">
-            <div className="card" id="topics">
-              <h2>📈 Trending Topics from Wikipedia</h2>
-              <ul>
-                {sortedWikiTopics.length === 0 ? (
-                  <p className="error">❌ No matching Wikipedia topics</p>
-                ) : (
-                  sortedWikiTopics.map((topic, idx) => (
-                    <li key={idx}>
-                      <a href={topic.url} target="_blank" rel="noopener noreferrer">
-                        {topic.title}
-                      </a>
-                    </li>
-                  ))
-                )}
-              </ul>
-            </div>
+        <div className="dashboard-grid">
+          <div className="grid-card ai-card">
+            <h2>🤖 AI Recommended Topics</h2>
+            <ul>
+              {aiSuggestions.length === 0 ? (
+                <p className="error">❌ No matching AI suggestions</p>
+              ) : (
+                aiSuggestions.map((topic, idx) => <li key={idx}>{topic}</li>)
+              )}
+            </ul>
+          </div>
 
-            <div className="card" id="ai-suggested">
-              <h2>🤖 AI-Suggested Topics</h2>
-              <ul>
-                {aiSuggestions.length === 0 ? (
-                  <p className="error">❌ No matching AI suggestions</p>
-                ) : (
-                  aiSuggestions.map((topic, idx) => <li key={idx}>{topic}</li>)
-                )}
-              </ul>
-            </div>
+          <div className="grid-card trending-card">
+            <h2>📈 Trending Study Materials</h2>
+            <ul>
+              {sortedWikiTopics.length === 0 ? (
+                <p className="error">❌ No matching Wikipedia topics</p>
+              ) : (
+                sortedWikiTopics.map((topic, idx) => (
+                  <li key={idx}>
+                    <a href={topic.url} target="_blank" rel="noopener noreferrer">
+                      {topic.title}
+                    </a>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+
+          <div className="grid-card recent-card">
+            <h2>📚 Recent Study Topics</h2>
+            <p>Coming soon: Your latest viewed or saved topics!</p>
           </div>
         </div>
 
