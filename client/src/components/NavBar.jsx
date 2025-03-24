@@ -30,7 +30,7 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/");
   };
 
   return (
