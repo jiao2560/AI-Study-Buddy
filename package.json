@@ -21,5 +21,9 @@
   "homepage": "https://github.com/jiao2560/AI-Study-Buddy#readme",
   "dependencies": {
     "concurrently": "^9.1.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.1.0"
   }
 }

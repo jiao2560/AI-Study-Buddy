@@ -5,11 +5,15 @@ const StudyMaterial = require("../models/StudyMaterial");
 // Create study material
 router.post("/", async (req, res) => {
   try {
-    const studyMaterial = new StudyMaterial(req.body);
-    await studyMaterial.save();
-    res.status(201).json(studyMaterial);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const { title, content } = req.body;
+    if (!title || !content) {
+      return res.status(400).json({ error: "Title and content are required" });
+    }
+    const newMaterial = new StudyMaterial({ title, content });
+    const saved = await newMaterial.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -26,20 +30,26 @@ router.get("/", async (req, res) => {
 // Update study material
 router.put("/:id", async (req, res) => {
   try {
-    const updatedStudyMaterial = await StudyMaterial.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updatedStudyMaterial);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const updated = await StudyMaterial.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updated) return res.status(404).json({ error: "Not found" });
+    res.status(200).json(updated);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
 // Delete study material
 router.delete("/:id", async (req, res) => {
   try {
-    await StudyMaterial.findByIdAndDelete(req.params.id);
-    res.json({ message: "Deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const deleted = await StudyMaterial.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ error: "Not found" });
+    res.status(200).json({ message: "Deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
