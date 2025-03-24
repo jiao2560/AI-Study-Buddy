@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import robotImg from "../assets/robot.png"; // ✅ correct relative path
-import "./HomePage.css"; // ✅ Import external CSS
+import "./homepage.css"; // ✅ Import external CSS
 
 const HomePage = () => {
   const [trendingTopics, setTrendingTopics] = useState([]);
