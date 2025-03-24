@@ -114,7 +114,7 @@ body {
 
 .card {
   color: #000;
-  border: 1px solid #ccc;
+  border: 0.5px solid #6b005d;
   padding: 30px 40px;
   border-radius: 40px; /* Oval corners */
   margin-bottom: 30px;
@@ -125,7 +125,7 @@ body {
 
 .card h2 {
   margin-top: 0;
-  color: #222;
+  color: #18ceee;
 }
 
 .floating-robot {
