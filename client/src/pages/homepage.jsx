@@ -13,7 +13,7 @@ const HomePage = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("/api/public/homepage-data", {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/public/homepage-data`, {
         params: {
           search: searchTerm || "computer science",
           keyword: requiredKeyword,
