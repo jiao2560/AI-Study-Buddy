@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import robotImg from "../assets/robot.png"; // ✅ correct relative path
-import "./homepage.css"; // ✅ Import external CSS
+import robotImg from "../assets/robot.png";
+import "./homepage.css";
+import NavBar from "../components/NavBar"; // 导入导航栏
 
 const HomePage = () => {
   const [trendingTopics, setTrendingTopics] = useState([]);
@@ -46,14 +47,11 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <div className="top-buttons">
-        <button className="login-button">Login</button>
-        <button className="signup-button">Sign Up</button>
-      </div>
+ 
 
       <h1>Welcome to AI Study Buddy</h1>
       <p>Summarize. Quiz. Master. Smarter studying starts here.</p>
-
+      <NavBar />
       <div className="filter-toggle">
         <button onClick={() => setShowFilters((prev) => !prev)}>
           {showFilters ? "🙈 Hide Filters" : "🔍 Show Filters"}
@@ -87,37 +85,45 @@ const HomePage = () => {
         </div>
       )}
 
-    <div className="card">
-      <h2>📈 Trending Topics from Wikipedia</h2>
-      <ul>
-        {sortedWikiTopics.length === 0 ? (
-          <p className="error">❌ No matching Wikipedia topics</p>
-        ) : (
-          sortedWikiTopics.map((topic, idx) => (
-            <li key={idx}>
-              <a href={topic.url} target="_blank" rel="noopener noreferrer">
-                {topic.title}
-              </a>
-            </li>
-          ))
-        )}
-      </ul>
-    </div>
+      {/* 🧩 两个卡片并排显示 */}
+      <div className="card-container">
+        <div className="card" id="topics">
+          <h2>📈 Trending Topics from Wikipedia</h2>
+          <ul>
+            {sortedWikiTopics.length === 0 ? (
+              <p className="error">❌ No matching Wikipedia topics</p>
+            ) : (
+              sortedWikiTopics.map((topic, idx) => (
+                <li key={idx}>
+                  <a href={topic.url} target="_blank" rel="noopener noreferrer">
+                    {topic.title}
+                  </a>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
 
-    <div className="card">
-      <h2>🤖 AI-Suggested Topics</h2>
-      <ul>
-        {aiSuggestions.length === 0 ? (
-          <p className="error">❌ No matching AI suggestions</p>
-        ) : (
-          aiSuggestions.map((topic, idx) => (
-            <li key={idx}>{topic}</li>
-          ))
-        )}
-      </ul>
+        <div className="card" id="ai-suggested">
+          <h2>🤖 AI-Suggested Topics</h2>
+          <ul>
+            {aiSuggestions.length === 0 ? (
+              <p className="error">❌ No matching AI suggestions</p>
+            ) : (
+              aiSuggestions.map((topic, idx) => <li key={idx}>{topic}</li>)
+            )}
+          </ul>
+        </div>
       </div>
+
       <div className="floating-robot">
         <img src={robotImg} alt="AI Study Bot" className="robot-image" />
+      </div>
+
+      {/* ✅ Login / Sign Up 放到底部 */}
+      <div className="auth-buttons">
+        <button className="login-btn">Login</button>
+        <button className="signup-btn">Sign Up</button>
       </div>
     </div>
   );

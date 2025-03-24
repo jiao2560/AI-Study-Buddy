@@ -154,3 +154,53 @@ button {
       transform: rotate(0deg) scale(1) translateY(0);
     }
   }
+/* 🆕 并排显示两个卡片 */
+.card-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  flex-wrap: wrap; /* ✅ 小屏幕自动换行 */
+  margin-top: 30px;
+}
+
+/* 卡片宽度设置，防止撑太开 */
+.card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+/* ✅ 移动 Login / Sign Up 到页面底部 */
+.auth-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+.login-btn,
+.signup-btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.login-btn {
+  background-color: #fff;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.signup-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+/* ✅ 隐藏旧的右上角按钮 */
+.top-buttons {
+  display: none;
+}
