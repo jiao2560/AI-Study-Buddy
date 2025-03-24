@@ -46,9 +46,17 @@
   }
 
   .filter-section {
-    margin: 20px 0;
-    transition: all 0.3s ease-in-out;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    align-items: center;
+    box-sizing: border-box;
   }
+  
 
   .filter-section input {
     padding: 8px;
@@ -200,7 +208,6 @@ button {
   color: white;
 }
 
-/* ✅ 隐藏旧的右上角按钮 */
 .top-buttons {
   display: none;
 }
