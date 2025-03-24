@@ -1,13 +1,12 @@
 .homepage {
-    padding: 40px;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    min-height: 100vh;
-    width: 100%;                /* 🆕 Full width */
-    box-sizing: border-box;     /* 🆕 Prevent overflow */
-    background-color: transparent; /* 🆕 Let gradient show */
-  }
-
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  background-color: transparent;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  box-sizing: border-box;
+}
 
   .top-buttons {
     position: absolute;
@@ -203,4 +202,16 @@ button {
 /* ✅ 隐藏旧的右上角按钮 */
 .top-buttons {
   display: none;
+}
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px; /* ✅ 页面边缘空隙 + 上下留白 */
+  box-sizing: border-box;
+
+}
+
+.top-buttons {
+  display: none !important;
+  position: static !important;
 }
