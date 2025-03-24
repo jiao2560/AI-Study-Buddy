@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homepage";
-import Signup from "./pages/signup"; // ✅ 导入 SignUp 页面
+import Signup from "./pages/signup"; // 👈 Import the Signup component
 
 function App() {
   return (
