@@ -5,11 +5,21 @@ const Quiz = require("../models/Quiz");
 // Create a new quiz
 router.post("/", async (req, res) => {
   try {
+    const { study_material_id, questions } = req.body;
+    if (
+      !study_material_id ||
+      !Array.isArray(questions) ||
+      questions.length === 0
+    ) {
+      return res
+        .status(400)
+        .json({ error: "Study material ID and questions are required" });
+    }
     const quiz = new Quiz(req.body);
-    await quiz.save();
-    res.status(201).json(quiz);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const saved = await quiz.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -37,20 +47,24 @@ router.get("/:id", async (req, res) => {
 // Update a quiz
 router.put("/:id", async (req, res) => {
   try {
-    const updatedQuiz = await Quiz.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updatedQuiz);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const updated = await Quiz.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!updated) return res.status(404).json({ error: "Quiz not found" });
+    res.status(200).json(updated);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
 // Delete a quiz
 router.delete("/:id", async (req, res) => {
   try {
-    await Quiz.findByIdAndDelete(req.params.id);
-    res.json({ message: "Quiz deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const deleted = await Quiz.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ error: "Quiz not found" });
+    res.status(200).json({ message: "Quiz deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
