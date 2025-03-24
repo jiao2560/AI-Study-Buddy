@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import robotImg from "../assets/robot.png";
 import "./homepage.css";
-import NavBar from "../components/NavBar"; // 导入导航栏
+import NavBar from "../components/NavBar"; 
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [trendingTopics, setTrendingTopics] = useState([]);
@@ -44,6 +45,7 @@ const HomePage = () => {
   } else if (sortOption === "snippetLength") {
     sortedWikiTopics.sort((a, b) => (b.snippet?.length || 0) - (a.snippet?.length || 0));
   }
+  const navigate = useNavigate();
 
   return (
     <div className="homepage">
@@ -120,10 +122,9 @@ const HomePage = () => {
           <img src={robotImg} alt="AI Study Bot" className="robot-image" />
         </div>
 
-        {/* ✅ Login / Sign Up 放到底部 */}
         <div className="auth-buttons">
           <button className="login-btn">Login</button>
-          <button className="signup-btn">Sign Up</button>
+          <button className="signup-btn"onClick={() => navigate("/signup")}>Sign Up</button>
         </div>
       </div>
     </div>
