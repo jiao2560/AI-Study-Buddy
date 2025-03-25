@@ -110,7 +110,7 @@ Absolutely! Here's a polished and professional **"My Contribution"** section for
 
 ## 👨‍💻 My Contribution(Wenbo Jiao)
 
-As part of the development team for AI Study Buddy, I led the implementation of several frontend and backend features to enhance functionality, user experience, and visual design:
+As part of the development team for AI Study Buddy, I implemented several frontend and backend features to enhance functionality, user experience, and visual design:
 
 ### ✅ Frontend (React)
 - Homepage Layout: Built a responsive and dynamic homepage using React and modular CSS, serving as the central hub for AI-suggested and Wikipedia trending topics.
