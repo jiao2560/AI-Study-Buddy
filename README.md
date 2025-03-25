@@ -103,6 +103,44 @@ VITE_API_BASE_URL=http://localhost:5000  # Replace with your backend URL
 4. Push to the branch (`git push origin feature/signup`)
 5. Create a Pull Request
 
+Wenbo Jiao:
+Absolutely! Here's a polished and professional **"My Contribution"** section for your `README.md` based on what you’ve implemented:
+
+---
+
+## 👨‍💻 My Contribution(Wenbo Jiao)
+
+As part of the development team for AI Study Buddy, I led the implementation of several frontend and backend features to enhance functionality, user experience, and visual design:
+
+### ✅ Frontend (React)
+- Homepage Layout: Built a responsive and dynamic homepage using React and modular CSS, serving as the central hub for AI-suggested and Wikipedia trending topics.
+- **Search, Filter & Sorting UI**: Implemented user-friendly controls to:
+  - Search topics using keywords
+  - Filter results by required keywords
+  - Sort Wikipedia results by alphabetical order or snippet richness
+- **Filter Toggle System**: Designed a collapsible filter panel with smooth UX and clean default UI state.
+- **Login/Signup UI Buttons**: Added styled, static Login and Signup buttons in the top-right corner for future authentication integration.
+- **Animated AI Bot Character**:
+  - Positioned an AI Study Bot image in the bottom-right of the screen
+  - Applied custom CSS keyframe animations for a floating/bouncing/dancing effect
+  - Ensured non-intrusive and playful UI enhancement
+- **Dark Text Contrast Fix**: Improved accessibility by fixing font visibility issues on gradient backgrounds.
+- **Layout Optimizations**: Refactored CSS layout to prevent wrapping issues and support a full-width background.
+
+### ✅ Backend (Node.js + Express)
+- **Integrated Wikipedia API**: Configured backend to fetch trending topics using the Wikipedia search API with custom search parameters.
+- **Gemini AI Integration**:
+  - Made a secure POST request to Google’s Gemini API
+  - Parsed and cleaned Gemini AI-generated suggestions for frontend display
+- **Query Parameter Support**: Enhanced the API to accept `search` and `keyword` query params to support real-time search and filtering from the frontend.
+
+### 📸 Screenshots
+(Insert screenshots here)
+
+---
+
+Let me know if you want a slightly more casual or technical tone. Happy to help with other parts of the README too!
+
 ---
 
 ## 📄 License
