@@ -136,6 +136,14 @@ As part of the development team for AI Study Buddy, I implemented several fronte
 
 ### 📸 Screenshots
 ![image](https://github.com/user-attachments/assets/b0dcc169-6d2f-4262-915a-3ebb930a648e)
+![image](https://github.com/user-attachments/assets/3739503d-a1a6-43d5-b88c-2194aba14602)
+![image](https://github.com/user-attachments/assets/118581b8-4a73-44ac-bdc4-1254d027e0d5)
+![image](https://github.com/user-attachments/assets/3dcb0563-932f-43f5-937a-4599635d9f1f)
+![image](https://github.com/user-attachments/assets/66b49058-f1a2-4840-8259-387bb3ba7930)
+
+
+
+
 
 
 ---
