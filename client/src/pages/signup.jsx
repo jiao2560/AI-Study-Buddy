@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // ✅ Add this
 import "./signup.css";
 
 const Signup = () => {
@@ -11,6 +12,7 @@ const Signup = () => {
   });
 
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); // ✅ Initialize navigate
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -34,7 +36,13 @@ const Signup = () => {
         }
       );
 
-      setMessage("✅ Registration successful! You can now log in.");
+      setMessage("✅ Registration successful! Redirecting to login...");
+
+      // ✅ Redirect to login after short delay
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+
     } catch (err) {
       setMessage(`❌ ${err.response?.data?.error || "Signup failed"}`);
     }
