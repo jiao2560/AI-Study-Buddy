@@ -4,7 +4,14 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",               // your dev frontend
+    "https://ai-study-buddy-4.onrender.com"       // your production site (e.g., Vercel, Netlify, etc.)
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 const userRoutes = require("./routes/userRoutes");
 app.use("/api/users", userRoutes);
