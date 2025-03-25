@@ -149,7 +149,6 @@ As part of the development team for AI Study Buddy, I implemented several fronte
 
 ---
 
-Let me know if you want a slightly more casual or technical tone. Happy to help with other parts of the README too!
 
 ---
 
