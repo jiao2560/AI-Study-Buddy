@@ -135,7 +135,8 @@ As part of the development team for AI Study Buddy, I implemented several fronte
 - **Query Parameter Support**: Enhanced the API to accept `search` and `keyword` query params to support real-time search and filtering from the frontend.
 
 ### 📸 Screenshots
-(Insert screenshots here)
+![image](https://github.com/user-attachments/assets/b0dcc169-6d2f-4262-915a-3ebb930a648e)
+
 
 ---
 
