@@ -59,6 +59,9 @@ const Login = () => {
           <button type="submit">Log In</button>
         </form>
         {message && <p className="message">{message}</p>}
+        <p className="back-home" onClick={() => navigate("/")}>
+        ← Return to Home
+        </p>
       </div>
     </div>
   );

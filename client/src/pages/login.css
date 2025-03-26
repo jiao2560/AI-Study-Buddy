@@ -57,4 +57,6 @@
     font-weight: bold;
     color: #ff3333;
   }
-  
+  .back-home:hover {
+    color: #0056b3;
+  }
