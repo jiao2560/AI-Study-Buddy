@@ -208,9 +208,63 @@ As a key frontend contributor to the **AI Study Buddy** project, I focused on im
 
 
 
+## 🧠 My Contribution (Xinlai Chen)
 
+🎥 **Code Walkthrough Video**: [Insert Your YouTube Link]
+
+As the primary backend developer for **AI Study Buddy**, I focused on building the server infrastructure, implementing all core CRUD functionality, and ensuring full test coverage and frontend-backend integration.
 
 ---
+
+### ✅ Backend (Node.js + Express + MongoDB)
+
+- **Express + MongoDB Setup**
+  - Initialized the Express server and connected to MongoDB Atlas using Mongoose.
+  - Managed environment variables and deployment configurations.
+
+- **Collections & Models**
+  - Created and managed four collections:
+    - `Users`: Handles registration, login, profile updates, deletion.
+    - `StudyMaterials`: Stores user-created study content.
+    - `Quizzes`: Stores multiple-choice questions linked to study materials.
+    - `AdminReports`: Allows users to flag inappropriate content.
+
+- **CRUD API Development**
+  - Implemented full RESTful endpoints for all collections (`GET`, `POST`, `PUT`, `DELETE`).
+  - Included field validation and proper HTTP status codes (e.g., `400`, `404`, `500`).
+
+- **Authentication**
+  - Used `bcrypt` to hash user passwords.
+  - Issued JWT tokens using `jsonwebtoken` during login.
+  - Helped configure `JWT_SECRET` and ensured token-based routing worked with frontend.
+
+- **External API Configuration**
+  - Assisted with deployment to Render and added missing keys like `JWT_SECRET`, `COHERE_API_KEY`, and `GOOGLE_API_KEY` to fix production bugs.
+
+
+### ✅ Automated Testing (Jest + Supertest)
+
+- **Full Test Coverage**
+  - Wrote 32 automated tests across 4 files: `users.test.js`, `studyMaterial.test.js`, `quiz.test.js`, and `report.test.js`.
+  - Each test suite covers:
+    - Successful CRUD operations
+    - Missing field errors (`400`)
+    - Invalid or non-existent ID handling (`404`)
+
+- **Test Tools**
+  - Used Jest for assertions and Supertest for simulating HTTP requests.
+  - Verified backend functionality before merging to `main`.
+
+
+### 🔁 Integration & Debugging
+
+- Verified frontend-backend integration using Axios and REST endpoints.
+- Helped teammates debug login failures related to JWT and missing `.env` variables.
+- Ensured deployed frontend could communicate securely with the backend.
+
+
+
+
 
 
 ---
