@@ -143,7 +143,7 @@ As part of the development team for AI Study Buddy, I implemented several fronte
 ![image](https://github.com/user-attachments/assets/66b49058-f1a2-4840-8259-387bb3ba7930)
 
 
-
+---
 
 ## 👨‍💻 My Contribution (Zhenziye Lin)
 
@@ -206,11 +206,11 @@ As a key frontend contributor to the **AI Study Buddy** project, I focused on im
 ![Image](https://github.com/user-attachments/assets/4c1cdd89-8f88-4036-bff7-0eac5495c038)
 ![Image](https://github.com/user-attachments/assets/43e59371-e339-442a-ae03-69e501c4842e)
 
-
+---
 
 ## 🧠 My Contribution (Xinlai Chen)
 
-🎥 **Code Walkthrough Video**: [Insert Your YouTube Link]
+🎥 **Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EWz0S7fNuLtOt2tFe2gBHzYBemcg_1BPAg6PIgCTmkZCmA?e=6aBWsb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
 
 As the primary backend developer for **AI Study Buddy**, I focused on building the server infrastructure, implementing all core CRUD functionality, and ensuring full test coverage and frontend-backend integration.
 
@@ -262,6 +262,8 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
 - Helped teammates debug login failures related to JWT and missing `.env` variables.
 - Ensured deployed frontend could communicate securely with the backend.
 
+### 📸 Screenshots
+<img width="274" alt="image" src="https://github.com/user-attachments/assets/4e03649d-284e-4d42-b973-44cd076c727d" />
 
 
 
