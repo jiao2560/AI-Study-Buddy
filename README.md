@@ -145,6 +145,69 @@ As part of the development team for AI Study Buddy, I implemented several fronte
 
 
 
+## 👨‍💻 My Contribution (Zhenziye Lin)
+
+🎥 **Code Walkthrough Video**: [Click to watch](https://drive.google.com/file/d/1OTJt8dUgkYx-CJOwB3qkq3DZG8bjqR3Z/view?usp=sharing)
+
+As a key frontend contributor to the **AI Study Buddy** project, I focused on improving the user interface, implementing user authentication, and managing post-login routing logic for a smooth and friendly user experience.
+
+---
+
+### ✅ Frontend (React)
+
+- **Homepage Redesign**
+  - Designed and implemented a responsive homepage layout.
+  - Used gradient background theme consistent with branding.
+  - Integrated animated AI Study Bot in the bottom-right corner for visual engagement.
+  - Created visually pleasing card layout for:
+    - Trending Topics from Wikipedia
+    - AI-Suggested Topics
+
+- **Navigation Bar (NavBar)**
+  - Designed a modern, responsive NavBar with:
+    - Home, Study Material, Show Search buttons.
+    - Dynamic display of `Hi, [username]`, Profile, and Logout after login.
+  - Ensured three buttons are spaced across the bar evenly.
+
+- **Login & Signup**
+  - Built standalone `Login.jsx` and `Signup.jsx` pages.
+  - Enabled JWT token storage on successful login (via `localStorage`).
+  - Implemented page redirection to Dashboard after login.
+  - Added message display for login success/failure.
+
+- **Dashboard Page (DashPage.jsx)**
+  - Created personalized post-login dashboard with greeting and:
+    - 📌 AI Recommended Topics
+    - 📚 Trending Study Materials
+    - ⏳ Recent Study Topics
+  - Used custom layout and theme-consistent colors.
+
+- **Search & Filters**
+  - Designed a collapsible search/filter bar:
+    - Search bar for topic keywords.
+    - Optional required keyword input.
+    - Dropdown to sort topics alphabetically or by richness.
+
+### ✅ Backend (Node.js + Express)
+
+- **User Authentication**
+  - Developed user routes (`/register`, `/login`, `/profile/:id`).
+  - Implemented secure password hashing using `bcrypt`.
+  - Generated JWT tokens using `jsonwebtoken` with proper secret key management.
+
+- **Login Routing**
+  - Integrated login flow with frontend:
+    - On login, token and user ID are stored.
+    - Profile is fetched from backend using the token and ID.
+    - Dynamic greeting and UI are rendered based on user state.
+
+### 📸 Screenshots
+![Image](https://github.com/user-attachments/assets/f93ba3a1-43b0-44d6-9844-a44492e6c864)
+![Image](https://github.com/user-attachments/assets/4c1cdd89-8f88-4036-bff7-0eac5495c038)
+![Image](https://github.com/user-attachments/assets/43e59371-e339-442a-ae03-69e501c4842e)
+
+
+
 
 
 ---
