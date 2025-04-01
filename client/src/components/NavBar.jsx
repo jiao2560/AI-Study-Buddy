@@ -36,8 +36,9 @@ const NavBar = () => {
       <nav className={`navbar ${!isLoggedIn ? "no-auth" : ""}`}>
         <div className="nav-left">
           <div className="nav-item">
-            <Link to="/home">Home</Link>
+            <Link to={isLoggedIn ? "/dashboard" : "/"}>Home</Link>
           </div>
+
           <div className="nav-item">
             <Link to="/study-materials">Study Material</Link>
           </div>

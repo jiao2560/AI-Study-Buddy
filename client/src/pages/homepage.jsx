@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import robotImg from "../assets/robot.png";
 import "./homepage.css";
-import StudyMaterials from "./StudyMaterials";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
