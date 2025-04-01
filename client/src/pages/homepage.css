@@ -301,3 +301,20 @@ a {
 .error {
   color: red;
 }
+
+.toggle-search-btn {
+  display: block;
+  margin: 1.5rem auto 1rem auto;
+  background-color: #00bcd4;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 0.8rem 1.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-search-btn:hover {
+  background-color: #0097a7;
+}

@@ -1,135 +1,83 @@
-/* Navbar wrapper */
 .navbar-wrapper {
   background: linear-gradient(to right, #1a2a6c, #6142d3, #21c2a7);
   padding: 20px 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   border-radius: 0 0 20px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* Navbar container */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
-  flex-wrap: wrap;
 }
 
-/* Layout adjustment for anonymous users */
-.navbar.no-auth .nav-left {
-  gap: 200px;
-}
-
-/* Left & right sections */
+/* Left and right nav sections */
 .nav-left,
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
-/* Nav links */
-.nav-item a,
-.nav-item .link {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.12);
-  padding: 8px 16px;
-  border-radius: 10px;
-  font-weight: 600;
+/* Main nav links - like tabs */
+.nav-item a {
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-weight: bold;
+  border-radius: 12px;
   text-decoration: none;
   transition: all 0.3s ease;
   font-size: 16px;
 }
 
 .nav-item a:hover {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
-}
-
-/* Toggle Search Button */
-.filter-toggle-btn {
-  padding: 8px 16px;
-  border: none;
-  background-color: #fff;
-  color: #1a2a6c;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
-  font-size: 15px;
-}
-
-.filter-toggle-btn:hover {
-  background-color: #eee;
-  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Greeting */
 .greeting {
-  color: #fff;
   font-weight: 600;
+  color: #ffffff;
   font-size: 16px;
+  margin-right: 16px;
 }
 
-/* Logout button */
 .logout-btn {
-  padding: 8px 14px;
-  border: none;
   background-color: #ff4d4d;
-  color: #fff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s;
-  font-size: 14px;
+  transition: background 0.3s ease;
 }
 
 .logout-btn:hover {
-  background-color: #cc0000;
-  transform: translateY(-2px);
+  background-color: #e60000;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
+    gap: 16px;
   }
 
   .nav-left,
   .nav-right {
     flex-direction: column;
-    gap: 12px;
+    align-items: flex-start;
   }
-
-  .navbar.no-auth .nav-left {
-    gap: 16px;
-  }
-}
-
-/* Auth links for anonymous users */
-.auth-links {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.auth-links a {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.15);
-  padding: 6px 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  transition: all 0.3s ease;
-}
-
-.auth-links a:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
 }
 
 .nav-auth-btn {

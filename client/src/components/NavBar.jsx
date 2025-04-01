@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
-const NavBar = ({ onToggleFilters, showFilters }) => {
+const NavBar = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("token");
@@ -36,22 +36,19 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
       <nav className={`navbar ${!isLoggedIn ? "no-auth" : ""}`}>
         <div className="nav-left">
           <div className="nav-item">
-            <a href="/">Home</a>
+            <Link to="/home">Home</Link>
           </div>
           <div className="nav-item">
-            <a href="/study-materials">Study Material</a>
-          </div>
-          <div className="nav-item">
-            <button className="filter-toggle-btn" onClick={onToggleFilters}>
-              {showFilters ? "🙈 Hide Search" : "🔍 Show Search"}
-            </button>
+            <Link to="/study-materials">Study Material</Link>
           </div>
         </div>
 
         <div className="nav-right">
           {isLoggedIn ? (
             <>
-              <div className="nav-item greeting">👋 Hi, {username || "User"}</div>
+              <div className="nav-item greeting">
+                👋 Hi, {username || "User"}
+              </div>
               <div className="nav-item">
                 <a href="/profile">Profile</a>
               </div>
@@ -61,10 +58,16 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
             </>
           ) : (
             <>
-              <button className="nav-auth-btn" onClick={() => navigate("/login")}>
+              <button
+                className="nav-auth-btn"
+                onClick={() => navigate("/login")}
+              >
                 Log In
               </button>
-              <button className="nav-auth-btn" onClick={() => navigate("/signup")}>
+              <button
+                className="nav-auth-btn"
+                onClick={() => navigate("/signup")}
+              >
                 Sign Up
               </button>
             </>

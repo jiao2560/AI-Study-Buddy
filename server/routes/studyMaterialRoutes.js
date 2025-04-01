@@ -27,6 +27,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get a single study material by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const material = await StudyMaterial.findById(req.params.id);
+    if (!material) {
+      return res.status(404).json({ error: "Study material not found" });
+    }
+    res.json(material);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 // Update study material
 router.put("/:id", async (req, res) => {
   try {

@@ -1,5 +1,3 @@
-// src/pages/StudyMaterials.jsx
-
 import React, { useEffect, useState } from "react";
 import {
   fetchStudyMaterials,
@@ -13,6 +11,7 @@ const StudyMaterials = () => {
   const [materials, setMaterials] = useState([]);
   const [newMaterial, setNewMaterial] = useState({ title: "", content: "" });
   const [error, setError] = useState("");
+  const [showForm, setShowForm] = useState(false); // 👈 control form visibility
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -42,6 +41,7 @@ const StudyMaterials = () => {
       await createStudyMaterial(newMaterial);
       setNewMaterial({ title: "", content: "" });
       setError("");
+      setShowForm(false); // 👈 hide form after adding
       loadMaterials();
     } catch (err) {
       console.error(err);
@@ -63,22 +63,33 @@ const StudyMaterials = () => {
       <h1>📚 Study Materials</h1>
 
       {token ? (
-        <div className="add-material-form">
-          <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={newMaterial.title}
-            onChange={handleChange}
-          />
-          <textarea
-            name="content"
-            placeholder="Content"
-            value={newMaterial.content}
-            onChange={handleChange}
-          ></textarea>
-          <button onClick={handleCreate}>➕ Add Material</button>
-        </div>
+        <>
+          <button
+            className="toggle-form-btn"
+            onClick={() => setShowForm(!showForm)}
+          >
+            {showForm ? "➖ Cancel" : "➕ Add New Material"}
+          </button>
+
+          {showForm && (
+            <div className="add-material-form">
+              <input
+                type="text"
+                name="title"
+                placeholder="Title"
+                value={newMaterial.title}
+                onChange={handleChange}
+              />
+              <textarea
+                name="content"
+                placeholder="Content"
+                value={newMaterial.content}
+                onChange={handleChange}
+              ></textarea>
+              <button onClick={handleCreate}>✅ Submit</button>
+            </div>
+          )}
+        </>
       ) : (
         <p className="auth-msg">
           🔐 Please <a onClick={() => navigate("/login")}>log in</a> to add or
@@ -92,10 +103,37 @@ const StudyMaterials = () => {
         {materials.map((m) => (
           <div className="material-card" key={m._id}>
             <h3>{m.title}</h3>
-            <p>{m.content}</p>
-            {token && (
-              <button onClick={() => handleDelete(m._id)}>🗑 Delete</button>
-            )}
+            <p>
+              {m.content.length > 225 ? (
+                <>
+                  {m.content.slice(0, 225)}...{" "}
+                  <span
+                    className="read-more"
+                    onClick={() => navigate(`/study-materials/${m._id}`)}
+                  >
+                    Read more
+                  </span>
+                </>
+              ) : (
+                m.content
+              )}
+            </p>
+
+            <div className="card-actions">
+              <button onClick={() => navigate(`/study-materials/${m._id}`)}>
+                👁 View
+              </button>
+              {token && (
+                <>
+                  <button
+                    onClick={() => navigate(`/study-materials/${m._id}/edit`)}
+                  >
+                    ✏️ Edit
+                  </button>
+                  <button onClick={() => handleDelete(m._id)}>🗑 Delete</button>
+                </>
+              )}
+            </div>
           </div>
         ))}
       </div>

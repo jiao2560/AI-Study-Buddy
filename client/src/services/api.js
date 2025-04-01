@@ -8,6 +8,8 @@ export const createStudyMaterial = (newMaterial) =>
 export const updateStudyMaterial = (id, updatedMaterial) =>
   API.put(`/studyMaterials/${id}`, updatedMaterial);
 export const deleteStudyMaterial = (id) => API.delete(`/studyMaterials/${id}`);
+export const fetchStudyMaterialById = (id) =>
+  API.get(`/studyMaterials/${id}`);
 
 // Quizzes API
 export const fetchQuizzes = () => API.get("/quizzes");
