@@ -50,22 +50,26 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
           </div>
         </div>
 
-        {isLoggedIn && (
-          <div className="nav-right">
-            <div className="nav-item greeting">
-              <span role="img" aria-label="wave">
-                👋
-              </span>{" "}
-              Hi, {username || "User"}
+        <div className="nav-right">
+          {isLoggedIn ? (
+            <>
+              <div className="nav-item greeting">
+                👋 Hi, {username || "User"}
+              </div>
+              <div className="nav-item">
+                <a href="/profile">Profile</a>
+              </div>
+              <button className="logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <div className="auth-links">
+              <a href="/login">Login</a>
+              <a href="/signup">Sign Up</a>
             </div>
-            <div className="nav-item">
-              <a href="/profile">Profile</a>
-            </div>
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        )}
+          )}
+        </div>
       </nav>
     </div>
   );

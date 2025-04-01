@@ -1,4 +1,4 @@
-/* Navbar wrapper styling */
+/* Navbar wrapper */
 .navbar-wrapper {
   background: linear-gradient(to right, #1a2a6c, #6142d3, #21c2a7);
   padding: 20px 40px;
@@ -11,94 +11,90 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
+  flex-wrap: wrap;
 }
 
-/* Adjust layout for non-authenticated state */
+/* Layout adjustment for anonymous users */
 .navbar.no-auth .nav-left {
-  gap: 300px; /* Increase spacing between items */
+  gap: 200px;
 }
 
-/* Left and right sections of the navbar */
+/* Left & right sections */
 .nav-left,
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 24px; /* Default spacing */
+  gap: 20px;
 }
 
-/* Navbar item links */
-.nav-item a {
+/* Nav links */
+.nav-item a,
+.nav-item .link {
   color: #fff;
-  text-decoration: none;
-  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.12);
   padding: 8px 16px;
-  border-radius: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
   transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.1);
-  font-size: 18px;
+  font-size: 16px;
 }
 
-/* Hover effect for links */
 .nav-item a:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Filter toggle button */
+/* Toggle Search Button */
 .filter-toggle-btn {
   padding: 8px 16px;
   border: none;
-  background-color: #ffffff;
+  background-color: #fff;
   color: #1a2a6c;
-  border-radius: 12px;
-  cursor: pointer;
+  border-radius: 10px;
   font-weight: 600;
+  cursor: pointer;
   transition: background 0.3s, transform 0.3s;
-  font-size: 16px;
+  font-size: 15px;
 }
 
-/* Hover effect for filter button */
 .filter-toggle-btn:hover {
-  background-color: #f1f1f1;
+  background-color: #eee;
   transform: translateY(-2px);
 }
 
-/* Greeting text */
+/* Greeting */
 .greeting {
+  color: #fff;
   font-weight: 600;
-  color: #ffffff;
   font-size: 16px;
-  margin-right: 16px;
 }
 
 /* Logout button */
 .logout-btn {
-  background-color: #ff4d4d;
+  padding: 8px 14px;
   border: none;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 12px;
-  cursor: pointer;
+  background-color: #ff4d4d;
+  color: #fff;
+  border-radius: 10px;
   font-weight: 600;
+  cursor: pointer;
   transition: background 0.3s ease, transform 0.3s;
   font-size: 14px;
 }
 
-/* Hover effect for logout button */
 .logout-btn:hover {
-  background-color: #e60000;
+  background-color: #cc0000;
   transform: translateY(-2px);
 }
 
-/* Responsive design for smaller screens */
+/* Responsive */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     padding: 16px;
   }
 
@@ -109,6 +105,29 @@
   }
 
   .navbar.no-auth .nav-left {
-    gap: 24px; /* Reduce spacing on smaller screens */
+    gap: 16px;
   }
+}
+
+/* Auth links for anonymous users */
+.auth-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.auth-links a {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.auth-links a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
