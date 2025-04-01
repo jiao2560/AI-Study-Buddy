@@ -3,6 +3,7 @@ import {
   fetchStudyMaterials,
   createStudyMaterial,
   deleteStudyMaterial,
+  createReport,
 } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "./StudyMaterials.css";
@@ -56,6 +57,21 @@ const StudyMaterials = () => {
       loadMaterials();
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  // Inside the component:
+  const handleReport = async (materialId) => {
+    try {
+      await createReport({
+        study_material_id: materialId,
+        reason: "Inappropriate or incorrect content",
+        flagged_by: currentUserId,
+      });
+      alert("🚩 Report submitted successfully!");
+    } catch (err) {
+      console.error("Failed to report material", err);
+      alert("❌ Failed to submit report.");
     }
   };
 
@@ -128,11 +144,7 @@ const StudyMaterials = () => {
                 </button>
 
                 {token && !isOwner && (
-                  <button
-                    onClick={() => alert("🚩 Report submitted (placeholder)")}
-                  >
-                    🚩 Report
-                  </button>
+                  <button onClick={() => handleReport(m._id)}>🚩 Report</button>
                 )}
 
                 {token && isOwner && (
