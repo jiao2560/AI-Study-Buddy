@@ -1,61 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { createReport } from "../services/api";
 import "./ReportModal.css";
 
-const ReportModal = ({
-  selectedReason,
-  setSelectedReason,
-  customReason,
-  setCustomReason,
-  onSubmit,
-  onCancel,
-  visible = false,
-}) => {
-  const reportReasons = [
-    "Inappropriate content",
-    "Incorrect information",
-    "Spam or promotional",
-    "Plagiarized content",
-    "Other",
-  ];
+const ReportModal = ({ visible, studyMaterialId, onClose }) => {
+  const [reason, setReason] = useState("Inappropriate content");
+  const [customReason, setCustomReason] = useState("");
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    if (visible) {
+      setReason("Inappropriate content");
+      setCustomReason("");
+    }
+  }, [visible]);
+
+  const handleSubmit = async () => {
+    const finalReason = reason === "Other" ? customReason : reason;
+    if (!finalReason.trim()) {
+      alert("Please provide a reason before submitting.");
+      return;
+    }
+
+    try {
+      await createReport({
+        study_material_id: studyMaterialId,
+        reason: finalReason,
+        flagged_by: userId,
+      });
+      alert("✅ Report submitted!");
+      onClose();
+    } catch (err) {
+      console.error("Report failed:", err);
+      alert("❌ Failed to report.");
+    }
+  };
 
   if (!visible) return null;
 
-  const isOther = selectedReason === "Other";
-
   return (
-    <div className="report-form-popup global-popup">
-      <h3>🚩 Report Study Material</h3>
-      <p>Please select a reason:</p>
-      <select
-        value={selectedReason}
-        onChange={(e) => setSelectedReason(e.target.value)}
-      >
-        {reportReasons.map((reason, i) => (
-          <option key={i} value={reason}>
-            {reason}
-          </option>
-        ))}
-      </select>
+    <div className="report-modal">
+      <div className="report-modal-content">
+        <h3>🚩 Report Study Material</h3>
+        <label>Select a reason:</label>
+        <select value={reason} onChange={(e) => setReason(e.target.value)}>
+          <option>Inappropriate content</option>
+          <option>Incorrect information</option>
+          <option>Spam or promotional</option>
+          <option>Plagiarized content</option>
+          <option>Other</option>
+        </select>
 
-      {isOther && (
-        <textarea
-          placeholder="Please explain your reason..."
-          value={customReason}
-          onChange={(e) => setCustomReason(e.target.value)}
-          style={{
-            marginTop: "10px",
-            width: "100%",
-            padding: "8px",
-            borderRadius: "6px",
-            border: "1px solid #ccc",
-            resize: "vertical",
-          }}
-        />
-      )}
+        {reason === "Other" && (
+          <textarea
+            placeholder="Enter custom reason"
+            value={customReason}
+            onChange={(e) => setCustomReason(e.target.value)}
+          />
+        )}
 
-      <div className="report-buttons">
-        <button onClick={onSubmit}>Submit Report</button>
-        <button onClick={onCancel}>Cancel</button>
+        <div className="modal-buttons">
+          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={onClose}>Cancel</button>
+        </div>
       </div>
     </div>
   );

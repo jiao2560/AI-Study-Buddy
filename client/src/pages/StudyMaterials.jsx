@@ -3,7 +3,6 @@ import {
   fetchStudyMaterials,
   createStudyMaterial,
   deleteStudyMaterial,
-  createReport,
 } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "./StudyMaterials.css";
@@ -18,9 +17,7 @@ const StudyMaterials = () => {
   const currentUserId = localStorage.getItem("userId"); // 👈 get current user ID
   const navigate = useNavigate();
   const [reportingId, setReportingId] = useState(null);
-  const [selectedReason, setSelectedReason] = useState("Inappropriate content");
   const [showReportForm, setShowReportForm] = useState(false);
-  const [customReason, setCustomReason] = useState("");
 
   const loadMaterials = async () => {
     try {
@@ -65,33 +62,33 @@ const StudyMaterials = () => {
     }
   };
 
-  // Inside the component:
-  const handleReportSubmit = async () => {
-    try {
-      const finalReason =
-        selectedReason === "Other" ? customReason : selectedReason;
+  //   // Inside the component:
+  //   const handleReportSubmit = async () => {
+  //     try {
+  //       const finalReason =
+  //         selectedReason === "Other" ? customReason : selectedReason;
 
-      if (!finalReason.trim()) {
-        alert("Please provide a reason before submitting.");
-        return;
-      }
+  //       if (!finalReason.trim()) {
+  //         alert("Please provide a reason before submitting.");
+  //         return;
+  //       }
 
-      await createReport({
-        study_material_id: reportingId,
-        reason: finalReason,
-        flagged_by: currentUserId,
-      });
+  //       await createReport({
+  //         study_material_id: reportingId,
+  //         reason: finalReason,
+  //         flagged_by: currentUserId,
+  //       });
 
-      alert("🚩 Report submitted!");
-      setShowReportForm(false);
-      setReportingId(null);
-      setSelectedReason("Inappropriate content");
-      setCustomReason("");
-    } catch (err) {
-      console.error("Report error", err);
-      alert("❌ Failed to report.");
-    }
-  };
+  //       alert("🚩 Report submitted!");
+  //       setShowReportForm(false);
+  //       setReportingId(null);
+  //       setSelectedReason("Inappropriate content");
+  //       setCustomReason("");
+  //     } catch (err) {
+  //       console.error("Report error", err);
+  //       alert("❌ Failed to report.");
+  //     }
+  //   };
 
   return (
     <div className="study-materials-page">
@@ -193,16 +190,10 @@ const StudyMaterials = () => {
       {/* 🔻 Add this OUTSIDE the material list */}
       <ReportModal
         visible={showReportForm}
-        selectedReason={selectedReason}
-        setSelectedReason={setSelectedReason}
-        customReason={customReason}
-        setCustomReason={setCustomReason}
-        onSubmit={handleReportSubmit}
-        onCancel={() => {
+        studyMaterialId={reportingId}
+        onClose={() => {
           setShowReportForm(false);
           setReportingId(null);
-          setSelectedReason("Inappropriate content");
-          setCustomReason("");
         }}
       />
     </div>

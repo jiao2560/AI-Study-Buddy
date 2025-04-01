@@ -70,3 +70,21 @@
     background-color: #ff5252;
   }
   
+  .report-btn, .edit-btn {
+    padding: 10px 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: #00bcd4;
+    color: white;
+    transition: background 0.3s ease;
+  }
+  
+  .report-btn:hover,
+  .edit-btn:hover {
+    background-color: #0097a7;
+  }
+  
+  
