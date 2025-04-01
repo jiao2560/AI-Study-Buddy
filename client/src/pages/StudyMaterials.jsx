@@ -8,13 +8,13 @@ import { useNavigate } from "react-router-dom";
 import "./StudyMaterials.css";
 
 const StudyMaterials = () => {
-    const [materials, setMaterials] = useState([]);
-    const [newMaterial, setNewMaterial] = useState({ title: "", content: "" });
-    const [error, setError] = useState("");
-    const [showForm, setShowForm] = useState(false);
-    const token = localStorage.getItem("token");
-    const currentUserId = localStorage.getItem("userId"); // 👈 get current user ID
-    const navigate = useNavigate();  
+  const [materials, setMaterials] = useState([]);
+  const [newMaterial, setNewMaterial] = useState({ title: "", content: "" });
+  const [error, setError] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const token = localStorage.getItem("token");
+  const currentUserId = localStorage.getItem("userId"); // 👈 get current user ID
+  const navigate = useNavigate();
 
   const loadMaterials = async () => {
     try {
@@ -101,52 +101,57 @@ const StudyMaterials = () => {
       {error && <p className="error">{error}</p>}
 
       <div className="material-list">
-  {materials.map((m) => {
-    const isOwner = currentUserId && m.creatorId === currentUserId;
-    return (
-      <div className="material-card" key={m._id}>
-        <h3>{m.title}</h3>
-        <p>
-          {m.content.length > 225 ? (
-            <>
-              {m.content.slice(0, 225)}...{" "}
-              <span
-                className="read-more"
-                onClick={() => navigate(`/study-materials/${m._id}`)}
-              >
-                Read more
-              </span>
-            </>
-          ) : (
-            m.content
-          )}
-        </p>
+        {materials.map((m) => {
+          const isOwner = currentUserId && m.user_id === currentUserId;
+          return (
+            <div className="material-card" key={m._id}>
+              <h3>{m.title}</h3>
+              <p>
+                {m.content.length > 225 ? (
+                  <>
+                    {m.content.slice(0, 225)}...{" "}
+                    <span
+                      className="read-more"
+                      onClick={() => navigate(`/study-materials/${m._id}`)}
+                    >
+                      Read more
+                    </span>
+                  </>
+                ) : (
+                  m.content
+                )}
+              </p>
 
-        <div className="card-actions">
-          <button onClick={() => navigate(`/study-materials/${m._id}`)}>
-            👁 View
-          </button>
+              <div className="card-actions">
+                <button onClick={() => navigate(`/study-materials/${m._id}`)}>
+                  👁 View
+                </button>
 
-          {token && !isOwner && (
-            <button onClick={() => alert("🚩 Report submitted (placeholder)")}>
-              🚩 Report
-            </button>
-          )}
+                {token && !isOwner && (
+                  <button
+                    onClick={() => alert("🚩 Report submitted (placeholder)")}
+                  >
+                    🚩 Report
+                  </button>
+                )}
 
-          {token && isOwner && (
-            <>
-              <button onClick={() => navigate(`/study-materials/${m._id}/edit`)}>
-                ✏️ Edit
-              </button>
-              <button onClick={() => handleDelete(m._id)}>🗑 Delete</button>
-            </>
-          )}
-        </div>
+                {token && isOwner && (
+                  <>
+                    <button
+                      onClick={() => navigate(`/study-materials/${m._id}/edit`)}
+                    >
+                      ✏️ Edit
+                    </button>
+                    <button onClick={() => handleDelete(m._id)}>
+                      🗑 Delete
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
-    );
-  })}
-</div>
-
     </div>
   );
 };

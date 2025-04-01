@@ -55,3 +55,18 @@
     background-color: #535bf2;
   }
   
+  .action-buttons {
+    margin-top: 1.5rem;
+  }
+  .report-btn {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 0.6em 1.2em;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .report-btn:hover {
+    background-color: #ff5252;
+  }
+  

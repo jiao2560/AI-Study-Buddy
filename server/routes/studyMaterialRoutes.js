@@ -1,15 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const StudyMaterial = require("../models/StudyMaterial");
+const authenticate = require("../middleware/authenticate");
 
 // Create study material
-router.post("/", async (req, res) => {
+router.post("/", authenticate, async (req, res) => {
   try {
     const { title, content } = req.body;
     if (!title || !content) {
       return res.status(400).json({ error: "Title and content are required" });
     }
-    const newMaterial = new StudyMaterial({ title, content });
+    console.log("Creating new material for user:", req.user?._id);
+
+    const newMaterial = new StudyMaterial({
+      title,
+      content,
+      user_id: req.user._id, // ✅ now this works
+    });
     const saved = await newMaterial.save();
     res.status(201).json(saved);
   } catch (err) {
@@ -39,7 +46,6 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // Update study material
 router.put("/:id", async (req, res) => {
