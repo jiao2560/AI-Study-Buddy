@@ -7,6 +7,7 @@ import {
 } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "./StudyMaterials.css";
+import ReportModal from "./ReportModal";
 
 const StudyMaterials = () => {
   const [materials, setMaterials] = useState([]);
@@ -19,13 +20,7 @@ const StudyMaterials = () => {
   const [reportingId, setReportingId] = useState(null);
   const [selectedReason, setSelectedReason] = useState("Inappropriate content");
   const [showReportForm, setShowReportForm] = useState(false);
-  const reportReasons = [
-    "Inappropriate content",
-    "Incorrect information",
-    "Spam or promotional",
-    "Plagiarized content",
-    "Other",
-  ];
+  const [customReason, setCustomReason] = useState("");
 
   const loadMaterials = async () => {
     try {
@@ -73,14 +68,25 @@ const StudyMaterials = () => {
   // Inside the component:
   const handleReportSubmit = async () => {
     try {
+      const finalReason =
+        selectedReason === "Other" ? customReason : selectedReason;
+
+      if (!finalReason.trim()) {
+        alert("Please provide a reason before submitting.");
+        return;
+      }
+
       await createReport({
         study_material_id: reportingId,
-        reason: selectedReason,
+        reason: finalReason,
         flagged_by: currentUserId,
       });
+
       alert("🚩 Report submitted!");
       setShowReportForm(false);
       setReportingId(null);
+      setSelectedReason("Inappropriate content");
+      setCustomReason("");
     } catch (err) {
       console.error("Report error", err);
       alert("❌ Failed to report.");
@@ -185,33 +191,20 @@ const StudyMaterials = () => {
       </div>
 
       {/* 🔻 Add this OUTSIDE the material list */}
-      {showReportForm && (
-        <div className="report-form-popup global-popup">
-          <h3>🚩 Report Study Material</h3>
-          <p>Please select a reason:</p>
-          <select
-            value={selectedReason}
-            onChange={(e) => setSelectedReason(e.target.value)}
-          >
-            {reportReasons.map((reason, i) => (
-              <option key={i} value={reason}>
-                {reason}
-              </option>
-            ))}
-          </select>
-          <br />
-          <button onClick={handleReportSubmit}>Submit Report</button>
-          <button
-            onClick={() => {
-              setShowReportForm(false);
-              setReportingId(null);
-              setSelectedReason("Inappropriate content");
-            }}
-          >
-            Cancel
-          </button>
-        </div>
-      )}
+      <ReportModal
+        visible={showReportForm}
+        selectedReason={selectedReason}
+        setSelectedReason={setSelectedReason}
+        customReason={customReason}
+        setCustomReason={setCustomReason}
+        onSubmit={handleReportSubmit}
+        onCancel={() => {
+          setShowReportForm(false);
+          setReportingId(null);
+          setSelectedReason("Inappropriate content");
+          setCustomReason("");
+        }}
+      />
     </div>
   );
 };
