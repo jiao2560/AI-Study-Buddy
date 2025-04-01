@@ -16,6 +16,16 @@ const StudyMaterials = () => {
   const token = localStorage.getItem("token");
   const currentUserId = localStorage.getItem("userId"); // 👈 get current user ID
   const navigate = useNavigate();
+  const [reportingId, setReportingId] = useState(null);
+  const [selectedReason, setSelectedReason] = useState("Inappropriate content");
+  const [showReportForm, setShowReportForm] = useState(false);
+  const reportReasons = [
+    "Inappropriate content",
+    "Incorrect information",
+    "Spam or promotional",
+    "Plagiarized content",
+    "Other",
+  ];
 
   const loadMaterials = async () => {
     try {
@@ -61,17 +71,19 @@ const StudyMaterials = () => {
   };
 
   // Inside the component:
-  const handleReport = async (materialId) => {
+  const handleReportSubmit = async () => {
     try {
       await createReport({
-        study_material_id: materialId,
-        reason: "Inappropriate or incorrect content",
+        study_material_id: reportingId,
+        reason: selectedReason,
         flagged_by: currentUserId,
       });
-      alert("🚩 Report submitted successfully!");
+      alert("🚩 Report submitted!");
+      setShowReportForm(false);
+      setReportingId(null);
     } catch (err) {
-      console.error("Failed to report material", err);
-      alert("❌ Failed to submit report.");
+      console.error("Report error", err);
+      alert("❌ Failed to report.");
     }
   };
 
@@ -144,7 +156,14 @@ const StudyMaterials = () => {
                 </button>
 
                 {token && !isOwner && (
-                  <button onClick={() => handleReport(m._id)}>🚩 Report</button>
+                  <button
+                    onClick={() => {
+                      setReportingId(m._id);
+                      setShowReportForm(true);
+                    }}
+                  >
+                    🚩 Report
+                  </button>
                 )}
 
                 {token && isOwner && (
@@ -164,6 +183,35 @@ const StudyMaterials = () => {
           );
         })}
       </div>
+
+      {/* 🔻 Add this OUTSIDE the material list */}
+      {showReportForm && (
+        <div className="report-form-popup global-popup">
+          <h3>🚩 Report Study Material</h3>
+          <p>Please select a reason:</p>
+          <select
+            value={selectedReason}
+            onChange={(e) => setSelectedReason(e.target.value)}
+          >
+            {reportReasons.map((reason, i) => (
+              <option key={i} value={reason}>
+                {reason}
+              </option>
+            ))}
+          </select>
+          <br />
+          <button onClick={handleReportSubmit}>Submit Report</button>
+          <button
+            onClick={() => {
+              setShowReportForm(false);
+              setReportingId(null);
+              setSelectedReason("Inappropriate content");
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+      )}
     </div>
   );
 };
