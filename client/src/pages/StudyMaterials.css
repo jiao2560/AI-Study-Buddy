@@ -1,0 +1,77 @@
+.study-materials-page {
+    padding: 2rem;
+    color: #fff;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .add-material-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 2rem;
+    background: rgba(255,255,255,0.05);
+    padding: 1rem;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+  }
+  
+  .add-material-form input,
+  .add-material-form textarea {
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .add-material-form button {
+    align-self: flex-start;
+    padding: 0.6rem 1.2rem;
+    font-weight: bold;
+    background-color: #00bcd4;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .material-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .material-card {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .material-card h3 {
+    margin-top: 0;
+    color: #18ceee;
+  }
+  
+  .material-card button {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
+  
+  .auth-msg {
+    margin-bottom: 1rem;
+    color: #ffd700;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 0.5rem;
+  }
+  

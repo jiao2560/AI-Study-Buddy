@@ -131,3 +131,18 @@
   background-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-1px);
 }
+
+.nav-auth-btn {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-auth-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}

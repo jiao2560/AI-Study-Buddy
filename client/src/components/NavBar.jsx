@@ -6,7 +6,7 @@ import "./NavBar.css";
 const NavBar = ({ onToggleFilters, showFilters }) => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem("token"); // 检查是否登录
+  const isLoggedIn = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -23,9 +23,7 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
       }
     };
 
-    if (isLoggedIn) {
-      fetchUsername();
-    }
+    if (isLoggedIn) fetchUsername();
   }, [isLoggedIn]);
 
   const handleLogout = () => {
@@ -38,10 +36,10 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
       <nav className={`navbar ${!isLoggedIn ? "no-auth" : ""}`}>
         <div className="nav-left">
           <div className="nav-item">
-            <a href="#home">Home</a>
+            <a href="/">Home</a>
           </div>
           <div className="nav-item">
-            <a href="#study">Study Material</a>
+            <a href="/study-materials">Study Material</a>
           </div>
           <div className="nav-item">
             <button className="filter-toggle-btn" onClick={onToggleFilters}>
@@ -53,9 +51,7 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
         <div className="nav-right">
           {isLoggedIn ? (
             <>
-              <div className="nav-item greeting">
-                👋 Hi, {username || "User"}
-              </div>
+              <div className="nav-item greeting">👋 Hi, {username || "User"}</div>
               <div className="nav-item">
                 <a href="/profile">Profile</a>
               </div>
@@ -64,10 +60,14 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
               </button>
             </>
           ) : (
-            <div className="auth-links">
-              <a href="/login">Login</a>
-              <a href="/signup">Sign Up</a>
-            </div>
+            <>
+              <button className="nav-auth-btn" onClick={() => navigate("/login")}>
+                Log In
+              </button>
+              <button className="nav-auth-btn" onClick={() => navigate("/signup")}>
+                Sign Up
+              </button>
+            </>
           )}
         </div>
       </nav>
