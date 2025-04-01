@@ -6,16 +6,30 @@ const AdminReport = require("../models/AdminReport");
 router.post("/", async (req, res) => {
   try {
     const { study_material_id, reason, flagged_by } = req.body;
+
     if (!study_material_id || !reason || !flagged_by) {
       return res.status(400).json({ error: "All fields required" });
     }
-    const report = new AdminReport(req.body);
+
+    // 👉 Check how many times the user has already reported this material
+    const existingReports = await AdminReport.countDocuments({
+      study_material_id,
+      flagged_by,
+    });
+
+    if (existingReports >= 3) {
+      return res.status(429).json({ error: "Limit reached. You can report this material only up to 3 times." });
+    }
+
+    const report = new AdminReport({ study_material_id, reason, flagged_by });
     const saved = await report.save();
     res.status(201).json(saved);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
+
 
 // Get all reports
 router.get("/", async (req, res) => {

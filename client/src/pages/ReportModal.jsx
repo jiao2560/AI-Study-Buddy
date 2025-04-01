@@ -31,7 +31,14 @@ const ReportModal = ({ visible, studyMaterialId, onClose }) => {
       onClose();
     } catch (err) {
       console.error("Report failed:", err);
-      alert("❌ Failed to report.");
+      if (err.response?.status === 429) {
+        alert(
+          "⚠️ You cannot submitted more than 3 reports for this material. Admin is working on it."
+        );
+        onClose();
+      } else {
+        alert("❌ Failed to report.");
+      }
     }
   };
 
