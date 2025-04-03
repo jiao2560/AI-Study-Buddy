@@ -218,7 +218,7 @@ As a key frontend contributor to the **AI Study Buddy** project, I focused on im
 As the primary backend developer for **AI Study Buddy**, I focused on building the server infrastructure, implementing all core CRUD functionality, and ensuring full test coverage and frontend-backend integration.
 
 ---
-### ✅ Iteration 1: CRUD Operations
+### **Iteration 1: CRUD Operations**
 ### ✅ Backend (Node.js + Express + MongoDB)
 
 - **Express + MongoDB Setup**
@@ -269,9 +269,8 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
 <img width="274" alt="image" src="https://github.com/user-attachments/assets/4e03649d-284e-4d42-b973-44cd076c727d" />
 
 
--
 
-### ✅ Iteration 2: New Features & Improvements
+### **Iteration 2: New Features & Improvements**
 
 ### 🧠 Study Materials
 
