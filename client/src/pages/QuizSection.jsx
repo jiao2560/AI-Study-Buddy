@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { generateQuiz, fetchQuizByMaterialId } from "../services/api";
 import "./QuizSection.css";
 
-const QuizSection = ({ studyMaterialId, content, isOwner, token }) => {
+const QuizSection = ({ studyMaterialId, content, token }) => {
   const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -51,24 +51,38 @@ const QuizSection = ({ studyMaterialId, content, isOwner, token }) => {
     <div className="quiz-section">
       <h2>📝 Quiz Section</h2>
 
-      {quiz ? (
-        <ul className="quiz-list">
-        {quiz.questions.map((q, i) => (
-          <li key={i}>
-            <strong>Q{i + 1}: {q.question_text}</strong>
-            <ul className="quiz-options">
-              {q.options.map((opt, idx) => (
-                <li key={idx} style={{ color: opt === q.correct_answer ? "green" : "inherit" }}>
-                {opt}
+      {!token ? (
+        <p className="no-quiz-msg">
+          Please log in to view or generate quizzes for this material.
+        </p>
+      ) : quiz ? (
+        <>
+          <ul className="quiz-list">
+            {quiz.questions.map((q, i) => (
+              <li key={i}>
+                <strong>
+                  Q{i + 1}: {q.question_text}
+                </strong>
+                <ul>
+                  {q.options.map((opt, j) => (
+                    <li key={j}>{opt}</li>
+                  ))}
+                </ul>
+                <p className="correct-answer">✅ Answer: {q.correct_answer}</p>
               </li>
-              
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
-      
-      ) : isOwner ? (
+            ))}
+          </ul>
+
+          {/* ✅ Always allow regeneration if logged in */}
+          <button
+            className="generate-quiz-btn"
+            onClick={handleGenerate}
+            disabled={loading}
+          >
+            {loading ? "Regenerating..." : "Regenerate Quiz"}
+          </button>
+        </>
+      ) : (
         <>
           {noQuizFound && (
             <p className="no-quiz-msg">No quiz found for this material.</p>
@@ -81,8 +95,6 @@ const QuizSection = ({ studyMaterialId, content, isOwner, token }) => {
             {loading ? "Generating..." : "Generate AI Quiz"}
           </button>
         </>
-      ) : (
-        <p className="no-quiz-msg">No quiz available for this material.</p>
       )}
 
       {error && <p className="error-msg">{error}</p>}

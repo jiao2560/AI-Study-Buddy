@@ -4,10 +4,10 @@ const axios = require("axios"); // ✅ <--- Add this
 const Quiz = require("../models/Quiz");
 
 // Create a new quiz
+// POST or update quiz for a material
 router.post("/", async (req, res) => {
   try {
     const { study_material_id, questions } = req.body;
-    console.log("Parsed quiz:", questions);
     if (
       !study_material_id ||
       !Array.isArray(questions) ||
@@ -17,9 +17,15 @@ router.post("/", async (req, res) => {
         .status(400)
         .json({ error: "Study material ID and questions are required" });
     }
-    const quiz = new Quiz(req.body);
-    const saved = await quiz.save();
-    res.status(201).json(saved);
+
+    // Upsert: update if exists, else insert
+    const updatedQuiz = await Quiz.findOneAndUpdate(
+      { study_material_id },
+      { questions },
+      { upsert: true, new: true }
+    );
+
+    res.status(201).json(updatedQuiz);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
