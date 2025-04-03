@@ -1,60 +1,72 @@
 .login-page {
-    height: 100vh;
-    background: linear-gradient(135deg, #1a1a40, #00aaff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .login-card {
-    background-color: white;
-    border-radius: 20px;
-    padding: 40px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    text-align: center;
-  }
-  
-  .login-card h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .login-card form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .login-card input {
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-  }
-  
-  .login-card button {
-    padding: 12px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-card button:hover {
-    background-color: #0056b3;
-  }
-  
-  .message {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #ff3333;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #1a2a6c, #6142d3, #21c2a7);
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.login-card {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: #333;
+  text-align: left;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.login-card input {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: border-color 0.2s ease;
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  background: #f7f7f7;
+  color: #111;
+}
+
+.login-card input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.login-card button {
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-card button:hover {
+  background-color: #0056b3;
+}
+
+.message {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  text-align: left;
+  color: #d93025;
+}
