@@ -62,34 +62,6 @@ const StudyMaterials = () => {
     }
   };
 
-  //   // Inside the component:
-  //   const handleReportSubmit = async () => {
-  //     try {
-  //       const finalReason =
-  //         selectedReason === "Other" ? customReason : selectedReason;
-
-  //       if (!finalReason.trim()) {
-  //         alert("Please provide a reason before submitting.");
-  //         return;
-  //       }
-
-  //       await createReport({
-  //         study_material_id: reportingId,
-  //         reason: finalReason,
-  //         flagged_by: currentUserId,
-  //       });
-
-  //       alert("🚩 Report submitted!");
-  //       setShowReportForm(false);
-  //       setReportingId(null);
-  //       setSelectedReason("Inappropriate content");
-  //       setCustomReason("");
-  //     } catch (err) {
-  //       console.error("Report error", err);
-  //       alert("❌ Failed to report.");
-  //     }
-  //   };
-
   return (
     <div className="study-materials-page">
       <h1>📚 Study Materials</h1>

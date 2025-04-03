@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { generateQuiz, fetchQuizByMaterialId } from "../services/api";
 import "./QuizSection.css";
+import { useNavigate } from "react-router-dom";
 
 const QuizSection = ({ studyMaterialId, content, token }) => {
   const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [noQuizFound, setNoQuizFound] = useState(false); // 👈 new flag
+  const navigate = useNavigate();
 
   const loadQuiz = useCallback(async () => {
     try {
@@ -53,7 +55,7 @@ const QuizSection = ({ studyMaterialId, content, token }) => {
 
       {!token ? (
         <p className="no-quiz-msg">
-          Please log in to view or generate quizzes for this material.
+          🔐 Please <a onClick={() => navigate("/login")}>log in</a> to view or generate quizzes for this material.
         </p>
       ) : quiz ? (
         <>
