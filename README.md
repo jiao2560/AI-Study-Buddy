@@ -211,12 +211,14 @@ As a key frontend contributor to the **AI Study Buddy** project, I focused on im
 
 ## 🧠 My Contribution (Xinlai Chen)
 
-🎥 **Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EWz0S7fNuLtOt2tFe2gBHzYBemcg_1BPAg6PIgCTmkZCmA?e=6aBWsb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+🎥 **CIteration 1 ode Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EWz0S7fNuLtOt2tFe2gBHzYBemcg_1BPAg6PIgCTmkZCmA?e=6aBWsb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+
+🎥 **Iteration 2 Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EZomDimCX3pMuF23VOSmrTcBWGPgy33f57lRndQuNuSARg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=NsO1V2)
 
 As the primary backend developer for **AI Study Buddy**, I focused on building the server infrastructure, implementing all core CRUD functionality, and ensuring full test coverage and frontend-backend integration.
 
 ---
-
+### ✅ Iteration 1
 ### ✅ Backend (Node.js + Express + MongoDB)
 
 - **Express + MongoDB Setup**
@@ -266,6 +268,94 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
 ### 📸 Screenshots
 <img width="274" alt="image" src="https://github.com/user-attachments/assets/4e03649d-284e-4d42-b973-44cd076c727d" />
 
+Here is your **Iteration 2 GitHub README section** in the exact format you used for Iteration 1. It includes updated backend, frontend, new features, and a link to screenshots hosted in the issue you mentioned.
+
+You can **copy-paste this directly** into your README:
+
+---
+
+### ✅ Iteration 2: New Features & Improvements
+
+### 🧠 Study Materials
+
+- **Feature Completion**
+  - Users can create, view, update, and delete their own study materials.
+  - Anonymous users can browse all materials but cannot modify them.
+  - Each material links to a detail page that now includes embedded Quiz and Report sections.
+
+- **Detail Page Enhancements**
+  - Rebuilt the detail view with better layout, dynamic routing, and integrated UI for related data.
+
+---
+
+### 🤖 Quiz System (Cohere LLM Integration)
+
+- **Quiz Generation**
+  - Users can generate or regenerate AI-generated quizzes for *any* study material.
+  - Only one quiz is stored per material — re-generating overwrites the existing quiz.
+
+- **Cohere API Integration**
+  - Used the `command` model from Cohere to produce 5 multiple-choice questions based on the study content.
+  - Implemented a robust parser to transform raw LLM output into structured quiz objects.
+
+- **Frontend Updates**
+  - Anonymous users see a message prompting them to log in to access the quiz.
+  - Logged-in users can view the quiz with formatted questions and answers.
+
+---
+
+### 🚩 Report Feature (Abuse Prevention & Flagging)
+
+- **User Reports**
+  - Authenticated users can flag study materials they did not create.
+  - Each report contains a `reason` and links to the material and the reporting user.
+
+- **Limits & Validation**
+  - Users can submit up to **3 reports per material** to prevent spamming.
+  - Duplicate reports are blocked via aggregation checks.
+
+---
+
+### ⚙️ Backend Enhancements
+
+- **Cascade Deletion**
+  - When a study material is deleted, all associated **quizzes and reports** are also removed automatically.
+
+- **Quiz Upsert**
+  - Switched quiz creation to `findOneAndUpdate` with `upsert: true` to handle regenerate requests efficiently.
+
+- **Report Limit Logic**
+  - Added MongoDB aggregation and counting logic to enforce the 3-report-per-user-per-material limit.
+
+---
+
+### 💅 Frontend UI Enhancements
+
+- **Navbar & Auth Pages**
+  - Rebuilt the navbar with dynamic login state, responsive design, and consistent button styles.
+  - Unified styling for signup and login pages to match the overall aesthetic.
+
+- **Home Page Improvements**
+  - Improved layout spacing, heading alignment, and interaction flow between cards and actions.
+
+---
+
+### 🔁 Testing & Bug Fixes
+
+- **Quiz Parsing Edge Cases**
+  - Fixed several parsing errors due to LLM format inconsistencies (e.g. "Question:" lines, misplaced answers).
+  - Added fallback handling to skip malformed entries.
+
+- **Bug Fixes**
+  - Resolved layout spacing issues between components.
+  - Fixed permission logic for quiz and report visibility.
+
+---
+
+### 📸 Screenshots
+
+Screenshots for Iteration 2 are available here:  
+👉 [Iteration 2 UI Screenshots & Changes](https://github.com/jiao2560/AI-Study-Buddy/issues/15)
 
 
 
