@@ -37,8 +37,7 @@ router.get("/", async (req, res) => {
     const { study_material_id } = req.query;
     if (study_material_id) {
       const quiz = await Quiz.findOne({ study_material_id });
-      if (!quiz) return res.status(404).json({ error: "Quiz not found" });
-      return res.status(200).json(quiz);
+      return quiz ? res.status(200).json(quiz) : res.status(200).json(null); // ✅ Consistent and frontend-friendly
     }
 
     // fallback: get all quizzes

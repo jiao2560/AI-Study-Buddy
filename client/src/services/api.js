@@ -57,11 +57,13 @@ export const generateQuiz = async (materialId, content) => {
 export const fetchQuizByMaterialId = async (materialId) => {
   try {
     const response = await API.get(`/quizzes?study_material_id=${materialId}`);
-    return response.data; // ✅ already parsed
+    return response.data;
   } catch (err) {
-    if (err.response && err.response.status === 404) {
+    if (err.response?.status === 404) {
+      // ❌ Don't log 404 as an error — it's just "not found"
       return null;
     }
+    console.error("Unexpected error fetching quiz:", err); // ✅ Only log unexpected errors
     throw err;
   }
 };
@@ -74,7 +76,10 @@ export const callCohereForQuestions = async (content) => {
     if (!text) throw new Error("Invalid Cohere response from backend.");
 
     // Split by questions
-    const lines = text.split(/\n/).map(line => line.trim()).filter(Boolean);
+    const lines = text
+      .split(/\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
 
     const questions = [];
     let currentQuestion = null;
@@ -102,4 +107,3 @@ export const callCohereForQuestions = async (content) => {
     throw error;
   }
 };
-
