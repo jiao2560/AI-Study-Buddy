@@ -2,11 +2,13 @@
   background: linear-gradient(to right, #1a2a6c, #6142d3, #21c2a7);
   padding: 20px 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border-radius: 0 0 20px 20px;
+  /* ↓↓↓ change this ↓↓↓ */
+  border-radius: 0;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
+
 
 .navbar {
   display: flex;
