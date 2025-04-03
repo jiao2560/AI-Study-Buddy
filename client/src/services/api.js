@@ -5,21 +5,17 @@ const API = axios.create({ baseURL: "http://localhost:5001/api" });
 export const fetchStudyMaterials = () => API.get("/studyMaterials");
 export const createStudyMaterial = (data) => {
   const token = localStorage.getItem("token");
-  return API.post("/studyMaterials",
-    data,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  return API.post("/studyMaterials", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const updateStudyMaterial = (id, updatedMaterial) =>
   API.put(`/studyMaterials/${id}`, updatedMaterial);
 export const deleteStudyMaterial = (id) => API.delete(`/studyMaterials/${id}`);
-export const fetchStudyMaterialById = (id) =>
-  API.get(`/studyMaterials/${id}`);
+export const fetchStudyMaterialById = (id) => API.get(`/studyMaterials/${id}`);
 
 // Quizzes API
 export const fetchQuizzes = () => API.get("/quizzes");
@@ -49,3 +45,61 @@ export const deleteUser = (userId, token) =>
   API.delete(`/users/${userId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
+
+export const generateQuiz = async (materialId, content) => {
+  const res = await API.post("/quizzes", {
+    study_material_id: materialId,
+    questions: await callCohereForQuestions(content),
+  });
+  return res;
+};
+
+export const fetchQuizByMaterialId = async (materialId) => {
+  try {
+    const response = await API.get(`/quizzes?study_material_id=${materialId}`);
+    return response.data; // ✅ already parsed
+  } catch (err) {
+    if (err.response && err.response.status === 404) {
+      return null;
+    }
+    throw err;
+  }
+};
+
+export const callCohereForQuestions = async (content) => {
+  try {
+    const response = await API.post("/quizzes/generate-quiz", { content });
+
+    const text = response.data.generations?.[0]?.text;
+    if (!text) throw new Error("Invalid Cohere response from backend.");
+
+    // Split by questions
+    const lines = text.split(/\n/).map(line => line.trim()).filter(Boolean);
+
+    const questions = [];
+    let currentQuestion = null;
+
+    for (let line of lines) {
+      if (/^\d+\./.test(line)) {
+        if (currentQuestion) questions.push(currentQuestion);
+        currentQuestion = {
+          question_text: line.replace(/^\d+\.\s*/, ""),
+          options: [],
+          correct_answer: "",
+        };
+      } else if (/^[a-d]\./i.test(line)) {
+        currentQuestion?.options.push(line);
+      } else if (/^answer:/i.test(line)) {
+        currentQuestion.correct_answer = line.replace(/^answer:\s*/i, "");
+      }
+    }
+
+    if (currentQuestion) questions.push(currentQuestion);
+
+    return questions;
+  } catch (error) {
+    console.error("Cohere API Error:", error);
+    throw error;
+  }
+};
+

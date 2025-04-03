@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchStudyMaterialById } from "../services/api";
 import ReportModal from "./ReportModal"; // 👈 Import the reusable modal
 import "./StudyMaterialDetail.css";
+import QuizSection from "./QuizSection";
 
 const StudyMaterialDetail = () => {
   const { id } = useParams();
@@ -67,6 +68,13 @@ const StudyMaterialDetail = () => {
           onClose={() => setShowReport(false)}
         />
       )}
+
+      <QuizSection
+        studyMaterialId={id}
+        content={material.content}
+        isOwner={isOwner}
+        token={token}
+      />
     </>
   );
 };

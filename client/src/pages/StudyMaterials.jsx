@@ -196,6 +196,7 @@ const StudyMaterials = () => {
           setReportingId(null);
         }}
       />
+      
     </div>
   );
 };
