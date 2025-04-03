@@ -13,7 +13,8 @@ This app helps users explore trending topics and get AI-suggested study material
 - **Backend**: Express + MongoDB *(coming soon)*
 - **Styling**: Custom CSS (responsive, modern UI)
 - **API Calls**: Axios
-
+- **External API**: Cohere (for AI-generated quiz questions), Wikipedia API, Gemini AI
+  
 ---
 
 ## 🚀 Getting Started
