@@ -87,34 +87,37 @@ export const callCohereForQuestions = async (content) => {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
 
+      // Start of a new question, grab the question text from the numbered line
       if (/^\d+\./.test(line)) {
-        // Start a new question block
-        if (currentQuestion) questions.push(currentQuestion);
-
+        if (
+          currentQuestion &&
+          currentQuestion.question_text &&
+          currentQuestion.options.length
+        ) {
+          questions.push(currentQuestion);
+        }
         currentQuestion = {
-          question_text: "",
+          question_text: line.replace(/^\d+\.\s*/, ""), // grab question after number
           options: [],
           correct_answer: "",
         };
-
-        const nextLine = lines[i + 1];
-        if (/^question:/i.test(nextLine)) {
-          currentQuestion.question_text = nextLine.replace(/^question:\s*/i, "").trim();
-          i++; // skip processed line
-        }
-      } else if (/^[a-d]\./i.test(line)) {
+      } else if (/^[a-d][.)]/i.test(line)) {
+        // Handle options like a) 2
         currentQuestion?.options.push(line);
       } else if (/^answer:/i.test(line)) {
         const answerText = line.replace(/^answer:\s*/i, "").trim();
         if (currentQuestion && answerText) {
           currentQuestion.correct_answer = answerText;
         } else {
-          console.warn("⚠️ Answer line skipped (missing question or empty):", line);
+          console.warn(
+            "⚠️ Answer line skipped (missing question or empty):",
+            line
+          );
         }
       }
     }
 
-    // Push last question if valid
+    // Push the last question
     if (
       currentQuestion &&
       currentQuestion.question_text &&

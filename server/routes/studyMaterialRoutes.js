@@ -12,7 +12,7 @@ router.post("/", authenticate, async (req, res) => {
     if (!title || !content) {
       return res.status(400).json({ error: "Title and content are required" });
     }
-    console.log("Creating new material for user:", req.user?._id);
+    // console.log("Creating new material for user:", req.user?._id);
 
     const newMaterial = new StudyMaterial({
       title,
