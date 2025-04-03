@@ -282,7 +282,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
 
 
 
-### Iteration 2: New Features & Improvements**
+### Iteration 2: New Features & Improvements
 
 #### 🧠 Study Materials
 
