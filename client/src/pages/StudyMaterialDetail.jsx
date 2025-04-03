@@ -25,10 +25,9 @@ const StudyMaterialDetail = () => {
   if (!material) return <p>Loading...</p>;
 
   const isOwner = isLoggedIn && material.user_id === currentUserId;
-
   return (
-    <>
-      <div className="study-detail-page">
+    <div className="study-detail-wrapper">
+      <div className="study-detail-card">
         <button
           className="back-btn"
           onClick={() => navigate("/study-materials")}
@@ -60,22 +59,21 @@ const StudyMaterialDetail = () => {
         )}
       </div>
 
-      {/* move this OUTSIDE the study-detail-page */}
-      {showReport && (
-        <ReportModal
-          visible={showReport} // <-- ADD THIS
-          studyMaterialId={id}
-          onClose={() => setShowReport(false)}
-        />
-      )}
-
       <QuizSection
         studyMaterialId={id}
         content={material.content}
         isOwner={isOwner}
         token={token}
       />
-    </>
+
+      {showReport && (
+        <ReportModal
+          visible={showReport}
+          studyMaterialId={id}
+          onClose={() => setShowReport(false)}
+        />
+      )}
+    </div>
   );
 };
 
