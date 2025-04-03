@@ -10,10 +10,11 @@ This app helps users explore trending topics and get AI-suggested study material
 
 - **Frontend**: React + Vite
 - **Routing**: React Router DOM
-- **Backend**: Express + MongoDB *(coming soon)*
+- **Backend**: Express + MongoDB
 - **Styling**: Custom CSS (responsive, modern UI)
 - **API Calls**: Axios
-
+- **External API**: Cohere (for AI-generated quiz questions), Wikipedia API, Gemini AI
+  
 ---
 
 ## 🚀 Getting Started
