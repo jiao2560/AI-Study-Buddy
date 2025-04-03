@@ -268,11 +268,8 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
 ### 📸 Screenshots
 <img width="274" alt="image" src="https://github.com/user-attachments/assets/4e03649d-284e-4d42-b973-44cd076c727d" />
 
-Here is your **Iteration 2 GitHub README section** in the exact format you used for Iteration 1. It includes updated backend, frontend, new features, and a link to screenshots hosted in the issue you mentioned.
 
-You can **copy-paste this directly** into your README:
-
----
+-
 
 ### ✅ Iteration 2: New Features & Improvements
 
