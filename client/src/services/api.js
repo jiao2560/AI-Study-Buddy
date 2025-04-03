@@ -54,6 +54,15 @@ export const generateQuiz = async (materialId, content) => {
   return res;
 };
 
+// 📌 Bookmark a study material
+export const bookmarkMaterial = (userId, materialId) =>
+  API.post(`/users/bookmark/${materialId}`, { userId });
+
+// ❌ Remove a bookmarked study material
+export const unbookmarkMaterial = (userId, materialId) =>
+  API.post(`/users/unbookmark/${materialId}`, { userId });
+
+
 export const fetchQuizByMaterialId = async (materialId) => {
   try {
     const response = await API.get(`/quizzes?study_material_id=${materialId}`);
