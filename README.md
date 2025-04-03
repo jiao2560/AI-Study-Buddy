@@ -57,21 +57,33 @@ VITE_API_BASE_URL=http://localhost:5000  # Replace with your backend URL
 ## 📁 Project Structure
 
 ```
-├── public/
-├── src/
-│   ├── assets/              # Images and static files
-│   ├── components/          # Reusable UI components (e.g., NavBar)
-│   ├── pages/               # Pages like Home and Signup
-│   │   ├── homepage.jsx
-│   │   ├── signup.jsx
-│   │   ├── homepage.css
-│   │   └── signup.css
-│   ├── services/            # Axios API functions
-│   ├── App.jsx              # Routes and layout
-│   └── main.jsx             # Entry point
-├── .env
-├── package.json
-├── README.md
+├── client/
+│   ├── public/                   # Static assets
+│   ├── src/
+│   │   ├── assets/              # Icons, images, misc media
+│   │   ├── components/          # Reusable components (NavBar, Footer, Modal, etc.)
+│   │   ├── pages/               # Full-page components (Home, Login, Signup, Detail)
+│   │   ├── services/            # Axios service functions for API calls
+│   │   ├── App.jsx              # Main route + layout
+│   │   └── main.jsx             # Vite entry point
+│   ├── .env                     # Frontend environment variables
+│   ├── README.md                # Frontend-specific README (if separate)
+│   ├── index.html               # HTML template
+│   ├── vite.config.js           # Vite configuration
+│   └── package.json             # Dependencies and scripts
+│
+├── server/
+│   ├── config/                  # MongoDB & env setup
+│   ├── middleware/             # Auth, error handling, etc.
+│   ├── models/                 # Mongoose schemas (User, Quiz, Report, Material)
+│   ├── routes/                 # Express routers (users, materials, reports, quizzes)
+│   ├── tests/                  # Jest + Supertest test files
+│   ├── .env                    # Backend environment variables
+│   ├── server.js               # Express app entry point
+│   └── package.json            # Backend dependencies
+│
+├── .gitignore
+└── README.md                   # Main project README
 ```
 
 ---
@@ -218,7 +230,7 @@ As a key frontend contributor to the **AI Study Buddy** project, I focused on im
 As the primary backend developer for **AI Study Buddy**, I focused on building the server infrastructure, implementing all core CRUD functionality, and ensuring full test coverage and frontend-backend integration.
 
 ---
-### Iteration 1: CRUD Operations**
+### Iteration 1: CRUD Operations
 #### ✅ Backend (Node.js + Express + MongoDB)
 
 - **Express + MongoDB Setup**
@@ -270,7 +282,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
 
 
 
-### **Iteration 2: New Features & Improvements**
+### Iteration 2: New Features & Improvements**
 
 #### 🧠 Study Materials
 
