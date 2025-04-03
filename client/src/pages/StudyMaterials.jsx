@@ -3,12 +3,15 @@ import {
   fetchStudyMaterials,
   createStudyMaterial,
   deleteStudyMaterial,
+  bookmarkMaterial,
+  unbookmarkMaterial,
 } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "./StudyMaterials.css";
 import ReportModal from "./ReportModal";
 
 const StudyMaterials = () => {
+  const [bookmarks, setBookmarks] = useState([]); // 🔖 Store bookmarked IDs
   const [materials, setMaterials] = useState([]);
   const [newMaterial, setNewMaterial] = useState({ title: "", content: "" });
   const [error, setError] = useState("");
@@ -23,14 +26,40 @@ const StudyMaterials = () => {
     try {
       const res = await fetchStudyMaterials();
       setMaterials(res.data);
+
+      if (currentUserId) {
+        const profileRes = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${currentUserId}`
+        );
+        setBookmarks(profileRes.data.bookmarks || []);
+      }
     } catch (err) {
       console.error(err);
     }
   };
 
+
   useEffect(() => {
     loadMaterials();
   }, []);
+
+  const handleBookmark = async (materialId) => {
+    try {
+      await bookmarkMaterial(currentUserId, materialId);
+      setBookmarks((prev) => [...prev, materialId]);
+    } catch (err) {
+      console.error("Bookmark failed", err);
+    }
+  };
+
+  const handleUnbookmark = async (materialId) => {
+    try {
+      await unbookmarkMaterial(currentUserId, materialId);
+      setBookmarks((prev) => prev.filter((id) => id !== materialId));
+    } catch (err) {
+      console.error("Unbookmark failed", err);
+    }
+  };
 
   const handleChange = (e) => {
     setNewMaterial({ ...newMaterial, [e.target.name]: e.target.value });
@@ -143,15 +172,21 @@ const StudyMaterials = () => {
 
                 {token && isOwner && (
                   <>
-                    <button
-                      onClick={() => navigate(`/study-materials/${m._id}/edit`)}
-                    >
+                    <button onClick={() => navigate(`/study-materials/${m._id}/edit`)}>
                       ✏️ Edit
                     </button>
                     <button onClick={() => handleDelete(m._id)}>
                       🗑 Delete
                     </button>
                   </>
+                )}
+
+                {token && (
+                  bookmarks.includes(m._id) ? (
+                    <button onClick={() => handleUnbookmark(m._id)}>📌 Unbookmark</button>
+                  ) : (
+                    <button onClick={() => handleBookmark(m._id)}>➕ Bookmark</button>
+                  )
                 )}
               </div>
             </div>
