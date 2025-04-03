@@ -211,14 +211,14 @@ As a key frontend contributor to the **AI Study Buddy** project, I focused on im
 
 ## 🧠 My Contribution (Xinlai Chen)
 
-🎥 **CIteration 1 ode Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EWz0S7fNuLtOt2tFe2gBHzYBemcg_1BPAg6PIgCTmkZCmA?e=6aBWsb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+🎥 **Iteration 1 Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EWz0S7fNuLtOt2tFe2gBHzYBemcg_1BPAg6PIgCTmkZCmA?e=6aBWsb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
 
 🎥 **Iteration 2 Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EZomDimCX3pMuF23VOSmrTcBWGPgy33f57lRndQuNuSARg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=NsO1V2)
 
 As the primary backend developer for **AI Study Buddy**, I focused on building the server infrastructure, implementing all core CRUD functionality, and ensuring full test coverage and frontend-backend integration.
 
 ---
-### ✅ Iteration 1
+### ✅ Iteration 1: CRUD Operations
 ### ✅ Backend (Node.js + Express + MongoDB)
 
 - **Express + MongoDB Setup**
@@ -286,7 +286,6 @@ You can **copy-paste this directly** into your README:
 - **Detail Page Enhancements**
   - Rebuilt the detail view with better layout, dynamic routing, and integrated UI for related data.
 
----
 
 ### 🤖 Quiz System (Cohere LLM Integration)
 
@@ -302,7 +301,6 @@ You can **copy-paste this directly** into your README:
   - Anonymous users see a message prompting them to log in to access the quiz.
   - Logged-in users can view the quiz with formatted questions and answers.
 
----
 
 ### 🚩 Report Feature (Abuse Prevention & Flagging)
 
@@ -314,7 +312,6 @@ You can **copy-paste this directly** into your README:
   - Users can submit up to **3 reports per material** to prevent spamming.
   - Duplicate reports are blocked via aggregation checks.
 
----
 
 ### ⚙️ Backend Enhancements
 
@@ -327,7 +324,6 @@ You can **copy-paste this directly** into your README:
 - **Report Limit Logic**
   - Added MongoDB aggregation and counting logic to enforce the 3-report-per-user-per-material limit.
 
----
 
 ### 💅 Frontend UI Enhancements
 
@@ -338,7 +334,6 @@ You can **copy-paste this directly** into your README:
 - **Home Page Improvements**
   - Improved layout spacing, heading alignment, and interaction flow between cards and actions.
 
----
 
 ### 🔁 Testing & Bug Fixes
 
@@ -350,7 +345,6 @@ You can **copy-paste this directly** into your README:
   - Resolved layout spacing issues between components.
   - Fixed permission logic for quiz and report visibility.
 
----
 
 ### 📸 Screenshots
 
