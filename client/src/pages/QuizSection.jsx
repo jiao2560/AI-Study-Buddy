@@ -57,21 +57,23 @@ const QuizSection = ({ studyMaterialId, content, token }) => {
         </p>
       ) : quiz ? (
         <>
-          <ul className="quiz-list">
+          <div className="quiz-list">
             {quiz.questions.map((q, i) => (
-              <li key={i}>
-                <strong>
-                  Q{i + 1}: {q.question_text}
-                </strong>
+              <div key={i} className="quiz-question-block">
+                <p>
+                  <strong>
+                    Q{i + 1}: {q.question_text}
+                  </strong>
+                </p>
                 <ul>
                   {q.options.map((opt, j) => (
                     <li key={j}>{opt}</li>
                   ))}
                 </ul>
                 <p className="correct-answer">✅ Answer: {q.correct_answer}</p>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
 
           {/* ✅ Always allow regeneration if logged in */}
           <button

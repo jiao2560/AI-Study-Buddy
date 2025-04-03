@@ -74,8 +74,8 @@ export const callCohereForQuestions = async (content) => {
 
     const text = response.data.generations?.[0]?.text;
     if (!text) throw new Error("Invalid Cohere response from backend.");
+    console.log("🔍 Raw Cohere Output:\n", text);
 
-    // Split by questions
     const lines = text
       .split(/\n/)
       .map((line) => line.trim())
@@ -84,22 +84,48 @@ export const callCohereForQuestions = async (content) => {
     const questions = [];
     let currentQuestion = null;
 
-    for (let line of lines) {
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+
       if (/^\d+\./.test(line)) {
+        // Start a new question block
         if (currentQuestion) questions.push(currentQuestion);
+
         currentQuestion = {
-          question_text: line.replace(/^\d+\.\s*/, ""),
+          question_text: "",
           options: [],
           correct_answer: "",
         };
+
+        const nextLine = lines[i + 1];
+        if (/^question:/i.test(nextLine)) {
+          currentQuestion.question_text = nextLine.replace(/^question:\s*/i, "").trim();
+          i++; // skip processed line
+        }
       } else if (/^[a-d]\./i.test(line)) {
         currentQuestion?.options.push(line);
       } else if (/^answer:/i.test(line)) {
-        currentQuestion.correct_answer = line.replace(/^answer:\s*/i, "");
+        const answerText = line.replace(/^answer:\s*/i, "").trim();
+        if (currentQuestion && answerText) {
+          currentQuestion.correct_answer = answerText;
+        } else {
+          console.warn("⚠️ Answer line skipped (missing question or empty):", line);
+        }
       }
     }
 
-    if (currentQuestion) questions.push(currentQuestion);
+    // Push last question if valid
+    if (
+      currentQuestion &&
+      currentQuestion.question_text &&
+      currentQuestion.options.length &&
+      currentQuestion.correct_answer
+    ) {
+      questions.push(currentQuestion);
+    }
+
+    if (questions.length === 0)
+      throw new Error("⚠️ No valid questions parsed from Cohere.");
 
     return questions;
   } catch (error) {

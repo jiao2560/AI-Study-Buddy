@@ -81,18 +81,18 @@ router.post("/generate-quiz", async (req, res) => {
       {
         model: "command",
         prompt: `Generate 5 multiple-choice quiz questions based on the following study material. 
-Each question should have 4 answer options labeled a–d and include the correct answer at the end.
-Use the following format strictly:
-
-1. Question text
-a. Option A
-b. Option B
-c. Option C
-d. Option D
-Answer: Option A
-
-Study Material:
-${content}`,
+  Each question should have 4 answer options labeled a–d and include the correct answer at the end.
+  Use the following format strictly:
+  
+  1. Question text
+  a. Option A
+  b. Option B
+  c. Option C
+  d. Option D
+  Answer: Option A
+  
+  Study Material:
+  ${content}`,
 
         max_tokens: 400,
         temperature: 0.7,

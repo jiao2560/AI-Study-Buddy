@@ -44,3 +44,8 @@
   color: #fff;
   backdrop-filter: blur(8px);
 }
+
+.quiz-question-block {
+    margin-bottom: 1.5rem;
+  }
+  
