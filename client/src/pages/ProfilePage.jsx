@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { fetchStudyMaterials, deleteStudyMaterial } from "../services/api";
 import "./ProfilePage.css";
 import "./StudyMaterials.css";
 
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState(null);
+  const [ownMaterials, setOwnMaterials] = useState([]);
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const userId = localStorage.getItem("userId");
       if (!userId) return;
-
       try {
         const res = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${userId}`
@@ -21,12 +25,33 @@ const ProfilePage = () => {
       }
     };
 
+    const fetchUserMaterials = async () => {
+      try {
+        const res = await fetchStudyMaterials();
+        const filtered = res.data.filter((m) => m.user_id === userId);
+        setOwnMaterials(filtered);
+      } catch (err) {
+        console.error("Failed to load materials", err);
+      }
+    };
+
     fetchProfile();
-  }, []);
+    fetchUserMaterials();
+  }, [userId]);
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteStudyMaterial(id);
+      setOwnMaterials((prev) => prev.filter((m) => m._id !== id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="study-materials-page">
       <div className="profile-page">
+        {/* LEFT SIDE: Profile Info */}
         <div className="profile-left">
           <div className="profile-box">
             <div className="profile-header">
@@ -43,8 +68,41 @@ const ProfilePage = () => {
             )}
           </div>
         </div>
+
+        {/* RIGHT SIDE: User's Study Materials */}
         <div className="profile-right">
-          {/* Reserved for future content */}
+          <h2 style={{ color: "#fff" }}>📘 Your Study Materials</h2>
+          <div className="material-list">
+            {ownMaterials.length === 0 ? (
+              <p style={{ color: "#ccc" }}>You haven't created any materials yet.</p>
+            ) : (
+              ownMaterials.map((m) => (
+                <div className="material-card" key={m._id}>
+                  <h3>{m.title}</h3>
+                  <p>
+                    {m.content.length > 225 ? (
+                      <>
+                        {m.content.slice(0, 225)}...{" "}
+                        <span
+                          className="read-more"
+                          onClick={() => navigate(`/study-materials/${m._id}`)}
+                        >
+                          Read more
+                        </span>
+                      </>
+                    ) : (
+                      m.content
+                    )}
+                  </p>
+                  <div className="card-actions">
+                    <button onClick={() => navigate(`/study-materials/${m._id}`)}>👁 View</button>
+                    <button onClick={() => navigate(`/study-materials/${m._id}/edit`)}>✏️ Edit</button>
+                    <button onClick={() => handleDelete(m._id)}>🗑 Delete</button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
     </div>
