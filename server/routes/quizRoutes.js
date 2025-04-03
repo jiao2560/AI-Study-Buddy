@@ -31,17 +31,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get all quizzes
-// router.get("/", async (req, res) => {
-//   try {
-//     const quizzes = await Quiz.find();
-//     res.json(quizzes);
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
-
-// GET quiz by study_material_id
 // GET quiz by study_material_id (query-based)
 router.get("/", async (req, res) => {
   try {
@@ -59,17 +48,6 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// Get a quiz by ID
-// router.get("/:id", async (req, res) => {
-//   try {
-//     const quiz = await Quiz.findById(req.params.id);
-//     if (!quiz) return res.status(404).json({ error: "Quiz not found" });
-//     res.json(quiz);
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
 
 // Update a quiz
 router.put("/:id", async (req, res) => {
