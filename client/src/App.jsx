@@ -2,16 +2,30 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homepage";
 import Signup from "./pages/signup"; // 👈 Import the Signup component
-import Login from "./pages/Login";
+import Login from "./pages/Login";import NavBar from "./components/NavBar";
+
 import DashPage from "./pages/DashPage";
+import StudyMaterials from "./pages/StudyMaterials";
+import StudyMaterialsPage from "./pages/StudyMaterials";
+import StudyMaterialDetail from "./pages/StudyMaterialDetail";
+import StudyMaterialForm from "./pages/StudyMaterialForm"; // for edit/create
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
+       <NavBar />
+       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<DashPage />} />
+        <Route path="/study-materials" element={<StudyMaterials />} />
+        <Route path="/study-materials" element={<StudyMaterialsPage />} />
+        <Route path="/study-materials/:id" element={<StudyMaterialDetail />} />
+        <Route
+          path="/study-materials/:id/edit"
+          element={<StudyMaterialForm />}
+        />
       </Routes>
     </BrowserRouter>
   );

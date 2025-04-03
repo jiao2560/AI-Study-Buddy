@@ -4,7 +4,7 @@
   align-items: center;
   min-height: 100vh;
   background: linear-gradient(to right, #1a2a6c, #6142d3, #21c2a7);
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
 }
 
 .signup-card {
@@ -38,17 +38,21 @@
 .signup-card form {
   display: flex;
   flex-direction: column;
+  gap: 0.8rem;
 }
 
-.signup-card input {
+.signup-card input,
+.password-wrapper input {
   padding: 8px 12px;
-  margin-bottom: 0.9rem;
   font-size: 0.9rem;
   border: 1px solid #ccc;
   border-radius: 10px;
   transition: border-color 0.2s ease;
   width: 100%;
-  height: 42px; /* Add fixed height for consistency */
+  height: 42px;
+  box-sizing: border-box;
+  background: #f7f7f7;
+  color: #111; /* ✅ Set visible dark text */
 }
 
 .signup-card input:focus {
@@ -60,15 +64,32 @@
   position: relative;
 }
 
+.password-wrapper input {
+  width: 100%;
+  height: 42px;
+  padding-right: 40px; /* space for the eye */
+  padding-left: 12px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+
 .toggle-visibility {
   position: absolute;
-  right: 14px;
+  right: 12px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-48%);  
   cursor: pointer;
   font-size: 1.1rem;
   user-select: none;
+  color: #333;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
 .signup-card button {
   padding: 12px;
@@ -102,13 +123,10 @@
 .back-home:hover {
   color: #0056b3;
 }
-.toggle-visibility {
-  position: absolute;
-  right: 12px;
-  top: 35%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 1rem;
-  user-select: none;
-  color: #333;
+
+.signup-card h2,
+.signup-card .login-redirect,
+.signup-card .message,
+.signup-card .back-home {
+  text-align: left;
 }

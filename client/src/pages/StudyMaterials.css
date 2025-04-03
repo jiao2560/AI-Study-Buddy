@@ -1,0 +1,205 @@
+.study-materials-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #fff;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  /* Toggle Button to show/hide form */
+  .toggle-form-btn {
+    background-color: #00bcd4;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 0.8rem 1.4rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .toggle-form-btn:hover {
+    background-color: #0097a7;
+  }
+  
+  /* Add New Material Form */
+  .add-material-form {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(6px);
+  }
+  
+  .add-material-form input,
+  .add-material-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+  
+  .add-material-form textarea {
+    min-height: 250px;
+  }
+  
+  .add-material-form button {
+    background: #00bcd4;
+    color: #fff;
+    padding: 10px 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .add-material-form button:hover {
+    background: #0097a7;
+  }
+  
+  /* Auth Message for non-logged-in users */
+  .auth-msg {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-msg a {
+    color: #00e5ff;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  /* Error Message */
+  .error {
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  
+  /* Study Material Card List */
+  .material-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  
+  .material-card {
+    flex: 1 1 300px;
+    background: linear-gradient(
+      135deg,
+      rgba(25, 25, 112, 0.6),
+      rgba(0, 212, 255, 0.15)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e0e0e0;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s;
+  }
+  
+  .material-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .material-card h3 {
+    margin-top: 0;
+    color: #18ceee;
+  }
+
+  .material-card p {
+    max-height: 120px;            /* Limit preview height */
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;        /* Show max 6 lines */
+    -webkit-box-orient: vertical;
+    margin-bottom: 0.5rem;
+  }
+  
+  .read-more {
+    color: #00e5ff;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .read-more:hover {
+    color: #80ffff;
+  }
+  
+  
+  /* Card action buttons: View, Edit, Delete */
+  .card-actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* Increased spacing between buttons */
+    justify-content: flex-start;
+  }
+  
+  .card-actions button {
+    background: #00bcd4;
+    color: #fff;
+    padding: 10px 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    min-width: 100px; /* Optional: make buttons more uniform */
+  }
+  
+  .card-actions button:hover {
+    background: #0097a7;
+  }
+  
+
+  .report-form-popup {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    background-color: #1f1f1f;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+  
+  .report-form-popup select {
+    padding: 0.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 1rem;
+  }
+  
+  .global-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #111;
+    padding: 24px;
+    border-radius: 12px;
+    z-index: 2000;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+  

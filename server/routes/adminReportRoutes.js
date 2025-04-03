@@ -6,10 +6,30 @@ const AdminReport = require("../models/AdminReport");
 router.post("/", async (req, res) => {
   try {
     const { study_material_id, reason, flagged_by } = req.body;
+
     if (!study_material_id || !reason || !flagged_by) {
       return res.status(400).json({ error: "All fields required" });
     }
-    const report = new AdminReport(req.body);
+
+    // 👉 Only count *pending* reports toward the limit
+    const existingReports = await AdminReport.countDocuments({
+      study_material_id,
+      flagged_by,
+      status: "pending",
+    });
+    if (existingReports >= 3) {
+      return res.status(429).json({
+        error:
+          "Limit reached. You can report this material only up to 3 times.",
+      });
+    }
+
+    const report = new AdminReport({
+      study_material_id,
+      reason,
+      flagged_by,
+      status: "pending",
+    });
     const saved = await report.save();
     res.status(201).json(saved);
   } catch (err) {
@@ -17,10 +37,18 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get all reports
+// Get all reports, optionally filtered by status
 router.get("/", async (req, res) => {
   try {
-    const reports = await AdminReport.find();
+    const { status } = req.query;
+
+    // Build filter only if status is provided
+    const filter = {};
+    if (status) {
+      filter.status = status;
+    }
+
+    const reports = await AdminReport.find(filter).sort({ createdAt: -1 });
     res.json(reports);
   } catch (error) {
     res.status(500).json({ error: error.message });
