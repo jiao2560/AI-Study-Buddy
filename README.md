@@ -218,8 +218,8 @@ As a key frontend contributor to the **AI Study Buddy** project, I focused on im
 As the primary backend developer for **AI Study Buddy**, I focused on building the server infrastructure, implementing all core CRUD functionality, and ensuring full test coverage and frontend-backend integration.
 
 ---
-### **Iteration 1: CRUD Operations**
-### ✅ Backend (Node.js + Express + MongoDB)
+### Iteration 1: CRUD Operations**
+#### ✅ Backend (Node.js + Express + MongoDB)
 
 - **Express + MongoDB Setup**
   - Initialized the Express server and connected to MongoDB Atlas using Mongoose.
@@ -245,7 +245,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Assisted with deployment to Render and added missing keys like `JWT_SECRET`, `COHERE_API_KEY`, and `GOOGLE_API_KEY` to fix production bugs.
 
 
-### ✅ Automated Testing (Jest + Supertest)
+#### ✅ Automated Testing (Jest + Supertest)
 
 - **Full Test Coverage**
   - Wrote 32 automated tests across 4 files: `users.test.js`, `studyMaterial.test.js`, `quiz.test.js`, and `report.test.js`.
@@ -259,20 +259,20 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Verified backend functionality before merging to `main`.
 
 
-### 🔁 Integration & Debugging
+#### 🔁 Integration & Debugging
 
 - Verified frontend-backend integration using Axios and REST endpoints.
 - Helped teammates debug login failures related to JWT and missing `.env` variables.
 - Ensured deployed frontend could communicate securely with the backend.
 
-### 📸 Screenshots
+#### 📸 Screenshots
 <img width="274" alt="image" src="https://github.com/user-attachments/assets/4e03649d-284e-4d42-b973-44cd076c727d" />
 
 
 
 ### **Iteration 2: New Features & Improvements**
 
-### 🧠 Study Materials
+#### 🧠 Study Materials
 
 - **Feature Completion**
   - Users can create, view, update, and delete their own study materials.
@@ -283,7 +283,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Rebuilt the detail view with better layout, dynamic routing, and integrated UI for related data.
 
 
-### 🤖 Quiz System (Cohere LLM Integration)
+#### 🤖 Quiz System (Cohere LLM Integration)
 
 - **Quiz Generation**
   - Users can generate or regenerate AI-generated quizzes for *any* study material.
@@ -298,7 +298,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Logged-in users can view the quiz with formatted questions and answers.
 
 
-### 🚩 Report Feature (Abuse Prevention & Flagging)
+#### 🚩 Report Feature (Abuse Prevention & Flagging)
 
 - **User Reports**
   - Authenticated users can flag study materials they did not create.
@@ -309,7 +309,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Duplicate reports are blocked via aggregation checks.
 
 
-### ⚙️ Backend Enhancements
+#### ⚙️ Backend Enhancements
 
 - **Cascade Deletion**
   - When a study material is deleted, all associated **quizzes and reports** are also removed automatically.
@@ -321,7 +321,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Added MongoDB aggregation and counting logic to enforce the 3-report-per-user-per-material limit.
 
 
-### 💅 Frontend UI Enhancements
+#### 💅 Frontend UI Enhancements
 
 - **Navbar & Auth Pages**
   - Rebuilt the navbar with dynamic login state, responsive design, and consistent button styles.
@@ -331,7 +331,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Improved layout spacing, heading alignment, and interaction flow between cards and actions.
 
 
-### 🔁 Testing & Bug Fixes
+#### 🔁 Testing & Bug Fixes
 
 - **Quiz Parsing Edge Cases**
   - Fixed several parsing errors due to LLM format inconsistencies (e.g. "Question:" lines, misplaced answers).
@@ -342,7 +342,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Fixed permission logic for quiz and report visibility.
 
 
-### 📸 Screenshots
+#### 📸 Screenshots
 
 Screenshots for Iteration 2 are available here:  
 👉 [Iteration 2 UI Screenshots & Changes](https://github.com/jiao2560/AI-Study-Buddy/issues/15)
