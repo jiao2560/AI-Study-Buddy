@@ -51,7 +51,7 @@ const NavBar = () => {
                 👋 Hi, {username || "User"}
               </div>
               <div className="nav-item">
-                <a href="/profile">Profile</a>
+                <Link to="/profile">Profile</Link> {/* ✅ fixed here */}
               </div>
               <button className="logout-btn" onClick={handleLogout}>
                 Logout
