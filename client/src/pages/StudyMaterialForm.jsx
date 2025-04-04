@@ -32,9 +32,12 @@ const StudyMaterialForm = () => {
 
   return (
     <div className="material-form">
-      <button className="back-btn" onClick={() => navigate("/study-materials")}>
-        ← Back to Materials
-      </button>
+        <button
+          className="back-btn"
+          onClick={() => navigate(-1)}
+        >
+          ← Back
+        </button>
 
       <h2>{id ? "Edit" : "Add New"} Study Material</h2>
       <form onSubmit={handleSubmit}>
