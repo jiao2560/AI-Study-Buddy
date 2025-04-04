@@ -117,11 +117,10 @@ VITE_API_BASE_URL=http://localhost:5000  # Replace with your backend URL
 5. Create a Pull Request
 
 Wenbo Jiao:
-Absolutely! Here's a polished and professional **"My Contribution"** section for your `README.md` based on what you’ve implemented:
 
 ---
 
-## 👨‍💻 My Contribution(Wenbo Jiao)
+## 👨‍💻 My Contribution(Wenbo Jiao) -- iteration 1
 codewalk video: https://youtu.be/8BzVmgmIMpQ
 
 As part of the development team for AI Study Buddy, I implemented several frontend and backend features to enhance functionality, user experience, and visual design:
@@ -157,6 +156,56 @@ As part of the development team for AI Study Buddy, I implemented several fronte
 
 
 ---
+
+ 🛠 My Contribution(Wenbo Jiao) -- iteration 2
+
+As part of the team project, I was responsible for **implementing the user Profile Page** and **integrating the Bookmarking feature** for study materials. These functionalities enhance personalization and allow users to manage their own content more effectively.
+
+---
+
+#### ✅ Profile Page (`/profile`)
+
+- **Functionality**: Displays the logged-in user's profile information including username and email.
+- **Own Study Materials**: Lists all the materials created by the user with options to:
+  - View the material.
+  - Edit the content.
+  - Delete the material.
+- **Bookmarked Materials**: Lists materials the user has bookmarked with a direct view button.
+
+📷 *Screenshots*:
+- **Profile Page Overview:**
+  ![Profile Top](./assets/profile-top.png)
+- **Your Study Materials:**
+  ![Own Materials](./assets/profile-own-materials.png)
+- **Bookmarked Materials:**
+  ![Bookmarked Materials](./assets/profile-bookmarked.png)
+
+---
+
+#### 📌 Bookmark Feature
+
+- **Functionality**: Users can bookmark or unbookmark any study material that is not their own.
+- **UI Updates Dynamically**: The bookmark button updates its label to show either ➕ Bookmark or ➖ Unbookmark based on current state.
+- **Persistent**: Bookmarks are stored in the user model and fetched during rendering of both the Study Materials list and Profile page.
+
+📷 *Screenshot of Bookmark Button:*
+![Bookmark Button](./assets/bookmark-button.png)
+
+---
+
+### 🔧 Technical Details
+
+- Created `ProfilePage.jsx` to fetch and display user details, authored materials, and bookmarked items.
+- Updated `StudyMaterials.jsx` to show and toggle bookmark status for each item.
+- Utilized `localStorage`, `React Router`, and a combination of `useEffect`, `axios`, and async API service functions to manage data flow.
+- Backend API endpoints used:
+  - `GET /api/users/profile/:id` to fetch user info.
+  - `POST /api/users/bookmark/:materialId` to bookmark.
+  - `POST /api/users/unbookmark/:materialId` to remove bookmark.
+
+---
+
+
 
 ## 👨‍💻 My Contribution (Zhenziye Lin)
 
