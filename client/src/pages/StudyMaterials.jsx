@@ -5,43 +5,72 @@ import {
   deleteStudyMaterial,
   bookmarkMaterial,
   unbookmarkMaterial,
+  fetchUserProfile,
 } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "./StudyMaterials.css";
 import ReportModal from "./ReportModal";
 
 const StudyMaterials = () => {
-  const [bookmarks, setBookmarks] = useState([]); // 🔖 Store bookmarked IDs
   const [materials, setMaterials] = useState([]);
   const [newMaterial, setNewMaterial] = useState({ title: "", content: "" });
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
-  const token = localStorage.getItem("token");
-  const currentUserId = localStorage.getItem("userId"); // 👈 get current user ID
-  const navigate = useNavigate();
+  const [bookmarks, setBookmarks] = useState([]);
   const [reportingId, setReportingId] = useState(null);
   const [showReportForm, setShowReportForm] = useState(false);
+
+  const token = localStorage.getItem("token");
+  const currentUserId = localStorage.getItem("userId");
+  const navigate = useNavigate();
 
   const loadMaterials = async () => {
     try {
       const res = await fetchStudyMaterials();
       setMaterials(res.data);
 
-      if (currentUserId) {
-        const profileRes = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${currentUserId}`
-        );
-        setBookmarks(profileRes.data.bookmarks || []);
+      if (currentUserId && token) {
+        const userRes = await fetchUserProfile(currentUserId, token);
+        setBookmarks(userRes.data.bookmarks || []);
       }
     } catch (err) {
       console.error(err);
     }
   };
 
-
   useEffect(() => {
     loadMaterials();
   }, []);
+
+  const handleChange = (e) => {
+    setNewMaterial({ ...newMaterial, [e.target.name]: e.target.value });
+  };
+
+  const handleCreate = async () => {
+    if (!token) {
+      setError("Please log in to add study materials.");
+      return;
+    }
+    try {
+      await createStudyMaterial(newMaterial);
+      setNewMaterial({ title: "", content: "" });
+      setError("");
+      setShowForm(false);
+      loadMaterials();
+    } catch (err) {
+      console.error(err);
+      setError("Failed to create material.");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteStudyMaterial(id);
+      loadMaterials();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleBookmark = async (materialId) => {
     try {
@@ -61,46 +90,13 @@ const StudyMaterials = () => {
     }
   };
 
-  const handleChange = (e) => {
-    setNewMaterial({ ...newMaterial, [e.target.name]: e.target.value });
-  };
-
-  const handleCreate = async () => {
-    if (!token) {
-      setError("Please log in to add study materials.");
-      return;
-    }
-    try {
-      await createStudyMaterial(newMaterial);
-      setNewMaterial({ title: "", content: "" });
-      setError("");
-      setShowForm(false); // 👈 hide form after adding
-      loadMaterials();
-    } catch (err) {
-      console.error(err);
-      setError("Failed to create material.");
-    }
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await deleteStudyMaterial(id);
-      loadMaterials();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   return (
     <div className="study-materials-page">
       <h1>📚 Study Materials</h1>
 
       {token ? (
         <>
-          <button
-            className="toggle-form-btn"
-            onClick={() => setShowForm(!showForm)}
-          >
+          <button className="toggle-form-btn" onClick={() => setShowForm(!showForm)}>
             {showForm ? "➖ Cancel" : "➕ Add New Material"}
           </button>
 
@@ -118,7 +114,7 @@ const StudyMaterials = () => {
                 placeholder="Content"
                 value={newMaterial.content}
                 onChange={handleChange}
-              ></textarea>
+              />
               <button onClick={handleCreate}>✅ Submit</button>
             </div>
           )}
@@ -135,6 +131,8 @@ const StudyMaterials = () => {
       <div className="material-list">
         {materials.map((m) => {
           const isOwner = currentUserId && m.user_id === currentUserId;
+          const isBookmarked = bookmarks.includes(m._id);
+
           return (
             <div className="material-card" key={m._id}>
               <h3>{m.title}</h3>
@@ -142,10 +140,7 @@ const StudyMaterials = () => {
                 {m.content.length > 225 ? (
                   <>
                     {m.content.slice(0, 225)}...{" "}
-                    <span
-                      className="read-more"
-                      onClick={() => navigate(`/study-materials/${m._id}`)}
-                    >
+                    <span className="read-more" onClick={() => navigate(`/study-materials/${m._id}`)}>
                       Read more
                     </span>
                   </>
@@ -160,14 +155,22 @@ const StudyMaterials = () => {
                 </button>
 
                 {token && !isOwner && (
-                  <button
-                    onClick={() => {
+                  <>
+                    <button onClick={() => {
                       setReportingId(m._id);
                       setShowReportForm(true);
-                    }}
-                  >
-                    🚩 Report
-                  </button>
+                    }}>
+                      🚩 Report
+                    </button>
+
+                    <button onClick={() =>
+                      isBookmarked
+                        ? handleUnbookmark(m._id)
+                        : handleBookmark(m._id)
+                    }>
+                      {isBookmarked ? "❌ Unbookmark" : "📌 Bookmark"}
+                    </button>
+                  </>
                 )}
 
                 {token && isOwner && (
@@ -180,21 +183,12 @@ const StudyMaterials = () => {
                     </button>
                   </>
                 )}
-
-                {token && (
-                  bookmarks.includes(m._id) ? (
-                    <button onClick={() => handleUnbookmark(m._id)}>📌 Unbookmark</button>
-                  ) : (
-                    <button onClick={() => handleBookmark(m._id)}>➕ Bookmark</button>
-                  )
-                )}
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* 🔻 Add this OUTSIDE the material list */}
       <ReportModal
         visible={showReportForm}
         studyMaterialId={reportingId}
@@ -203,7 +197,6 @@ const StudyMaterials = () => {
           setReportingId(null);
         }}
       />
-
     </div>
   );
 };

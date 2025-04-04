@@ -113,41 +113,42 @@ const ProfilePage = () => {
             </div>
         </div>
 
-        {/* BOTTOM RIGHT: Bookmarked Materials */}
-        <div className="profile-box profile-materials-right">
-            <h2>🔖 Bookmarked Materials</h2>
-            <div className="material-list">
-            {bookmarkedMaterials.length === 0 ? (
-                <p style={{ color: "#ccc" }}>You haven’t bookmarked any materials yet.</p>
-            ) : (
-                bookmarkedMaterials.map((m) => (
-                <div className="material-card" key={m._id}>
-                    <h3>{m.title}</h3>
-                    <p>
-                    {m.content.length > 225 ? (
-                        <>
-                        {m.content.slice(0, 225)}...{" "}
-                        <span
-                            className="read-more"
-                            onClick={() => navigate(`/study-materials/${m._id}`)}
-                        >
-                            Read more
-                        </span>
-                        </>
-                    ) : (
-                        m.content
-                    )}
-                    </p>
-                    <div className="card-actions">
-                    <button onClick={() => navigate(`/study-materials/${m._id}`)}>👁 View</button>
-                    </div>
+    {/* BOTTOM RIGHT: Bookmarked Materials */}
+    <div className="profile-box profile-materials-right">
+        <h2>🔖 Bookmarked Materials</h2>
+        <div className="material-list">
+        {bookmarkedMaterials.length === 0 ? (
+            <p style={{ color: "#ccc" }}>You haven’t bookmarked any materials yet.</p>
+        ) : (
+            bookmarkedMaterials.map((m) => (
+            <div className="material-card" key={m._id}>
+                <h3>{m.title}</h3>
+                <p>
+                {m.content.length > 225 ? (
+                    <>
+                    {m.content.slice(0, 225)}...{" "}
+                    <span
+                        className="read-more"
+                        onClick={() => navigate(`/study-materials/${m._id}`)}
+                    >
+                        Read more
+                    </span>
+                    </>
+                ) : (
+                    m.content
+                )}
+                </p>
+                <div className="card-actions">
+                <button onClick={() => navigate(`/study-materials/${m._id}`)}>👁 View</button>
                 </div>
-                ))
-            )}
             </div>
-          </div>
+            ))
+        )}
         </div>
-     </div>
+  </div>
+</div>
+
+</div>
     </div>
   );
 };
