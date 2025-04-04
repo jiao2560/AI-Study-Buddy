@@ -9,6 +9,8 @@ import StudyMaterials from "./pages/StudyMaterials";
 import StudyMaterialsPage from "./pages/StudyMaterials";
 import StudyMaterialDetail from "./pages/StudyMaterialDetail";
 import StudyMaterialForm from "./pages/StudyMaterialForm"; // for edit/create
+import ProfilePage from "./pages/ProfilePage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +28,8 @@ function App() {
           path="/study-materials/:id/edit"
           element={<StudyMaterialForm />}
         />
+        <Route path="/profile" element={<ProfilePage />} />
+
       </Routes>
     </BrowserRouter>
   );

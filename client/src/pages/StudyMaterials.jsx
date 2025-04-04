@@ -3,6 +3,9 @@ import {
   fetchStudyMaterials,
   createStudyMaterial,
   deleteStudyMaterial,
+  bookmarkMaterial,
+  unbookmarkMaterial,
+  fetchUserProfile,
 } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "./StudyMaterials.css";
@@ -13,16 +16,23 @@ const StudyMaterials = () => {
   const [newMaterial, setNewMaterial] = useState({ title: "", content: "" });
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
-  const token = localStorage.getItem("token");
-  const currentUserId = localStorage.getItem("userId"); // 👈 get current user ID
-  const navigate = useNavigate();
+  const [bookmarks, setBookmarks] = useState([]);
   const [reportingId, setReportingId] = useState(null);
   const [showReportForm, setShowReportForm] = useState(false);
+
+  const token = localStorage.getItem("token");
+  const currentUserId = localStorage.getItem("userId");
+  const navigate = useNavigate();
 
   const loadMaterials = async () => {
     try {
       const res = await fetchStudyMaterials();
       setMaterials(res.data);
+
+      if (currentUserId && token) {
+        const userRes = await fetchUserProfile(currentUserId, token);
+        setBookmarks(userRes.data.bookmarks || []);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -45,7 +55,7 @@ const StudyMaterials = () => {
       await createStudyMaterial(newMaterial);
       setNewMaterial({ title: "", content: "" });
       setError("");
-      setShowForm(false); // 👈 hide form after adding
+      setShowForm(false);
       loadMaterials();
     } catch (err) {
       console.error(err);
@@ -62,16 +72,31 @@ const StudyMaterials = () => {
     }
   };
 
+  const handleBookmark = async (materialId) => {
+    try {
+      await bookmarkMaterial(currentUserId, materialId);
+      setBookmarks((prev) => [...prev, materialId]);
+    } catch (err) {
+      console.error("Bookmark failed", err);
+    }
+  };
+
+  const handleUnbookmark = async (materialId) => {
+    try {
+      await unbookmarkMaterial(currentUserId, materialId);
+      setBookmarks((prev) => prev.filter((id) => id !== materialId));
+    } catch (err) {
+      console.error("Unbookmark failed", err);
+    }
+  };
+
   return (
     <div className="study-materials-page">
       <h1>📚 Study Materials</h1>
 
       {token ? (
         <>
-          <button
-            className="toggle-form-btn"
-            onClick={() => setShowForm(!showForm)}
-          >
+          <button className="toggle-form-btn" onClick={() => setShowForm(!showForm)}>
             {showForm ? "➖ Cancel" : "➕ Add New Material"}
           </button>
 
@@ -89,7 +114,7 @@ const StudyMaterials = () => {
                 placeholder="Content"
                 value={newMaterial.content}
                 onChange={handleChange}
-              ></textarea>
+              />
               <button onClick={handleCreate}>✅ Submit</button>
             </div>
           )}
@@ -106,6 +131,8 @@ const StudyMaterials = () => {
       <div className="material-list">
         {materials.map((m) => {
           const isOwner = currentUserId && m.user_id === currentUserId;
+          const isBookmarked = bookmarks.includes(m._id);
+
           return (
             <div className="material-card" key={m._id}>
               <h3>{m.title}</h3>
@@ -113,10 +140,7 @@ const StudyMaterials = () => {
                 {m.content.length > 225 ? (
                   <>
                     {m.content.slice(0, 225)}...{" "}
-                    <span
-                      className="read-more"
-                      onClick={() => navigate(`/study-materials/${m._id}`)}
-                    >
+                    <span className="read-more" onClick={() => navigate(`/study-materials/${m._id}`)}>
                       Read more
                     </span>
                   </>
@@ -131,21 +155,27 @@ const StudyMaterials = () => {
                 </button>
 
                 {token && !isOwner && (
-                  <button
-                    onClick={() => {
+                  <>
+                    <button onClick={() => {
                       setReportingId(m._id);
                       setShowReportForm(true);
-                    }}
-                  >
-                    🚩 Report
-                  </button>
+                    }}>
+                      🚩 Report
+                    </button>
+
+                    <button onClick={() =>
+                      isBookmarked
+                        ? handleUnbookmark(m._id)
+                        : handleBookmark(m._id)
+                    }>
+                      {isBookmarked ? "❌ Unbookmark" : "📌 Bookmark"}
+                    </button>
+                  </>
                 )}
 
                 {token && isOwner && (
                   <>
-                    <button
-                      onClick={() => navigate(`/study-materials/${m._id}/edit`)}
-                    >
+                    <button onClick={() => navigate(`/study-materials/${m._id}/edit`)}>
                       ✏️ Edit
                     </button>
                     <button onClick={() => handleDelete(m._id)}>
@@ -159,7 +189,6 @@ const StudyMaterials = () => {
         })}
       </div>
 
-      {/* 🔻 Add this OUTSIDE the material list */}
       <ReportModal
         visible={showReportForm}
         studyMaterialId={reportingId}
@@ -168,7 +197,6 @@ const StudyMaterials = () => {
           setReportingId(null);
         }}
       />
-      
     </div>
   );
 };
