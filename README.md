@@ -174,11 +174,16 @@ As part of the team project, I was responsible for **implementing the user Profi
 
 📷 *Screenshots*:
 - **Profile Page Overview:**
-  ![Profile Top](./assets/profile-top.png)
+ ![image](https://github.com/user-attachments/assets/ef78e41f-4624-4248-b32a-c95988d23f2c)
+![573720a2d2cb761d0d6b6ef2e17d81f](https://github.com/user-attachments/assets/f6930e6d-967b-4ce1-9a84-8ed413161c56)
+
+ 
 - **Your Study Materials:**
-  ![Own Materials](./assets/profile-own-materials.png)
+ ![image](https://github.com/user-attachments/assets/9e5c8387-776e-434c-b504-e16870f72de4)
+
 - **Bookmarked Materials:**
-  ![Bookmarked Materials](./assets/profile-bookmarked.png)
+ ![97cfdd3d5aa49ca35b68a7d811b90db](https://github.com/user-attachments/assets/fe5c1cb1-3ece-47ca-96bd-ee7dd8a29cae)
+
 
 ---
 
@@ -189,7 +194,8 @@ As part of the team project, I was responsible for **implementing the user Profi
 - **Persistent**: Bookmarks are stored in the user model and fetched during rendering of both the Study Materials list and Profile page.
 
 📷 *Screenshot of Bookmark Button:*
-![Bookmark Button](./assets/bookmark-button.png)
+![82c83ff6cb08f4b0e482004993b26de](https://github.com/user-attachments/assets/37172f10-34df-4c59-9392-031e5e5a6f3f)
+
 
 ---
 
