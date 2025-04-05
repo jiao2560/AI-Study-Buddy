@@ -1,0 +1,28 @@
+.admin-reports-page {
+    padding: 2rem;
+    font-family: sans-serif;
+  }
+  
+  .report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .report-table th,
+  .report-table td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: left;
+  }
+  
+  .report-table th {
+    background-color: #987ce6;
+  }
+  
+  .report-table button {
+    margin-right: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+  

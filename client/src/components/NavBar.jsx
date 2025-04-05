@@ -7,6 +7,7 @@ const NavBar = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("token");
+  const role = localStorage.getItem("role"); // ✅ 加载用户角色
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -42,6 +43,13 @@ const NavBar = () => {
           <div className="nav-item">
             <Link to="/study-materials">Study Material</Link>
           </div>
+
+          {/* ✅ Only admin sees this */}
+          {role === "admin" && (
+            <div className="nav-item">
+              <Link to="/admin-reports">📋 Handle Reports</Link>
+            </div>
+          )}
         </div>
 
         <div className="nav-right">
@@ -51,7 +59,7 @@ const NavBar = () => {
                 👋 Hi, {username || "User"}
               </div>
               <div className="nav-item">
-                <Link to="/profile">Profile</Link> {/* ✅ fixed here */}
+                <Link to="/profile">Profile</Link>
               </div>
               <button className="logout-btn" onClick={handleLogout}>
                 Logout

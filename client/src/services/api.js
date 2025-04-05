@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5001/api" });
+import api from "../utils/axiosInstance"; // 
 
-export const fetchStudyMaterials = () => API.get("/studyMaterials");
+export const fetchStudyMaterials = () => api.get("/studyMaterials");
 export const createStudyMaterial = (data) => {
   const token = localStorage.getItem("token");
-  return API.post("/studyMaterials", data, {
+  return api.post("/studyMaterials", data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -13,41 +13,41 @@ export const createStudyMaterial = (data) => {
 };
 
 export const updateStudyMaterial = (id, updatedMaterial) =>
-  API.put(`/studyMaterials/${id}`, updatedMaterial);
-export const deleteStudyMaterial = (id) => API.delete(`/studyMaterials/${id}`);
-export const fetchStudyMaterialById = (id) => API.get(`/studyMaterials/${id}`);
+  api.put(`/studyMaterials/${id}`, updatedMaterial);
+export const deleteStudyMaterial = (id) => api.delete(`/studyMaterials/${id}`);
+export const fetchStudyMaterialById = (id) => api.get(`/studyMaterials/${id}`);
 
 // Quizzes API
-export const fetchQuizzes = () => API.get("/quizzes");
-export const createQuiz = (quiz) => API.post("/quizzes", quiz);
+export const fetchQuizzes = () => api.get("/quizzes");
+export const createQuiz = (quiz) => api.post("/quizzes", quiz);
 export const updateQuiz = (id, updatedQuiz) =>
-  API.put(`/quizzes/${id}`, updatedQuiz);
-export const deleteQuiz = (id) => API.delete(`/quizzes/${id}`);
+  api.put(`/quizzes/${id}`, updatedQuiz);
+export const deleteQuiz = (id) => api.delete(`/quizzes/${id}`);
 
-// Admin Reports API
-export const fetchReports = () => API.get("/reports");
-export const createReport = (report) => API.post("/reports", report);
-export const updateReport = (id, report) => API.put(`/reports/${id}`, report);
-export const deleteReport = (id) => API.delete(`/reports/${id}`);
+// ✅ Corrected Admin Reports API
+export const fetchReports = () => api.get("/reports");
+export const createReport = (report) => api.post("/reports", report);
+export const updateReport = (id, report) => api.put(`/reports/${id}`, report);
+export const deleteReport = (id) => api.delete(`/reports/${id}`);
 
 // User Authentication API
-export const registerUser = (userData) => API.post("/users/register", userData);
-export const loginUser = (credentials) => API.post("/users/login", credentials);
+export const registerUser = (userData) => api.post("/users/register", userData);
+export const loginUser = (credentials) => api.post("/users/login", credentials);
 export const fetchUserProfile = (userId, token) =>
-  API.get(`/users/profile/${userId}`, {
+  api.get(`/users/profile/${userId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 export const updateUser = (userId, updatedUser, token) =>
-  API.put(`/users/${userId}`, updatedUser, {
+  api.put(`/users/${userId}`, updatedUser, {
     headers: { Authorization: `Bearer ${token}` },
   });
 export const deleteUser = (userId, token) =>
-  API.delete(`/users/${userId}`, {
+  api.delete(`/users/${userId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
 export const generateQuiz = async (materialId, content) => {
-  const res = await API.post("/quizzes", {
+  const res = await api.post("/quizzes", {
     study_material_id: materialId,
     questions: await callCohereForQuestions(content),
   });
@@ -56,16 +56,15 @@ export const generateQuiz = async (materialId, content) => {
 
 // 📌 Bookmark a study material
 export const bookmarkMaterial = (userId, materialId) =>
-  API.post(`/users/bookmark/${materialId}`, { userId });
+  api.post(`/users/bookmark/${materialId}`, { userId });
 
 // ❌ Remove a bookmarked study material
 export const unbookmarkMaterial = (userId, materialId) =>
-  API.post(`/users/unbookmark/${materialId}`, { userId });
-
+  api.post(`/users/unbookmark/${materialId}`, { userId });
 
 export const fetchQuizByMaterialId = async (materialId) => {
   try {
-    const response = await API.get(`/quizzes?study_material_id=${materialId}`);
+    const response = await api.get(`/quizzes?study_material_id=${materialId}`);
     return response.data;
   } catch (err) {
     if (err.response?.status === 404) {
@@ -79,7 +78,7 @@ export const fetchQuizByMaterialId = async (materialId) => {
 
 export const callCohereForQuestions = async (content) => {
   try {
-    const response = await API.post("/quizzes/generate-quiz", { content });
+    const response = await api.post("/quizzes/generate-quiz", { content });
 
     const text = response.data.generations?.[0]?.text;
     if (!text) throw new Error("Invalid Cohere response from backend.");
