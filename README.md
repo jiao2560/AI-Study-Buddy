@@ -274,6 +274,48 @@ As a key frontend contributor to the **AI Study Buddy** project, I focused on im
 ![Image](https://github.com/user-attachments/assets/4c1cdd89-8f88-4036-bff7-0eac5495c038)
 ![Image](https://github.com/user-attachments/assets/43e59371-e339-442a-ae03-69e501c4842e)
 
+## 📄 My Contribution (Zhenziye Lin) — Iteration 2
+
+🎥 **Code Walkthrough Video**: [Click to watch](https://drive.google.com/file/d/1KPixkHeg3LVXyNyxKSBOGkklBRXIsQN7/view?usp=drive_link)
+
+In the second iteration of our project, I focused on implementing admin-specific features and improving the report management system:
+
+### ✅ Admin Role Support
+- Updated the user model to include `role` field (`user` or `admin`).
+- Modified JWT token generation to include role.
+- Developed `verifyToken` and `isAdmin` middleware to protect admin-only routes.
+
+### ✅ Admin Report Management Interface
+- Created a new `/admin-reports` page accessible only to admin users.
+- Built a full CRUD interface to:
+  - View all pending/resolved reports.
+  - Mark reports as resolved.
+  - Delete invalid or spam reports.
+- Integrated access control based on `role` stored in token.
+
+### ✅ Enhanced Report Submission
+- Users can report study materials they didn't create.
+- Limit enforced: max 3 reports per user per material.
+- Modal-based report UI added to `StudyMaterialDetail`.
+- Backend protects duplicate reports with `countDocuments` logic.
+
+### ✅ Frontend Enhancements
+- Displayed dynamic NavBar item for admin (`Manage Reports`).
+- Linked to `AdminReports.jsx` component.
+- Styled table with status/actions using conditional rendering.
+
+### ⚖️ Technologies Used
+- `axiosInstance` for authenticated API requests.
+- `localStorage` for token/role persistence.
+- Express + MongoDB (Mongoose) for report tracking.
+
+### 📷 Screenshots (Iteration 2)
+![Image](https://github.com/user-attachments/assets/c64e1dfe-2768-476f-a801-7e491b4bed12)
+
+![Image](https://github.com/user-attachments/assets/e3156ea2-a237-4d3b-8d1f-ab7a169a5f07)
+
+![Image](https://github.com/user-attachments/assets/8e214ab1-a465-4c29-92b3-804c9ba17c91)
+
 ---
 
 ## 🧠 My Contribution (Xinlai Chen)
