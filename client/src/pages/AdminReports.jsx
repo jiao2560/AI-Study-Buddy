@@ -22,7 +22,7 @@ const AdminReports = () => {
   // 修改状态为 resolved
   const resolveReport = async (id) => {
     try {
-      const res = await api.put(`/admin-reports/${id}`, { status: "resolved" });
+      const res = await api.put(`/reports/${id}`, { status: "resolved" });
       setReports((prev) =>
         prev.map((r) => (r._id === id ? { ...r, status: "resolved" } : r))
       );
@@ -35,7 +35,7 @@ const AdminReports = () => {
   const deleteReport = async (id) => {
     if (!window.confirm("Are you sure you want to delete this report?")) return;
     try {
-      await api.delete(`/admin-reports/${id}`);
+      await api.delete(`/reports/${id}`);
       setReports((prev) => prev.filter((r) => r._id !== id));
     } catch (err) {
       console.error("Failed to delete report", err);
