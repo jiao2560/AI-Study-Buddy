@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import api from "../utils/axiosInstance";
-import "./AdminReports.css"; // 可选：你可以创建这个来美化
+import "./AdminReports.css"; // for styling
 
 const AdminReports = () => {
   const [reports, setReports] = useState([]);
 
-  // 加载所有举报
   useEffect(() => {
     const fetchReports = async () => {
       try {
@@ -19,7 +18,7 @@ const AdminReports = () => {
     fetchReports();
   }, []);
 
-  // 修改状态为 resolved
+  // change report status to resolved
   const resolveReport = async (id) => {
     try {
       const res = await api.put(`/reports/${id}`, { status: "resolved" });
@@ -31,7 +30,8 @@ const AdminReports = () => {
     }
   };
 
-  // 删除举报
+  // delete report
+    // confirm before deleting
   const deleteReport = async (id) => {
     if (!window.confirm("Are you sure you want to delete this report?")) return;
     try {
