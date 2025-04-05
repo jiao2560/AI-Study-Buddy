@@ -10,10 +10,11 @@ This app helps users explore trending topics and get AI-suggested study material
 
 - **Frontend**: React + Vite
 - **Routing**: React Router DOM
-- **Backend**: Express + MongoDB *(coming soon)*
+- **Backend**: Express + MongoDB
 - **Styling**: Custom CSS (responsive, modern UI)
 - **API Calls**: Axios
-
+- **External API**: Cohere (for AI-generated quiz questions), Wikipedia API, Gemini AI
+  
 ---
 
 ## 🚀 Getting Started
@@ -56,21 +57,33 @@ VITE_API_BASE_URL=http://localhost:5000  # Replace with your backend URL
 ## 📁 Project Structure
 
 ```
-├── public/
-├── src/
-│   ├── assets/              # Images and static files
-│   ├── components/          # Reusable UI components (e.g., NavBar)
-│   ├── pages/               # Pages like Home and Signup
-│   │   ├── homepage.jsx
-│   │   ├── signup.jsx
-│   │   ├── homepage.css
-│   │   └── signup.css
-│   ├── services/            # Axios API functions
-│   ├── App.jsx              # Routes and layout
-│   └── main.jsx             # Entry point
-├── .env
-├── package.json
-├── README.md
+├── client/
+│   ├── public/                   # Static assets
+│   ├── src/
+│   │   ├── assets/              # Icons, images, misc media
+│   │   ├── components/          # Reusable components (NavBar, Footer, Modal, etc.)
+│   │   ├── pages/               # Full-page components (Home, Login, Signup, Detail)
+│   │   ├── services/            # Axios service functions for API calls
+│   │   ├── App.jsx              # Main route + layout
+│   │   └── main.jsx             # Vite entry point
+│   ├── .env                     # Frontend environment variables
+│   ├── README.md                # Frontend-specific README (if separate)
+│   ├── index.html               # HTML template
+│   ├── vite.config.js           # Vite configuration
+│   └── package.json             # Dependencies and scripts
+│
+├── server/
+│   ├── config/                  # MongoDB & env setup
+│   ├── middleware/             # Auth, error handling, etc.
+│   ├── models/                 # Mongoose schemas (User, Quiz, Report, Material)
+│   ├── routes/                 # Express routers (users, materials, reports, quizzes)
+│   ├── tests/                  # Jest + Supertest test files
+│   ├── .env                    # Backend environment variables
+│   ├── server.js               # Express app entry point
+│   └── package.json            # Backend dependencies
+│
+├── .gitignore
+└── README.md                   # Main project README
 ```
 
 ---
@@ -104,11 +117,10 @@ VITE_API_BASE_URL=http://localhost:5000  # Replace with your backend URL
 5. Create a Pull Request
 
 Wenbo Jiao:
-Absolutely! Here's a polished and professional **"My Contribution"** section for your `README.md` based on what you’ve implemented:
 
 ---
 
-## 👨‍💻 My Contribution(Wenbo Jiao)
+## 👨‍💻 My Contribution(Wenbo Jiao) -- iteration 1
 codewalk video: https://youtu.be/8BzVmgmIMpQ
 
 As part of the development team for AI Study Buddy, I implemented several frontend and backend features to enhance functionality, user experience, and visual design:
@@ -144,6 +156,62 @@ As part of the development team for AI Study Buddy, I implemented several fronte
 
 
 ---
+
+ 🛠 My Contribution(Wenbo Jiao) -- iteration 2
+
+As part of the team project, I was responsible for **implementing the user Profile Page** and **integrating the Bookmarking feature** for study materials. These functionalities enhance personalization and allow users to manage their own content more effectively.
+
+---
+
+#### ✅ Profile Page (`/profile`)
+
+- **Functionality**: Displays the logged-in user's profile information including username and email.
+- **Own Study Materials**: Lists all the materials created by the user with options to:
+  - View the material.
+  - Edit the content.
+  - Delete the material.
+- **Bookmarked Materials**: Lists materials the user has bookmarked with a direct view button.
+
+📷 *Screenshots*:
+- **Profile Page Overview:**
+ ![image](https://github.com/user-attachments/assets/ef78e41f-4624-4248-b32a-c95988d23f2c)
+![573720a2d2cb761d0d6b6ef2e17d81f](https://github.com/user-attachments/assets/f6930e6d-967b-4ce1-9a84-8ed413161c56)
+
+ 
+- **Your Study Materials:**
+ ![image](https://github.com/user-attachments/assets/9e5c8387-776e-434c-b504-e16870f72de4)
+
+- **Bookmarked Materials:**
+ ![97cfdd3d5aa49ca35b68a7d811b90db](https://github.com/user-attachments/assets/fe5c1cb1-3ece-47ca-96bd-ee7dd8a29cae)
+
+
+---
+
+#### 📌 Bookmark Feature
+
+- **Functionality**: Users can bookmark or unbookmark any study material that is not their own.
+- **UI Updates Dynamically**: The bookmark button updates its label to show either ➕ Bookmark or ➖ Unbookmark based on current state.
+- **Persistent**: Bookmarks are stored in the user model and fetched during rendering of both the Study Materials list and Profile page.
+
+📷 *Screenshot of Bookmark Button:*
+![82c83ff6cb08f4b0e482004993b26de](https://github.com/user-attachments/assets/37172f10-34df-4c59-9392-031e5e5a6f3f)
+
+
+---
+
+### 🔧 Technical Details
+
+- Created `ProfilePage.jsx` to fetch and display user details, authored materials, and bookmarked items.
+- Updated `StudyMaterials.jsx` to show and toggle bookmark status for each item.
+- Utilized `localStorage`, `React Router`, and a combination of `useEffect`, `axios`, and async API service functions to manage data flow.
+- Backend API endpoints used:
+  - `GET /api/users/profile/:id` to fetch user info.
+  - `POST /api/users/bookmark/:materialId` to bookmark.
+  - `POST /api/users/unbookmark/:materialId` to remove bookmark.
+
+---
+
+
 
 ## 👨‍💻 My Contribution (Zhenziye Lin)
 
@@ -210,13 +278,15 @@ As a key frontend contributor to the **AI Study Buddy** project, I focused on im
 
 ## 🧠 My Contribution (Xinlai Chen)
 
-🎥 **Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EWz0S7fNuLtOt2tFe2gBHzYBemcg_1BPAg6PIgCTmkZCmA?e=6aBWsb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+🎥 **Iteration 1 Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EWz0S7fNuLtOt2tFe2gBHzYBemcg_1BPAg6PIgCTmkZCmA?e=6aBWsb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+
+🎥 **Iteration 2 Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EZomDimCX3pMuF23VOSmrTcBWGPgy33f57lRndQuNuSARg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=NsO1V2)
 
 As the primary backend developer for **AI Study Buddy**, I focused on building the server infrastructure, implementing all core CRUD functionality, and ensuring full test coverage and frontend-backend integration.
 
 ---
-
-### ✅ Backend (Node.js + Express + MongoDB)
+### Iteration 1: CRUD Operations
+#### ✅ Backend (Node.js + Express + MongoDB)
 
 - **Express + MongoDB Setup**
   - Initialized the Express server and connected to MongoDB Atlas using Mongoose.
@@ -242,7 +312,7 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Assisted with deployment to Render and added missing keys like `JWT_SECRET`, `COHERE_API_KEY`, and `GOOGLE_API_KEY` to fix production bugs.
 
 
-### ✅ Automated Testing (Jest + Supertest)
+#### ✅ Automated Testing (Jest + Supertest)
 
 - **Full Test Coverage**
   - Wrote 32 automated tests across 4 files: `users.test.js`, `studyMaterial.test.js`, `quiz.test.js`, and `report.test.js`.
@@ -256,15 +326,93 @@ As the primary backend developer for **AI Study Buddy**, I focused on building t
   - Verified backend functionality before merging to `main`.
 
 
-### 🔁 Integration & Debugging
+#### 🔁 Integration & Debugging
 
 - Verified frontend-backend integration using Axios and REST endpoints.
 - Helped teammates debug login failures related to JWT and missing `.env` variables.
 - Ensured deployed frontend could communicate securely with the backend.
 
-### 📸 Screenshots
+#### 📸 Screenshots
 <img width="274" alt="image" src="https://github.com/user-attachments/assets/4e03649d-284e-4d42-b973-44cd076c727d" />
 
+
+
+### Iteration 2: New Features & Improvements
+
+#### 🧠 Study Materials
+
+- **Feature Completion**
+  - Users can create, view, update, and delete their own study materials.
+  - Anonymous users can browse all materials but cannot modify them.
+  - Each material links to a detail page that now includes embedded Quiz and Report sections.
+
+- **Detail Page Enhancements**
+  - Rebuilt the detail view with better layout, dynamic routing, and integrated UI for related data.
+
+
+#### 🤖 Quiz System (Cohere LLM Integration)
+
+- **Quiz Generation**
+  - Users can generate or regenerate AI-generated quizzes for *any* study material.
+  - Only one quiz is stored per material — re-generating overwrites the existing quiz.
+
+- **Cohere API Integration**
+  - Used the `command` model from Cohere to produce 5 multiple-choice questions based on the study content.
+  - Implemented a robust parser to transform raw LLM output into structured quiz objects.
+
+- **Frontend Updates**
+  - Anonymous users see a message prompting them to log in to access the quiz.
+  - Logged-in users can view the quiz with formatted questions and answers.
+
+
+#### 🚩 Report Feature (Abuse Prevention & Flagging)
+
+- **User Reports**
+  - Authenticated users can flag study materials they did not create.
+  - Each report contains a `reason` and links to the material and the reporting user.
+
+- **Limits & Validation**
+  - Users can submit up to **3 reports per material** to prevent spamming.
+  - Duplicate reports are blocked via aggregation checks.
+
+
+#### ⚙️ Backend Enhancements
+
+- **Cascade Deletion**
+  - When a study material is deleted, all associated **quizzes and reports** are also removed automatically.
+
+- **Quiz Upsert**
+  - Switched quiz creation to `findOneAndUpdate` with `upsert: true` to handle regenerate requests efficiently.
+
+- **Report Limit Logic**
+  - Added MongoDB aggregation and counting logic to enforce the 3-report-per-user-per-material limit.
+
+
+#### 💅 Frontend UI Enhancements
+
+- **Navbar & Auth Pages**
+  - Rebuilt the navbar with dynamic login state, responsive design, and consistent button styles.
+  - Unified styling for signup and login pages to match the overall aesthetic.
+
+- **Home Page Improvements**
+  - Improved layout spacing, heading alignment, and interaction flow between cards and actions.
+
+
+#### 🔁 Testing & Bug Fixes
+
+- **Quiz Parsing Edge Cases**
+  - Fixed several parsing errors due to LLM format inconsistencies (e.g. "Question:" lines, misplaced answers).
+  - Added fallback handling to skip malformed entries.
+
+- **Bug Fixes**
+  - Resolved layout spacing issues between components.
+  - Fixed permission logic for quiz and report visibility.
+
+
+#### 📸 Screenshots
+
+Screenshots for Iteration 2 are available here:  
+👉 [Iteration 2 UI Screenshots & Changes](https://github.com/jiao2560/AI-Study-Buddy/issues/15)
 
 
 

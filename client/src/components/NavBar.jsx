@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
-const NavBar = ({ onToggleFilters, showFilters }) => {
+const NavBar = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem("token"); // 检查是否登录
+  const isLoggedIn = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -23,9 +23,7 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
       }
     };
 
-    if (isLoggedIn) {
-      fetchUsername();
-    }
+    if (isLoggedIn) fetchUsername();
   }, [isLoggedIn]);
 
   const handleLogout = () => {
@@ -38,34 +36,44 @@ const NavBar = ({ onToggleFilters, showFilters }) => {
       <nav className={`navbar ${!isLoggedIn ? "no-auth" : ""}`}>
         <div className="nav-left">
           <div className="nav-item">
-            <a href="#home">Home</a>
+            <Link to={isLoggedIn ? "/dashboard" : "/"}>Home</Link>
           </div>
+
           <div className="nav-item">
-            <a href="#study">Study Material</a>
-          </div>
-          <div className="nav-item">
-            <button className="filter-toggle-btn" onClick={onToggleFilters}>
-              {showFilters ? "🙈 Hide Search" : "🔍 Show Search"}
-            </button>
+            <Link to="/study-materials">Study Material</Link>
           </div>
         </div>
 
-        {isLoggedIn && (
-          <div className="nav-right">
-            <div className="nav-item greeting">
-              <span role="img" aria-label="wave">
-                👋
-              </span>{" "}
-              Hi, {username || "User"}
-            </div>
-            <div className="nav-item">
-              <a href="/profile">Profile</a>
-            </div>
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        )}
+        <div className="nav-right">
+          {isLoggedIn ? (
+            <>
+              <div className="nav-item greeting">
+                👋 Hi, {username || "User"}
+              </div>
+              <div className="nav-item">
+                <Link to="/profile">Profile</Link> {/* ✅ fixed here */}
+              </div>
+              <button className="logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="nav-auth-btn"
+                onClick={() => navigate("/login")}
+              >
+                Log In
+              </button>
+              <button
+                className="nav-auth-btn"
+                onClick={() => navigate("/signup")}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
+        </div>
       </nav>
     </div>
   );

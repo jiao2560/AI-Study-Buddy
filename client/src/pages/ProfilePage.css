@@ -1,0 +1,50 @@
+.profile-page {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    color: #fff;
+    height: 100%;
+  }
+
+  .profile-left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-right {
+    width: 50%;
+  }
+
+  /* Profile Box */
+  .profile-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 80%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Header row */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-icon {
+    font-size: 2rem;
+  }
+
+  .profile-title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  /* Info */
+  .profile-info p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+  }

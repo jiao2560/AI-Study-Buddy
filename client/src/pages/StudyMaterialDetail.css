@@ -1,0 +1,115 @@
+.study-detail-page {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.study-detail-page h1 {
+  color: #18ceee;
+  margin-bottom: 1.2rem;
+}
+
+.study-detail-page p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Common styles for back buttons */
+.back-btn {
+  background-color: #646cff;
+  color: white;
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 1em;
+}
+
+.back-btn:hover {
+  background-color: #535bf2;
+}
+
+/* Styles for the Edit button */
+.edit-btn {
+  background-color: #646cff;
+  color: white;
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1em; /* Adds space between content and button */
+}
+
+.edit-btn:hover {
+  background-color: #535bf2;
+}
+
+.action-buttons {
+  margin-top: 1.5rem;
+}
+.report-btn {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.report-btn:hover {
+  background-color: #ff5252;
+}
+
+.report-btn,
+.edit-btn {
+  padding: 10px 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  background-color: #00bcd4;
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.report-btn:hover,
+.edit-btn:hover {
+  background-color: #0097a7;
+}
+
+.study-detail-wrapper {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 2rem;
+}
+
+.study-detail-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  margin-bottom: 2rem;
+}
+
+.study-detail-card h1 {
+  font-size: 2rem;
+  color: #18ceee;
+  margin-bottom: 1rem;
+}
+
+.study-detail-card p {
+  white-space: pre-wrap;
+  line-height: 1.6;
+}

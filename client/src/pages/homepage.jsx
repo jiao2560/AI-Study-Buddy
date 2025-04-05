@@ -1,8 +1,8 @@
+// src/pages/HomePage.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import robotImg from "../assets/robot.png";
 import "./homepage.css";
-import NavBar from "../components/NavBar"; 
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -12,20 +12,28 @@ const HomePage = () => {
   const [requiredKeyword, setRequiredKeyword] = useState("");
   const [sortOption, setSortOption] = useState("default");
   const [showFilters, setShowFilters] = useState(false);
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/public/homepage-data`, {
-        params: {
-          search: searchTerm || "computer science",
-          keyword: requiredKeyword,
-        },
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/public/homepage-data`,
+        {
+          params: {
+            search: searchTerm || "computer science",
+            keyword: requiredKeyword,
+          },
+        }
+      );
 
-      setTrendingTopics(Array.isArray(res.data.trendingTopics) ? res.data.trendingTopics : []);
-      setAiSuggestions(Array.isArray(res.data.aiSuggestions) ? res.data.aiSuggestions : []);
+      setTrendingTopics(
+        Array.isArray(res.data.trendingTopics) ? res.data.trendingTopics : []
+      );
+      setAiSuggestions(
+        Array.isArray(res.data.aiSuggestions) ? res.data.aiSuggestions : []
+      );
     } catch (err) {
-      console.error("Failed to fetch homepage data", err);
+      console.error("❌ Failed to fetch homepage data", err);
       setTrendingTopics([]);
       setAiSuggestions([]);
     }
@@ -43,21 +51,23 @@ const HomePage = () => {
   if (sortOption === "alpha") {
     sortedWikiTopics.sort((a, b) => a.title.localeCompare(b.title));
   } else if (sortOption === "snippetLength") {
-    sortedWikiTopics.sort((a, b) => (b.snippet?.length || 0) - (a.snippet?.length || 0));
+    sortedWikiTopics.sort(
+      (a, b) => (b.snippet?.length || 0) - (a.snippet?.length || 0)
+    );
   }
-  const navigate = useNavigate();
 
   return (
     <div className="homepage">
       <div className="content-container">
-
         <h1>Welcome to AI Study Buddy</h1>
         <p>Summarize. Quiz. Master. Smarter studying starts here.</p>
-        <NavBar
-          onToggleFilters={() => setShowFilters((prev) => !prev)} 
-          showFilters={showFilters} 
-        />
-        
+
+        <button
+          className="toggle-search-btn"
+          onClick={() => setShowFilters((prev) => !prev)}
+        >
+          {showFilters ? "🙈 Hide Search" : "🔍 Show Search"}
+        </button>
 
         {showFilters && (
           <div className="filter-section">
@@ -77,7 +87,10 @@ const HomePage = () => {
 
             <div className="sort-dropdown">
               <label>📊 Sort Wiki Topics:</label>
-              <select value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
+              <select
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+              >
                 <option value="default">Original Order</option>
                 <option value="alpha">Alphabetical (A → Z)</option>
                 <option value="snippetLength">By Snippet Richness</option>
@@ -86,9 +99,17 @@ const HomePage = () => {
           </div>
         )}
 
+        <div className="intro-section">
+          <p>Explore the latest learning trends powered by Wikipedia and AI.</p>
+          <p>
+            Find topics to dive into or generate custom study content with one
+            click.
+          </p>
+        </div>
+
         <div className="card-container-wrapper">
           <div className="card-container">
-            <div className="card" id="topics">
+            <div className="card">
               <h2>📈 Trending Topics from Wikipedia</h2>
               <ul>
                 {sortedWikiTopics.length === 0 ? (
@@ -96,7 +117,11 @@ const HomePage = () => {
                 ) : (
                   sortedWikiTopics.map((topic, idx) => (
                     <li key={idx}>
-                      <a href={topic.url} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={topic.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         {topic.title}
                       </a>
                     </li>
@@ -105,7 +130,7 @@ const HomePage = () => {
               </ul>
             </div>
 
-            <div className="card" id="ai-suggested">
+            <div className="card">
               <h2>🤖 AI-Suggested Topics</h2>
               <ul>
                 {aiSuggestions.length === 0 ? (
@@ -116,15 +141,34 @@ const HomePage = () => {
               </ul>
             </div>
           </div>
-        </div>  
+        </div>
+
+        <div className="cta-section">
+          <h2>🚀 Want to unlock more?</h2>
+          <p>
+            Create an account to save materials, bookmark topics, and generate
+            AI-powered quizzes!
+          </p>
+          <button className="get-started" onClick={() => navigate("/signup")}>
+            Get Started
+          </button>
+          <p>
+            Already have an account? <a href="/login">Log in here.</a>
+          </p>
+        </div>
+
+        <div className="why-section">
+          <h3>📚 Why use AI Study Buddy?</h3>
+          <ul>
+            <li>✅ Create & save study materials with AI assistance</li>
+            <li>🧠 Get personalized quiz questions & summaries</li>
+            <li>🔍 Search and explore trending learning topics</li>
+            <li>📅 Organize content for long-term retention</li>
+          </ul>
+        </div>
 
         <div className="floating-robot">
           <img src={robotImg} alt="AI Study Bot" className="robot-image" />
-        </div>
-
-        <div className="auth-buttons">
-          <button className="login-btn"onClick={() => navigate("/Login")}>Login</button>
-          <button className="signup-btn"onClick={() => navigate("/signup")}>Sign Up</button>
         </div>
       </div>
     </div>

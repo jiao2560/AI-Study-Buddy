@@ -1,0 +1,102 @@
+.report-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .report-modal-content {
+    background: linear-gradient(to right, #1f1c2c, #928dab);
+    color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .report-modal-content h3 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: #ff6b6b;
+  }
+  
+  .report-modal-content label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #ddd;
+  }
+  
+  .report-modal-content select,
+  .report-modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    background-color: #2e2a45;
+    color: white;
+    outline: none;
+  }
+  
+  .report-modal-content textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .modal-buttons button {
+    padding: 0.6em 1.2em;
+    font-size: 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .modal-buttons button:first-child {
+    background-color: #ff4d4d;
+    color: white;
+  }
+  
+  .modal-buttons button:first-child:hover {
+    background-color: #e03e3e;
+  }
+  
+  .modal-buttons button:last-child {
+    background-color: #888;
+    color: white;
+  }
+  
+  .modal-buttons button:last-child:hover {
+    background-color: #777;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

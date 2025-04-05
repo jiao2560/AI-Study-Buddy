@@ -20,15 +20,22 @@ const DashPage = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/public/homepage-data`, {
-        params: {
-          search: searchTerm || "computer science",
-          keyword: requiredKeyword,
-        },
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/public/homepage-data`,
+        {
+          params: {
+            search: searchTerm || "computer science",
+            keyword: requiredKeyword,
+          },
+        }
+      );
 
-      setTrendingTopics(Array.isArray(res.data.trendingTopics) ? res.data.trendingTopics : []);
-      setAiSuggestions(Array.isArray(res.data.aiSuggestions) ? res.data.aiSuggestions : []);
+      setTrendingTopics(
+        Array.isArray(res.data.trendingTopics) ? res.data.trendingTopics : []
+      );
+      setAiSuggestions(
+        Array.isArray(res.data.aiSuggestions) ? res.data.aiSuggestions : []
+      );
     } catch (err) {
       console.error("Failed to fetch homepage data", err);
       setTrendingTopics([]);
@@ -40,7 +47,9 @@ const DashPage = () => {
     const userId = localStorage.getItem("userId");
     if (!userId) return;
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${userId}`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${userId}`
+      );
       setUsername(res.data.username);
     } catch (err) {
       console.error("Failed to load user profile", err);
@@ -55,16 +64,23 @@ const DashPage = () => {
   if (sortOption === "alpha") {
     sortedWikiTopics.sort((a, b) => a.title.localeCompare(b.title));
   } else if (sortOption === "snippetLength") {
-    sortedWikiTopics.sort((a, b) => (b.snippet?.length || 0) - (a.snippet?.length || 0));
+    sortedWikiTopics.sort(
+      (a, b) => (b.snippet?.length || 0) - (a.snippet?.length || 0)
+    );
   }
 
   return (
     <div className="homepage">
       <div className="content-container">
+        <button
+          className="toggle-search-btn"
+          onClick={() => setShowFilters((prev) => !prev)}
+        >
+          {showFilters ? "🙈 Hide Search" : "🔍 Show Search"}
+        </button>
+
         <h1>Welcome back, {username || "User"}!</h1>
         <p>Happy studying! 🎓✨</p>
-
-        <NavBar onToggleFilters={() => setShowFilters((prev) => !prev)} showFilters={showFilters} />
 
         {showFilters && (
           <div className="filter-section">
@@ -84,7 +100,10 @@ const DashPage = () => {
 
             <div className="sort-dropdown">
               <label>📊 Sort Wiki Topics:</label>
-              <select value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
+              <select
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+              >
                 <option value="default">Original Order</option>
                 <option value="alpha">Alphabetical (A → Z)</option>
                 <option value="snippetLength">By Snippet Richness</option>
@@ -113,7 +132,11 @@ const DashPage = () => {
               ) : (
                 sortedWikiTopics.map((topic, idx) => (
                   <li key={idx}>
-                    <a href={topic.url} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={topic.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {topic.title}
                     </a>
                   </li>
