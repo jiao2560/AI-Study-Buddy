@@ -10,6 +10,7 @@ import StudyMaterialsPage from "./pages/StudyMaterials";
 import StudyMaterialDetail from "./pages/StudyMaterialDetail";
 import StudyMaterialForm from "./pages/StudyMaterialForm"; // for edit/create
 import ProfilePage from "./pages/ProfilePage";
+import AdminReports from "./pages/AdminReports"; // for admin
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           element={<StudyMaterialForm />}
         />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/admin-reports" element={<AdminReports />} />
 
       </Routes>
     </BrowserRouter>
