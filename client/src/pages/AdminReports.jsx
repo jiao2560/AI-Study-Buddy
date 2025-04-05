@@ -9,7 +9,7 @@ const AdminReports = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const res = await api.get("/admin-reports");
+        const res = await api.get("/reports");
         setReports(res.data);
       } catch (err) {
         console.error("Failed to load reports", err);
