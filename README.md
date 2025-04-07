@@ -211,6 +211,49 @@ As part of the team project, I was responsible for **implementing the user Profi
 
 ---
 
+🛠 My Contribution(Wenbo Jiao) -- iteration 3
+1. Admin Access and Navigation
+
+Implemented conditional rendering on the navigation bar to display an "Handle Reports" button exclusively for admin users based on their role.
+
+![image](https://github.com/user-attachments/assets/9fbdfc62-0787-4ea3-bd7a-101e7bcc1a98)
+
+
+2. Admin Report Page
+
+Developed an admin dashboard that allows administrators to view and manage reported study materials.
+
+Features:
+
+Display a detailed list of reports including material title, reason, reporter username, report status, and actionable buttons (Resolve, Delete Report, Delete Material).
+
+Integrated backend APIs (fetchReports, updateReport, deleteReport, and deleteStudyMaterial) to dynamically manage reported items.
+
+![image](https://github.com/user-attachments/assets/9889845d-4a54-4257-9769-fa1968a5efda)
+
+
+3. User Management (System Users Report)
+
+Created an additional system users report within the admin page that lists all users, their emails, roles, and account creation dates.
+
+Features:
+
+Clicking on a username redirects to the user's detailed profile page.
+
+Enhanced admin insight into user activity and account management.
+
+![image](https://github.com/user-attachments/assets/f89fff2b-c0f0-4b1f-b1ec-890938b229be)
+
+
+4. User Profile Navigation
+
+Implemented dynamic profile pages accessible via user links from the System Users Report, enabling admins to review individual users’ created and bookmarked study materials.
+
+![image](https://github.com/user-attachments/assets/053f39d1-10dc-45df-8b38-50e67937fad0)
+![image](https://github.com/user-attachments/assets/b621b685-f221-4ebf-b35d-8d2a26896ecf)
+
+
+
 
 
 ## 👨‍💻 My Contribution (Zhenziye Lin)
