@@ -125,7 +125,6 @@ const AdminReports = () => {
                 <th>Username</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Joined On</th>
               </tr>
             </thead>
             <tbody>
@@ -136,7 +135,6 @@ const AdminReports = () => {
                   </td>
                   <td>{user.email}</td>
                   <td>{user.role}</td>
-                  <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                 </tr>
               ))}
             </tbody>
