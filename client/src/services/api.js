@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import api from "../utils/axiosInstance"; // 
+import api from "../utils/axiosInstance"; //
 
 export const fetchStudyMaterials = () => api.get("/studyMaterials");
 export const createStudyMaterial = (data) => {
@@ -25,10 +25,31 @@ export const updateQuiz = (id, updatedQuiz) =>
 export const deleteQuiz = (id) => api.delete(`/quizzes/${id}`);
 
 // ✅ Corrected Admin Reports API
-export const fetchReports = () => api.get("/reports");
-export const createReport = (report) => api.post("/reports", report);
-export const updateReport = (id, report) => api.put(`/reports/${id}`, report);
-export const deleteReport = (id) => api.delete(`/reports/${id}`);
+export const fetchReports = (token) =>
+  api.get("/reports", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const updateReport = (id, data, token) =>
+  api.put(`/reports/${id}`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const deleteReport = (id, token) =>
+  api.delete(`/reports/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  export const createReport = (report, token) =>
+    api.post("/reports", report, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+// ✅ Fetch all users (admin only)
+export const fetchAllUsers = (token) =>
+  api.get("/users", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
 
 // User Authentication API
 export const registerUser = (userData) => api.post("/users/register", userData);

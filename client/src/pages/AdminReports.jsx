@@ -1,80 +1,145 @@
 import React, { useEffect, useState } from "react";
-import api from "../utils/axiosInstance";
-import "./AdminReports.css"; // for styling
+import { Link } from "react-router-dom";
+import {
+  fetchReports,
+  updateReport,
+  deleteReport,
+  fetchStudyMaterialById,
+  fetchUserProfile,
+  deleteStudyMaterial,
+  fetchAllUsers, // ✅ Ensure this exists in your api.js
+} from "../services/api";
+import "./AdminReports.css";
 
 const AdminReports = () => {
   const [reports, setReports] = useState([]);
+  const [users, setUsers] = useState([]); // ✅ new state for system users
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const fetchReports = async () => {
+    const fetchAllReports = async () => {
       try {
-        const res = await api.get("/reports");
-        setReports(res.data);
+        const res = await fetchReports(token);
+        const reportsWithDetails = await Promise.all(
+          res.data.map(async (r) => {
+            const material = await fetchStudyMaterialById(r.study_material_id);
+            const user = await fetchUserProfile(r.flagged_by, token);
+            return {
+              ...r,
+              materialTitle: material?.data?.title || "Material Deleted",
+              flaggedByName: user?.data?.username || "Unknown user",
+            };
+          })
+        );
+        setReports(reportsWithDetails);
       } catch (err) {
         console.error("Failed to load reports", err);
       }
     };
 
-    fetchReports();
-  }, []);
+    const fetchUsers = async () => {
+      try {
+        const userRes = await fetchAllUsers(token);
+        setUsers(userRes.data);
+      } catch (err) {
+        console.error("Failed to load users", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // change report status to resolved
+    fetchAllReports();
+    fetchUsers(); // ✅ Load users when page loads
+  }, [token]);
+
   const resolveReport = async (id) => {
-    try {
-      const res = await api.put(`/reports/${id}`, { status: "resolved" });
-      setReports((prev) =>
-        prev.map((r) => (r._id === id ? { ...r, status: "resolved" } : r))
-      );
-    } catch (err) {
-      console.error("Failed to update report", err);
-    }
+    await updateReport(id, { status: "resolved" }, token);
+    setReports((prev) => prev.map((r) => (r._id === id ? { ...r, status: "resolved" } : r)));
   };
 
-  // delete report
-    // confirm before deleting
-  const deleteReport = async (id) => {
+  const handleDeleteReport = async (id) => {
     if (!window.confirm("Are you sure you want to delete this report?")) return;
-    try {
-      await api.delete(`/reports/${id}`);
-      setReports((prev) => prev.filter((r) => r._id !== id));
-    } catch (err) {
-      console.error("Failed to delete report", err);
-    }
+    await deleteReport(id, token);
+    setReports((prev) => prev.filter((r) => r._id !== id));
+  };
+
+  const handleDeleteMaterial = async (materialId) => {
+    if (!window.confirm("Are you sure you want to delete this material?")) return;
+    await deleteStudyMaterial(materialId);
+    setReports((prev) => prev.filter((r) => r.study_material_id !== materialId));
+    alert("Material successfully deleted.");
   };
 
   return (
     <div className="admin-reports-page">
-      <h2>📋 Admin Reports</h2>
-      {reports.length === 0 ? (
-        <p>No reports yet.</p>
+      <h2>🛡️ Admin: Reported Materials</h2>
+      {loading ? (
+        <p>Loading data...</p>
       ) : (
-        <table className="report-table">
-          <thead>
-            <tr>
-              <th>Reason</th>
-              <th>Material ID</th>
-              <th>Flagged By</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reports.map((r) => (
-              <tr key={r._id}>
-                <td>{r.reason}</td>
-                <td>{r.study_material_id}</td>
-                <td>{r.flagged_by}</td>
-                <td>{r.status}</td>
-                <td>
-                  {r.status === "pending" && (
-                    <button onClick={() => resolveReport(r._id)}>✅ Resolve</button>
-                  )}
-                  <button onClick={() => deleteReport(r._id)}>🗑️ Delete</button>
-                </td>
+        <>
+          <table className="report-table">
+            <thead>
+              <tr>
+                <th>Material Title</th>
+                <th>Reason</th>
+                <th>Flagged By</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {reports.map((r) => (
+                <tr key={r._id}>
+                  <td>
+                    <Link to={`/study-materials/${r.study_material_id}`}>
+                      {r.materialTitle}
+                    </Link>
+                  </td>
+                  <td>{r.reason}</td>
+                  <td>{r.flaggedByName}</td>
+                  <td>{r.status}</td>
+                  <td>
+                    {r.status === "pending" && (
+                      <button onClick={() => resolveReport(r._id)}>
+                        ✅ Resolve
+                      </button>
+                    )}
+                    <button onClick={() => handleDeleteReport(r._id)}>
+                      🗑️ Delete Report
+                    </button>
+                    <button onClick={() => handleDeleteMaterial(r.study_material_id)}>
+                      🚫 Delete Material
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* ✅ Enhanced System Report for Users */}
+          <h2 style={{ marginTop: "3rem" }}>📈 System Users Report</h2>
+          <table className="user-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <td>
+                    <Link to={`/profile/${user._id}`}>{user.username}</Link>
+                  </td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       )}
     </div>
   );
