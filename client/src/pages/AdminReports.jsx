@@ -90,7 +90,7 @@ const AdminReports = () => {
                   {r.status === "pending" && (
                     <button onClick={() => resolveReport(r._id)}>✅ Resolve</button>
                   )}
-                  <button onClick={() => handleDelete(r._id)}>🗑️ Delete</button>
+                  <button onClick={() => handleDelete(r._id)}>🗑️ Delete Report</button>
                 </td>
               </tr>
             ))}
