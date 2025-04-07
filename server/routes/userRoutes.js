@@ -137,6 +137,15 @@ router.post("/unbookmark/:materialId", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// Add this route in your backend (users.js)
+router.get("/", verifyToken, isAdmin, async (req, res) => {
+  try {
+    const users = await User.find({}, '-password').sort({ createdAt: -1 });
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 
 module.exports = router;
