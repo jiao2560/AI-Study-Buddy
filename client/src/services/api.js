@@ -44,6 +44,11 @@ export const deleteReport = (id, token) =>
       headers: { Authorization: `Bearer ${token}` },
     });
 
+// ✅ Fetch all users (admin only)
+export const fetchAllUsers = (token) =>
+  api.get("/users", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
 
 // User Authentication API
