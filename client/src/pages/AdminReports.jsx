@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom"; // ✅ Import Link
 import {
   fetchReports,
   updateReport,
@@ -17,20 +18,20 @@ const AdminReports = () => {
     const fetchAllReports = async () => {
       try {
         const res = await fetchReports(token);
-        const detailedReports = await Promise.all(
+        const reportsWithDetails = await Promise.all(
           res.data.map(async (r) => {
-            const materialRes = await fetchStudyMaterialById(r.study_material_id);
-            const userRes = await fetchUserProfile(r.flagged_by, token);
+            const material = await fetchStudyMaterialById(r.study_material_id);
+            const user = await fetchUserProfile(r.flagged_by, token);
             return {
               ...r,
-              materialTitle: materialRes?.data?.title || "Unknown Material",
-              flaggedByName: userRes?.data?.username || "Unknown User",
+              materialTitle: material?.data?.title || "Material Deleted",
+              flaggedByName: user?.data?.username || "Unknown user",
             };
           })
         );
-        setReports(detailedReports);
+        setReports(reportsWithDetails);
       } catch (err) {
-        console.error("❌ Failed to fetch reports:", err);
+        console.error("Failed to load reports", err);
       } finally {
         setLoading(false);
       }
@@ -39,31 +40,30 @@ const AdminReports = () => {
     fetchAllReports();
   }, [token]);
 
-  const resolveReport = async (reportId) => {
+  const resolveReport = async (id) => {
     try {
-      await updateReport(reportId, { status: "resolved" }, token);
+      await updateReport(id, { status: "resolved" }, token);
       setReports((prev) =>
-        prev.map((r) => (r._id === reportId ? { ...r, status: "resolved" } : r))
+        prev.map((r) => (r._id === id ? { ...r, status: "resolved" } : r))
       );
     } catch (err) {
-      console.error("❌ Failed to resolve report:", err);
+      console.error("Failed to resolve report", err);
     }
   };
 
-  const handleDelete = async (reportId) => {
+  const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this report?")) return;
     try {
-      await deleteReport(reportId, token);
-      setReports((prev) => prev.filter((r) => r._id !== reportId));
+      await deleteReport(id, token);
+      setReports((prev) => prev.filter((r) => r._id !== id));
     } catch (err) {
-      console.error("❌ Failed to delete report:", err);
+      console.error("Failed to delete report", err);
     }
   };
 
   return (
     <div className="admin-reports-page">
       <h2>🛡️ Admin: Reported Materials</h2>
-
       {loading ? (
         <p>Loading reports...</p>
       ) : reports.length === 0 ? (
@@ -82,15 +82,23 @@ const AdminReports = () => {
           <tbody>
             {reports.map((r) => (
               <tr key={r._id}>
-                <td>{r.materialTitle}</td>
+                <td>
+                  <Link to={`/study-materials/${r.study_material_id}`}>
+                    {r.materialTitle}
+                  </Link>
+                </td>
                 <td>{r.reason}</td>
                 <td>{r.flaggedByName}</td>
                 <td>{r.status}</td>
                 <td>
                   {r.status === "pending" && (
-                    <button onClick={() => resolveReport(r._id)}>✅ Resolve</button>
+                    <button onClick={() => resolveReport(r._id)}>
+                      ✅ Resolve
+                    </button>
                   )}
-                  <button onClick={() => handleDelete(r._id)}>🗑️ Delete Report</button>
+                  <button onClick={() => handleDelete(r._id)}>
+                    🗑️ Delete Report
+                  </button>
                 </td>
               </tr>
             ))}
