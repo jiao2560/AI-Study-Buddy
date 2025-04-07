@@ -30,6 +30,7 @@ function App() {
           element={<StudyMaterialForm />}
         />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route path="/admin-reports" element={<AdminReports />} />
 
       </Routes>

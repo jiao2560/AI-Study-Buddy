@@ -2,22 +2,31 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const { verifyToken, isAdmin } = require("../middleware/auth");
 
 const router = express.Router();
 
-// Register User
+// ✅ Admin route at the TOP (correct!)
+router.get("/", verifyToken, isAdmin, async (req, res) => {
+  try {
+    const users = await User.find({}, "-password").sort({ createdAt: -1 });
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Now your other routes
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
       return res.status(400).json({ error: "All fields are required" });
     }
-
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "Email already in use" });
     }
-
     const user = new User({ username, email, password });
     await user.save();
     res.status(201).json({ message: "User registered successfully" });
@@ -26,37 +35,25 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Login User
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: "All fields are required" });
     }
-
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ error: "Invalid credentials" });
-    }
+    if (!user) return res.status(400).json({ error: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ error: "Invalid credentials" });
-    }
+    if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
-    // Generate JWT Token
-    const token = jwt.sign(
-      { userId: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
     res.json({ token, userId: user._id, role: user.role });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// Get User Profile
 router.get("/profile/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select("-password");
@@ -67,18 +64,15 @@ router.get("/profile/:id", async (req, res) => {
   }
 });
 
-// Update User Profile
 router.put("/:id", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-
     const user = await User.findById(req.params.id);
     if (!user) return res.status(404).json({ error: "User not found" });
 
     if (username) user.username = username;
     if (email) user.email = email;
-    if (password) user.password = await bcrypt.hash(password, 10); // Hash new password
-
+    if (password) user.password = await bcrypt.hash(password, 10);
     await user.save();
     res.json({ message: "User updated successfully", user });
   } catch (error) {
@@ -86,19 +80,16 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete User Account
 router.delete("/:id", async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) return res.status(404).json({ error: "User not found" });
-
     res.json({ message: "User deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// Bookmark a material
 router.post("/bookmark/:materialId", async (req, res) => {
   const { userId } = req.body;
   const { materialId } = req.params;
@@ -111,14 +102,12 @@ router.post("/bookmark/:materialId", async (req, res) => {
       user.bookmarks.push(materialId);
       await user.save();
     }
-
     res.json({ message: "Bookmarked", bookmarks: user.bookmarks });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// Unbookmark a material
 router.post("/unbookmark/:materialId", async (req, res) => {
   const { userId } = req.body;
   const { materialId } = req.params;
@@ -127,25 +116,12 @@ router.post("/unbookmark/:materialId", async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    user.bookmarks = user.bookmarks.filter(
-      (id) => id.toString() !== materialId
-    );
-
+    user.bookmarks = user.bookmarks.filter(id => id.toString() !== materialId);
     await user.save();
     res.json({ message: "Unbookmarked", bookmarks: user.bookmarks });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-// Add this route in your backend (users.js)
-router.get("/", verifyToken, isAdmin, async (req, res) => {
-  try {
-    const users = await User.find({}, '-password').sort({ createdAt: -1 });
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
 
 module.exports = router;
