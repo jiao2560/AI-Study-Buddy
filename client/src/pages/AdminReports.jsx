@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // ✅ Import Link
+import { Link } from "react-router-dom";
 import {
   fetchReports,
   updateReport,
   deleteReport,
   fetchStudyMaterialById,
   fetchUserProfile,
+  deleteStudyMaterial, // ✅ Import this
 } from "../services/api";
 import "./AdminReports.css";
 
@@ -51,13 +52,26 @@ const AdminReports = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDeleteReport = async (id) => {
     if (!window.confirm("Are you sure you want to delete this report?")) return;
     try {
       await deleteReport(id, token);
       setReports((prev) => prev.filter((r) => r._id !== id));
     } catch (err) {
       console.error("Failed to delete report", err);
+    }
+  };
+
+  // ✅ Handle deleting study material
+  const handleDeleteMaterial = async (materialId) => {
+    if (!window.confirm("Are you sure you want to delete this material?")) return;
+    try {
+      await deleteStudyMaterial(materialId);
+      // Also remove related reports since material no longer exists
+      setReports((prev) => prev.filter((r) => r.study_material_id !== materialId));
+      alert("Material successfully deleted.");
+    } catch (err) {
+      console.error("Failed to delete material", err);
     }
   };
 
@@ -96,8 +110,14 @@ const AdminReports = () => {
                       ✅ Resolve
                     </button>
                   )}
-                  <button onClick={() => handleDelete(r._id)}>
+                  <button onClick={() => handleDeleteReport(r._id)}>
                     🗑️ Delete Report
+                  </button>
+                  <button
+                    className="delete-material-btn"
+                    onClick={() => handleDeleteMaterial(r.study_material_id)}
+                  >
+                    🚫 Delete Material
                   </button>
                 </td>
               </tr>
