@@ -5,8 +5,11 @@
 This app helps users explore trending topics and get AI-suggested study material. Users can sign up, browse topics, and customize their study dashboard.
 
 For testing admin features, use following account:
+
 email: admin123@gmail.com
+
 password: 123
+
 ---
 
 ## 📦 Tech Stack
