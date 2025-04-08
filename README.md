@@ -119,7 +119,6 @@ VITE_API_BASE_URL=http://localhost:5000  # Replace with your backend URL
 4. Push to the branch (`git push origin feature/signup`)
 5. Create a Pull Request
 
-Wenbo Jiao:
 
 ---
 
@@ -160,7 +159,7 @@ As part of the development team for AI Study Buddy, I implemented several fronte
 
 ---
 
- 🛠 My Contribution(Wenbo Jiao) -- iteration 2
+## 🛠 My Contribution(Wenbo Jiao) -- iteration 2
 
 As part of the team project, I was responsible for **implementing the user Profile Page** and **integrating the Bookmarking feature** for study materials. These functionalities enhance personalization and allow users to manage their own content more effectively.
 
@@ -214,7 +213,7 @@ As part of the team project, I was responsible for **implementing the user Profi
 
 ---
 
-🛠 My Contribution(Wenbo Jiao) -- iteration 3
+## 🛠 My Contribution(Wenbo Jiao) -- iteration 3
 1. Admin Access and Navigation
 
 Implemented conditional rendering on the navigation bar to display an "Handle Reports" button exclusively for admin users based on their role.
@@ -369,8 +368,6 @@ In the second iteration of our project, I focused on implementing admin-specific
 🎥 **Iteration 1 Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EWz0S7fNuLtOt2tFe2gBHzYBemcg_1BPAg6PIgCTmkZCmA?e=6aBWsb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
 
 🎥 **Iteration 2 Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EZomDimCX3pMuF23VOSmrTcBWGPgy33f57lRndQuNuSARg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=NsO1V2)
-
-As the primary backend developer for **AI Study Buddy**, I focused on building the server infrastructure, implementing all core CRUD functionality, and ensuring full test coverage and frontend-backend integration.
 
 ---
 ### Iteration 1: CRUD Operations
