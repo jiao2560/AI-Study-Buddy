@@ -60,7 +60,6 @@ const HomePage = () => {
     <div className="homepage">
       <div className="content-container">
         <h1>Welcome to AI Study Buddy</h1>
-        <p>Summarize. Quiz. Master. Smarter studying starts here.</p>
 
         <button
           className="toggle-search-btn"
@@ -100,6 +99,7 @@ const HomePage = () => {
         )}
 
         <div className="intro-section">
+          <p>Summarize. Quiz. Master. Smarter studying starts here.</p>
           <p>Explore the latest learning trends powered by Wikipedia and AI.</p>
           <p>
             Find topics to dive into or generate custom study content with one
