@@ -511,75 +511,95 @@ Screenshots for Iteration 2 are available here:
 
 ### Iteration 3: Final Features, Admin Tools, and Polish
 
-#### 🔐 Authentication & Profile Completion
+#### 🏠 Homepage Enhancements & Dashboard Experience
 
-- **Dynamic Login Support**
-  - Logged-in users now see personalized greetings, access to quiz/report tools, and profile options.
-  - Admin users have distinct privileges and UI visibility.
-  
-- **Profile Integration**
-  - Dashboards dynamically fetch and display the authenticated user’s profile data.
-  - Username is shown in the navbar and welcome message.
+**Improved Dashboard Experience**
+
+- The post-login home page now includes three clearly structured sections:
+  - 🤖 AI Recommended Topics (from our custom backend)
+  - 📈 Trending Study Materials (from the Wikipedia API)
+  - 📚 Recent Study Topics (placeholder for future use)
+
+**Layout & Readability Fixes**
+
+- Fixed issues where these sections overflowed on mobile.
+- Grid now stacks properly on smaller screens, with uniform spacing and no content cutoff.
+- All cards maintain padding, alignment, and consistent design for better mobile readability.
 
 
 
 #### 📋 Admin Permissions & Moderation Tools
 
-- **Admin Editing & Deletion**
-  - Admins can now **edit or delete any study material**, not just their own.
-  - Delete actions are guarded by **native browser confirmation dialogs**.
-  
-- **Restricted Creation Access**
-  - Admins are explicitly **prevented from creating new materials**, aligning their role with content moderation.
+**Admin Editing & Deletion**
 
-- **Enhanced Visual Feedback**
-  - 🔶 Delete buttons now use **orange** styling to convey importance without being too aggressive.
-  - All admin actions are clearly separated visually for clarity and user safety.
+- Admins can now **edit or delete** *any* study material — not just their own.
+- Deletion includes a **browser confirmation popup**:
+  - Cancelling does nothing.
+  - Confirming triggers backend deletion and UI update.
+
+**Restricted Creation Access**
+
+- Admins **cannot** create new study materials.
+- Add form is hidden and creation logic is blocked on the backend and frontend.
+
+**Enhanced Visual Feedback**
+
+- 🟠 Delete buttons now use orange instead of red for a softer yet visible warning style.
+- Admin-only actions are visually separated from regular user actions.
 
 
 
 #### 📱 Mobile Optimization
 
-- **Responsive Navbar**
-  - Mobile users now see a **hamburger menu** on the left, only visible below 768px.
-  - Dropdown menu aligns properly, stacks buttons vertically, and avoids overflow or overlap.
-  
-- **Dashboard Layout**
-  - Fixed layout overflow where dashboard cards (AI, Trending, Recent) previously **exceeded screen width**.
-  - Cards now **stack neatly**, maintain spacing, and preserve visual balance on small screens.
+**Responsive Navbar**
+
+- Hamburger menu is now added **only for screens <768px**.
+- It appears on the left and toggles a clean dropdown.
+- All buttons are aligned vertically with no overlap or cutoff.
+
+**Dashboard Layout**
+
+- Previously broken stacking and overflow issues are resolved.
+- Cards stack vertically on small screens, retaining proper margin and layout spacing.
 
 
 
 #### 💄 UI & UX Improvements
 
-- **Study Material Card Alignment**
-  - Buttons (Edit, Delete, Report) are consistently spaced and aligned.
-  - Improved mobile card readability and padding.
+**Study Material Card Alignment**
 
-- **Report Modal Styling**
-  - Overhauled modal with:
-    - Blue-purple **gradient background**
-    - Matching **glassy aesthetic**
-    - Clean form inputs and consistent spacing
-  
-- **Theming Consistency**
-  - Ensured all buttons, inputs, and modals match the project’s visual identity.
+- Aligned all card buttons (👁 View, ✏️ Edit, 🗑 Delete, 🚩 Report).
+- Fixed inconsistent spacing and made button width uniform.
+
+**Report Modal Styling**
+
+- Full redesign with:
+  - Blue-purple gradient
+  - Rounded inputs and buttons
+  - Clean spacing and modern field styling
+
+**Theming Consistency**
+
+- Unified styles across components:
+  - Button styles
+  - Glassy modal overlays
+  - Color palette and border radius
 
 
 
 #### 🧠 AI Quiz Fixes
 
-- **Timeout Handling**
-  - Resolved issues where **Cohere API calls timed out** during quiz generation.
-  - Adjusted timeout thresholds and improved error feedback to users.
-  
+**Timeout Handling**
+
+- Resolved API timeout issues during quiz generation with Cohere.
+- Increased timeout limits in Axios config.
+- Added frontend error handling and fallback message if quiz fails.
+
 
 
 #### 📸 Screenshots
 
 👉 [Iteration 3 UI Screenshots](https://github.com/jiao2560/AI-Study-Buddy/issues/27)
-
-
 
 
 ---
