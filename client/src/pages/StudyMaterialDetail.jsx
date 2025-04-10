@@ -16,6 +16,7 @@ const StudyMaterialDetail = () => {
   const [material, setMaterial] = useState(null);
   const [showReport, setShowReport] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [userRole, setUserRole] = useState("");
 
   const token = localStorage.getItem("token");
   const currentUserId = localStorage.getItem("userId");
@@ -32,6 +33,7 @@ const StudyMaterialDetail = () => {
           const profileRes = await fetchUserProfile(currentUserId, token);
           const bookmarks = profileRes.data.bookmarks || [];
           setIsBookmarked(bookmarks.includes(res.data._id));
+          setUserRole(profileRes.data.role);
         }
       } catch (err) {
         console.error("Failed to fetch material or profile", err);
@@ -55,15 +57,32 @@ const StudyMaterialDetail = () => {
     }
   };
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this study material?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await fetch(`/api/study-materials/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      navigate("/study-materials");
+    } catch (err) {
+      console.error("Failed to delete material", err);
+    }
+  };
+
   if (!material) return <p>Loading...</p>;
 
   return (
     <div className="study-detail-wrapper">
       <div className="study-detail-card">
-        <button
-          className="back-btn"
-          onClick={() => navigate(-1)}
-        >
+        <button className="back-btn" onClick={() => navigate(-1)}>
           ← Back
         </button>
 
@@ -72,19 +91,23 @@ const StudyMaterialDetail = () => {
 
         {isLoggedIn && (
           <div className="action-buttons">
-            {isOwner ? (
-              <button
-                className="edit-btn"
-                onClick={() => navigate(`/study-materials/${id}/edit`)}
-              >
-                ✏️ Edit Material
-              </button>
-            ) : (
+            {(isOwner || userRole === "admin") && (
               <>
                 <button
-                  className="bookmark-btn"
-                  onClick={handleBookmarkToggle}
+                  className="edit-btn"
+                  onClick={() => navigate(`/study-materials/${id}/edit`)}
                 >
+                  ✏️ Edit Material
+                </button>
+                <button className="delete-btn" onClick={handleDelete}>
+                  🗑 Delete
+                </button>
+              </>
+            )}
+
+            {isLoggedIn && userRole !== "admin" && !isOwner && (
+              <>
+                <button className="bookmark-btn" onClick={handleBookmarkToggle}>
                   {isBookmarked ? "➖ Unbookmark" : "➕ Bookmark"}
                 </button>
 

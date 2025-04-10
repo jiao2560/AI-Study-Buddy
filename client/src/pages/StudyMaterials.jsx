@@ -19,6 +19,7 @@ const StudyMaterials = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const [reportingId, setReportingId] = useState(null);
   const [showReportForm, setShowReportForm] = useState(false);
+  const [userRole, setUserRole] = useState("");
 
   const token = localStorage.getItem("token");
   const currentUserId = localStorage.getItem("userId");
@@ -32,6 +33,7 @@ const StudyMaterials = () => {
       if (currentUserId && token) {
         const userRes = await fetchUserProfile(currentUserId, token);
         setBookmarks(userRes.data.bookmarks || []);
+        setUserRole(userRes.data.role);
       }
     } catch (err) {
       console.error(err);
@@ -64,6 +66,11 @@ const StudyMaterials = () => {
   };
 
   const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this study material?"
+    );
+    if (!confirmDelete) return;
+
     try {
       await deleteStudyMaterial(id);
       loadMaterials();
@@ -94,9 +101,12 @@ const StudyMaterials = () => {
     <div className="study-materials-page">
       <h1>📚 Study Materials</h1>
 
-      {token ? (
+      {token && userRole !== "admin" ? (
         <>
-          <button className="toggle-form-btn" onClick={() => setShowForm(!showForm)}>
+          <button
+            className="toggle-form-btn"
+            onClick={() => setShowForm(!showForm)}
+          >
             {showForm ? "➖ Cancel" : "➕ Add New Material"}
           </button>
 
@@ -119,6 +129,8 @@ const StudyMaterials = () => {
             </div>
           )}
         </>
+      ) : token ? (
+        <p className="auth-msg">⚠️ Admins cannot create new materials.</p>
       ) : (
         <p className="auth-msg">
           🔐 Please <a onClick={() => navigate("/login")}>log in</a> to add or
@@ -130,7 +142,10 @@ const StudyMaterials = () => {
 
       <div className="material-list">
         {materials.map((m) => {
+          const isAdmin = userRole === "admin";
           const isOwner = currentUserId && m.user_id === currentUserId;
+          const canEdit = isOwner || isAdmin;
+
           const isBookmarked = bookmarks.includes(m._id);
 
           return (
@@ -140,7 +155,10 @@ const StudyMaterials = () => {
                 {m.content.length > 225 ? (
                   <>
                     {m.content.slice(0, 225)}...{" "}
-                    <span className="read-more" onClick={() => navigate(`/study-materials/${m._id}`)}>
+                    <span
+                      className="read-more"
+                      onClick={() => navigate(`/study-materials/${m._id}`)}
+                    >
                       Read more
                     </span>
                   </>
@@ -154,31 +172,37 @@ const StudyMaterials = () => {
                   👁 View
                 </button>
 
-                {token && !isOwner && (
+                {token && !canEdit && (
                   <>
-                    <button onClick={() => {
-                      setReportingId(m._id);
-                      setShowReportForm(true);
-                    }}>
+                    <button
+                      onClick={() => {
+                        setReportingId(m._id);
+                        setShowReportForm(true);
+                      }}
+                    >
                       🚩 Report
                     </button>
 
-                    <button onClick={() =>
-                      isBookmarked
-                        ? handleUnbookmark(m._id)
-                        : handleBookmark(m._id)
-                    }>
+                    <button
+                      onClick={() =>
+                        isBookmarked
+                          ? handleUnbookmark(m._id)
+                          : handleBookmark(m._id)
+                      }
+                    >
                       {isBookmarked ? "❌ Unbookmark" : "📌 Bookmark"}
                     </button>
                   </>
                 )}
 
-                {token && isOwner && (
+                {token && canEdit && (
                   <>
-                    <button onClick={() => navigate(`/study-materials/${m._id}/edit`)}>
+                    <button
+                      onClick={() => navigate(`/study-materials/${m._id}/edit`)}
+                    >
                       ✏️ Edit
                     </button>
-                    <button onClick={() => handleDelete(m._id)}>
+                    <button className="delete-btn" onClick={() => handleDelete(m._id)}>
                       🗑 Delete
                     </button>
                   </>

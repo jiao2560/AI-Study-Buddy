@@ -318,3 +318,32 @@ a {
 .toggle-search-btn:hover {
   background-color: #0097a7;
 }
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 16px;
+  }
+
+  .grid-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow-wrap: break-word;
+  }
+
+  .robot-image {
+    width: 80px;
+  }
+
+  .floating-robot {
+    right: 12px;
+    bottom: 12px;
+    width: 90px;
+  }
+}

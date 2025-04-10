@@ -37,6 +37,7 @@
   background-color: #535bf2;
 }
 
+
 /* Styles for the Edit button */
 .edit-btn {
   background-color: #646cff;
@@ -91,6 +92,7 @@
   max-width: 1000px;
   margin: 40px auto;
   padding: 2rem;
+  position: relative;
 }
 
 .study-detail-card {
@@ -113,3 +115,22 @@
   white-space: pre-wrap;
   line-height: 1.6;
 }
+
+.delete-btn {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 16px; /* Match other buttons */
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-width: 100px; /* Optional: to align width */
+}
+
+
+.delete-btn:hover {
+  background-color: #e67e00; /* deeper orange on hover */
+}
+

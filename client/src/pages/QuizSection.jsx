@@ -43,7 +43,11 @@ const QuizSection = ({ studyMaterialId, content, token }) => {
       setNoQuizFound(false); // reset flag on success
     } catch (err) {
       console.error("Quiz generation failed", err);
-      setError("Quiz generation failed. Try again.");
+      if (err.code === "ECONNABORTED") {
+        setError("⚠️ Quiz generation timed out. Please try again.");
+      } else {
+        setError("Quiz generation failed. Try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -55,7 +59,8 @@ const QuizSection = ({ studyMaterialId, content, token }) => {
 
       {!token ? (
         <p className="no-quiz-msg">
-          🔐 Please <a onClick={() => navigate("/login")}>log in</a> to view or generate quizzes for this material.
+          🔐 Please <a onClick={() => navigate("/login")}>log in</a> to view or
+          generate quizzes for this material.
         </p>
       ) : quiz ? (
         <>
