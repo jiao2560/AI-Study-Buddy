@@ -1,4 +1,4 @@
-
+![image](https://github.com/user-attachments/assets/7fe7123b-4e74-418e-9e88-7eecd1aa0ef0)
 # 🧠 AI Study Buddy
 
 **Smarter studying starts here.**  
@@ -519,12 +519,17 @@ Screenshots for Iteration 2 are available here:
   - 🤖 AI Recommended Topics (from our custom backend)
   - 📈 Trending Study Materials (from the Wikipedia API)
   - 📚 Recent Study Topics (placeholder for future use)
+- Fixed layout issues where cards overflowed or broke on mobile.
+- The dashboard is now fully responsive:
+  - Cards stack neatly with proper spacing on smaller screens.
+  - Margins and padding are adjusted for readability.
 
-**Layout & Readability Fixes**
+**Profile Page Refinement**
 
-- Fixed issues where these sections overflowed on mobile.
-- Grid now stacks properly on smaller screens, with uniform spacing and no content cutoff.
-- All cards maintain padding, alignment, and consistent design for better mobile readability.
+- Updated the profile page layout for better structure and readability.
+- Removed unnecessary nested containers to simplify the layout.
+- Grouped "Your Study Materials" and "Bookmarked Materials" into balanced sections with consistent spacing and alignment.
+- Material cards in the profile now match the global design and are responsive on mobile.
 
 
 
