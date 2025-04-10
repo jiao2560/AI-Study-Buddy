@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import api from "../utils/axiosInstance"; //
 
 export const fetchStudyMaterials = () => api.get("/studyMaterials");
@@ -39,17 +37,16 @@ export const deleteReport = (id, token) =>
   api.delete(`/reports/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  export const createReport = (report, token) =>
-    api.post("/reports", report, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+export const createReport = (report, token) =>
+  api.post("/reports", report, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
 // ✅ Fetch all users (admin only)
 export const fetchAllUsers = (token) =>
   api.get("/users", {
     headers: { Authorization: `Bearer ${token}` },
   });
-
 
 // User Authentication API
 export const registerUser = (userData) => api.post("/users/register", userData);

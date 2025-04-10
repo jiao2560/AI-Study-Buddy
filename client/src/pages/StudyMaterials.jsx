@@ -101,7 +101,7 @@ const StudyMaterials = () => {
     <div className="study-materials-page">
       <h1>📚 Study Materials</h1>
 
-      {token ? (
+      {token && userRole !== "admin" ? (
         <>
           <button
             className="toggle-form-btn"
@@ -129,6 +129,8 @@ const StudyMaterials = () => {
             </div>
           )}
         </>
+      ) : token ? (
+        <p className="auth-msg">⚠️ Admins cannot create new materials.</p>
       ) : (
         <p className="auth-msg">
           🔐 Please <a onClick={() => navigate("/login")}>log in</a> to add or

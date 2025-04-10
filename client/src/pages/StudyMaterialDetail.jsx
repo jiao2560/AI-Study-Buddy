@@ -33,7 +33,7 @@ const StudyMaterialDetail = () => {
           const profileRes = await fetchUserProfile(currentUserId, token);
           const bookmarks = profileRes.data.bookmarks || [];
           setIsBookmarked(bookmarks.includes(res.data._id));
-          setUserRole(profileRes.data.role); // ✅ add this line
+          setUserRole(profileRes.data.role);
         }
       } catch (err) {
         console.error("Failed to fetch material or profile", err);

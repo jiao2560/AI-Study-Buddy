@@ -11,6 +11,7 @@ const StudyMaterialForm = () => {
   const { id } = useParams(); // for editing
   const [form, setForm] = useState({ title: "", content: "" });
   const navigate = useNavigate();
+  const userRole = localStorage.getItem("role");
 
   useEffect(() => {
     if (id) {
@@ -21,6 +22,11 @@ const StudyMaterialForm = () => {
   }, [id]);
 
   const handleSubmit = async (e) => {
+    if (!id && userRole === "admin") {
+      alert("Admins are not allowed to create new materials.");
+      return;
+    }
+
     e.preventDefault();
     if (id) {
       await updateStudyMaterial(id, form);
@@ -32,12 +38,9 @@ const StudyMaterialForm = () => {
 
   return (
     <div className="material-form">
-        <button
-          className="back-btn"
-          onClick={() => navigate(-1)}
-        >
-          ← Back
-        </button>
+      <button className="back-btn" onClick={() => navigate(-1)}>
+        ← Back
+      </button>
 
       <h2>{id ? "Edit" : "Add New"} Study Material</h2>
       <form onSubmit={handleSubmit}>
