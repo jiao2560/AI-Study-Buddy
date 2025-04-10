@@ -7,13 +7,15 @@ const NavBar = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("token");
-  const role = localStorage.getItem("role"); // ✅ 加载用户角色
+  const role = localStorage.getItem("role");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
     const fetchUsername = async () => {
       const userId = localStorage.getItem("userId");
       if (!userId) return;
-
       try {
         const res = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${userId}`
@@ -23,7 +25,6 @@ const NavBar = () => {
         console.error("Failed to load user", err);
       }
     };
-
     if (isLoggedIn) fetchUsername();
   }, [isLoggedIn]);
 
@@ -34,17 +35,19 @@ const NavBar = () => {
 
   return (
     <div className="navbar-wrapper">
-      <nav className={`navbar ${!isLoggedIn ? "no-auth" : ""}`}>
-        <div className="nav-left">
+      <nav className="navbar">
+        {/* Mobile hamburger icon */}
+        <button className="hamburger" onClick={toggleMenu}>
+          ☰
+        </button>
+
+        <div className={`nav-left ${menuOpen ? "show" : ""}`}>
           <div className="nav-item">
             <Link to={isLoggedIn ? "/dashboard" : "/"}>Home</Link>
           </div>
-
           <div className="nav-item">
             <Link to="/study-materials">Study Material</Link>
           </div>
-
-          {/* ✅ Only admin sees this */}
           {role === "admin" && (
             <div className="nav-item">
               <Link to="/admin-reports">📋 Handle Reports</Link>
@@ -52,12 +55,10 @@ const NavBar = () => {
           )}
         </div>
 
-        <div className="nav-right">
+        <div className={`nav-right ${menuOpen ? "show" : ""}`}>
           {isLoggedIn ? (
             <>
-              <div className="nav-item greeting">
-                👋 Hi, {username || "User"}
-              </div>
+              <div className="nav-item greeting">👋 Hi, {username || "User"}</div>
               <div className="nav-item">
                 <Link to="/profile">Profile</Link>
               </div>
@@ -67,16 +68,10 @@ const NavBar = () => {
             </>
           ) : (
             <>
-              <button
-                className="nav-auth-btn"
-                onClick={() => navigate("/login")}
-              >
+              <button className="nav-auth-btn" onClick={() => navigate("/login")}>
                 Log In
               </button>
-              <button
-                className="nav-auth-btn"
-                onClick={() => navigate("/signup")}
-              >
+              <button className="nav-auth-btn" onClick={() => navigate("/signup")}>
                 Sign Up
               </button>
             </>

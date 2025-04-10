@@ -96,3 +96,63 @@
 .nav-auth-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
+
+/* ✅ Make hamburger appear on the left in mobile only */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ✅ Show hamburger only on small screens and align it left */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    margin-right: auto; /* forces it to the left */
+    padding: 10px;
+  }
+
+  .nav-left,
+  .nav-right {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .nav-left.show,
+  .nav-right.show {
+    display: flex;
+  }
+
+  .nav-item a,
+  .nav-auth-btn,
+  .logout-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    color: white;
+    font-weight: bold;
+  }
+
+  .nav-auth-btn,
+  .logout-btn {
+    background: none;
+    border: 2px solid white;
+    border-radius: 8px;
+  }
+
+  .nav-item a:hover,
+  .nav-auth-btn:hover,
+  .logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}
