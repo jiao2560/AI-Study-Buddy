@@ -113,3 +113,18 @@
   white-space: pre-wrap;
   line-height: 1.6;
 }
+
+.delete-btn {
+  background-color: #ff9800; /* bright orange */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #e67e00; /* deeper orange on hover */
+}

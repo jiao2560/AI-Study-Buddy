@@ -202,7 +202,7 @@ const StudyMaterials = () => {
                     >
                       ✏️ Edit
                     </button>
-                    <button onClick={() => handleDelete(m._id)}>
+                    <button className="delete-btn" onClick={() => handleDelete(m._id)}>
                       🗑 Delete
                     </button>
                   </>
