@@ -4,6 +4,8 @@
 **Smarter studying starts here.**  
 This app helps users explore trending topics and get AI-suggested study material. Users can sign up, browse topics, and customize their study dashboard.
 
+**Check out our deployed working website**: [Click](https://ai-study-buddy-4.onrender.com/)
+
 For testing admin features, use following account:
 
 email: admin123@gmail.com
@@ -372,6 +374,7 @@ In the second iteration of our project, I focused on implementing admin-specific
 
 🎥 **Iteration 2 Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/EZomDimCX3pMuF23VOSmrTcBWGPgy33f57lRndQuNuSARg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=NsO1V2)
 
+🎥 **Iteration 3 Code Walkthrough Video**: [Click to Watch](https://northeastern-my.sharepoint.com/:v:/g/personal/chen_xinla_northeastern_edu/Ecab0BF3midKq-SkmQdQ02sBViU45UtEBaFNC5tXXYNwuQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=gJ3FT0)
 ---
 ### Iteration 1: CRUD Operations
 #### ✅ Backend (Node.js + Express + MongoDB)
