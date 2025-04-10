@@ -9,10 +9,8 @@ const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [ownMaterials, setOwnMaterials] = useState([]);
   const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [bookmarkedMaterials, setBookmarkedMaterials] = useState([]);
-
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -24,7 +22,7 @@ const ProfilePage = () => {
         setUserInfo(res.data);
         const allMaterialsRes = await fetchStudyMaterials();
         const bookmarked = allMaterialsRes.data.filter((m) =>
-        res.data.bookmarks.includes(m._id)
+          res.data.bookmarks.includes(m._id)
         );
         setBookmarkedMaterials(bookmarked);
       } catch (err) {
@@ -56,99 +54,118 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="study-materials-page">
-      <div className="profile-page">
-        <div className="profile-page-grid">
-        {/* TOP CENTER: Profile Info */}
-        <div className="profile-header-center">
-            <div className="profile-box">
+    <div className="profile-page">
+      <div className="profile-page-grid">
+        {/* Profile Info */}
+        <div className="profile-section">
+          <div className="profile-header-center">
             <div className="profile-header">
-                <span className="profile-icon">👤</span>
-                <h1 className="profile-title">Profile</h1>
+              <span className="profile-icon">👤</span>
+              <h1 className="profile-title">Profile</h1>
             </div>
             {userInfo ? (
-                <div className="profile-info">
-                <p><strong>Username:</strong> {userInfo.username}</p>
-                <p><strong>Email:</strong> {userInfo.email}</p>
-                </div>
+              <div className="profile-info">
+                <p>
+                  <strong>Username:</strong> {userInfo.username}
+                </p>
+                <p>
+                  <strong>Email:</strong> {userInfo.email}
+                </p>
+              </div>
             ) : (
-                <p>Loading profile...</p>
+              <p>Loading profile...</p>
             )}
-            </div>
+          </div>
         </div>
 
-        {/* BOTTOM LEFT: Your Study Materials */}
-        <div className="profile-box profile-materials-left">
-            <h2>📘 Your Study Materials</h2>
-            <div className="material-list">
+        {/* Your Materials */}
+        <div className="profile-section">
+          <h2>📘 Your Study Materials</h2>
+          <div className="material-list">
             {ownMaterials.length === 0 ? (
-                <p style={{ color: "#ccc" }}>You haven't created any materials yet.</p>
+              <p style={{ color: "#ccc" }}>
+                You haven't created any materials yet.
+              </p>
             ) : (
-                ownMaterials.map((m) => (
+              ownMaterials.map((m) => (
                 <div className="material-card" key={m._id}>
-                    <h3>{m.title}</h3>
-                    <p>
+                  <h3>{m.title}</h3>
+                  <p>
                     {m.content.length > 225 ? (
-                        <>
+                      <>
                         {m.content.slice(0, 225)}...{" "}
                         <span
-                            className="read-more"
-                            onClick={() => navigate(`/study-materials/${m._id}`)}
+                          className="read-more"
+                          onClick={() => navigate(`/study-materials/${m._id}`)}
                         >
-                            Read more
+                          Read more
                         </span>
-                        </>
+                      </>
                     ) : (
-                        m.content
+                      m.content
                     )}
-                    </p>
-                    <div className="card-actions">
-                    <button onClick={() => navigate(`/study-materials/${m._id}`)}>👁 View</button>
-                    <button onClick={() => navigate(`/study-materials/${m._id}/edit`)}>✏️ Edit</button>
-                    <button onClick={() => handleDelete(m._id)}>🗑 Delete</button>
-                    </div>
-                </div>
-                ))
-            )}
-            </div>
-        </div>
-
-    {/* BOTTOM RIGHT: Bookmarked Materials */}
-    <div className="profile-box profile-materials-right">
-        <h2>🔖 Bookmarked Materials</h2>
-        <div className="material-list">
-        {bookmarkedMaterials.length === 0 ? (
-            <p style={{ color: "#ccc" }}>You haven’t bookmarked any materials yet.</p>
-        ) : (
-            bookmarkedMaterials.map((m) => (
-            <div className="material-card" key={m._id}>
-                <h3>{m.title}</h3>
-                <p>
-                {m.content.length > 225 ? (
-                    <>
-                    {m.content.slice(0, 225)}...{" "}
-                    <span
-                        className="read-more"
-                        onClick={() => navigate(`/study-materials/${m._id}`)}
+                  </p>
+                  <div className="card-actions">
+                    <button
+                      onClick={() => navigate(`/study-materials/${m._id}`)}
                     >
-                        Read more
-                    </span>
-                    </>
-                ) : (
-                    m.content
-                )}
-                </p>
-                <div className="card-actions">
-                <button onClick={() => navigate(`/study-materials/${m._id}`)}>👁 View</button>
+                      👁 View
+                    </button>
+                    <button
+                      onClick={() => navigate(`/study-materials/${m._id}/edit`)}
+                    >
+                      ✏️ Edit
+                    </button>
+                    <button onClick={() => handleDelete(m._id)}>
+                      🗑 Delete
+                    </button>
+                  </div>
                 </div>
-            </div>
-            ))
-        )}
+              ))
+            )}
+          </div>
         </div>
-  </div>
-</div>
 
-</div>
+        {/* Bookmarked Materials */}
+        <div className="profile-section">
+          <h2>🔖 Bookmarked Materials</h2>
+          <div className="material-list">
+            {bookmarkedMaterials.length === 0 ? (
+              <p style={{ color: "#ccc" }}>
+                You haven’t bookmarked any materials yet.
+              </p>
+            ) : (
+              bookmarkedMaterials.map((m) => (
+                <div className="material-card" key={m._id}>
+                  <h3>{m.title}</h3>
+                  <p>
+                    {m.content.length > 225 ? (
+                      <>
+                        {m.content.slice(0, 225)}...{" "}
+                        <span
+                          className="read-more"
+                          onClick={() => navigate(`/study-materials/${m._id}`)}
+                        >
+                          Read more
+                        </span>
+                      </>
+                    ) : (
+                      m.content
+                    )}
+                  </p>
+                  <div className="card-actions">
+                    <button
+                      onClick={() => navigate(`/study-materials/${m._id}`)}
+                    >
+                      👁 View
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
