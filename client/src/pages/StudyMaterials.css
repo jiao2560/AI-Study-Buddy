@@ -109,6 +109,9 @@ h1 {
   padding: 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .material-card:hover {
@@ -145,11 +148,12 @@ h1 {
 
 /* Card action buttons: View, Edit, Delete */
 .card-actions {
-  margin-top: 1rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px; /* Increased spacing between buttons */
   justify-content: flex-start;
+  align-items: center; /* ✅ Align vertically */
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto; /* Push buttons to the bottom if needed */
 }
 
 .card-actions button:not(.delete-btn) {
@@ -202,15 +206,16 @@ h1 {
 }
 
 .delete-btn {
-  background-color: #ff9800; /* Orange */
+  background-color: #ff9800;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 16px; /* Match other buttons */
   border-radius: 8px;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
+  min-width: 100px; /* Optional: to align width */
 }
 
 .delete-btn:hover {
