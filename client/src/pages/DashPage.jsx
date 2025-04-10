@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import robotImg from "../assets/robot.png";
 import "./homepage.css";
-import NavBar from "../components/NavBar";
 
 const DashPage = () => {
   const [trendingTopics, setTrendingTopics] = useState([]);
