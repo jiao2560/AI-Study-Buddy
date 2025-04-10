@@ -91,7 +91,7 @@ const StudyMaterialDetail = () => {
 
         {isLoggedIn && (
           <div className="action-buttons">
-            {isOwner || userRole === "admin" ? (
+            {(isOwner || userRole === "admin") && (
               <>
                 <button
                   className="edit-btn"
@@ -103,7 +103,9 @@ const StudyMaterialDetail = () => {
                   🗑 Delete
                 </button>
               </>
-            ) : (
+            )}
+
+            {isLoggedIn && userRole !== "admin" && !isOwner && (
               <>
                 <button className="bookmark-btn" onClick={handleBookmarkToggle}>
                   {isBookmarked ? "➖ Unbookmark" : "➕ Bookmark"}
