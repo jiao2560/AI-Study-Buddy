@@ -508,6 +508,79 @@ Screenshots for Iteration 2 are available here:
 
 
 
+### Iteration 3: Final Features, Admin Tools, and Polish
+
+#### 🔐 Authentication & Profile Completion
+
+- **Dynamic Login Support**
+  - Logged-in users now see personalized greetings, access to quiz/report tools, and profile options.
+  - Admin users have distinct privileges and UI visibility.
+  
+- **Profile Integration**
+  - Dashboards dynamically fetch and display the authenticated user’s profile data.
+  - Username is shown in the navbar and welcome message.
+
+
+
+#### 📋 Admin Permissions & Moderation Tools
+
+- **Admin Editing & Deletion**
+  - Admins can now **edit or delete any study material**, not just their own.
+  - Delete actions are guarded by **native browser confirmation dialogs**.
+  
+- **Restricted Creation Access**
+  - Admins are explicitly **prevented from creating new materials**, aligning their role with content moderation.
+
+- **Enhanced Visual Feedback**
+  - 🔶 Delete buttons now use **orange** styling to convey importance without being too aggressive.
+  - All admin actions are clearly separated visually for clarity and user safety.
+
+
+
+#### 📱 Mobile Optimization
+
+- **Responsive Navbar**
+  - Mobile users now see a **hamburger menu** on the left, only visible below 768px.
+  - Dropdown menu aligns properly, stacks buttons vertically, and avoids overflow or overlap.
+  
+- **Dashboard Layout**
+  - Fixed layout overflow where dashboard cards (AI, Trending, Recent) previously **exceeded screen width**.
+  - Cards now **stack neatly**, maintain spacing, and preserve visual balance on small screens.
+
+
+
+#### 💄 UI & UX Improvements
+
+- **Study Material Card Alignment**
+  - Buttons (Edit, Delete, Report) are consistently spaced and aligned.
+  - Improved mobile card readability and padding.
+
+- **Report Modal Styling**
+  - Overhauled modal with:
+    - Blue-purple **gradient background**
+    - Matching **glassy aesthetic**
+    - Clean form inputs and consistent spacing
+  
+- **Theming Consistency**
+  - Ensured all buttons, inputs, and modals match the project’s visual identity.
+
+
+
+#### 🧠 AI Quiz Fixes
+
+- **Timeout Handling**
+  - Resolved issues where **Cohere API calls timed out** during quiz generation.
+  - Adjusted timeout thresholds and improved error feedback to users.
+  
+
+
+#### 📸 Screenshots
+
+👉 [Iteration 3 UI Screenshots](https://github.com/jiao2560/AI-Study-Buddy/issues/27)
+
+
+
+
 ---
 
 ## 📄 License
