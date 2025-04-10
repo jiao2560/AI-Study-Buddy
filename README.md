@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/7fe7123b-4e74-418e-9e88-7eecd1aa0ef0)
 # 🧠 AI Study Buddy
 
 **Smarter studying starts here.**  
