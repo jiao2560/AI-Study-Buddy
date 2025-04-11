@@ -20,6 +20,7 @@ const ProfilePage = () => {
           `${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${userId}`
         );
         console.log("User Info 👉", res.data); 
+        
         setUserInfo(res.data);
         const allMaterialsRes = await fetchStudyMaterials();
         const bookmarked = allMaterialsRes.data.filter((m) =>
@@ -72,6 +73,14 @@ const ProfilePage = () => {
                 <p>
                   <strong>Email:</strong> {userInfo.email}
                 </p>
+                  <p>
+      <strong>Registered:</strong>{" "}
+      {new Date(userInfo.createdAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })}
+    </p>
               </div>
             ) : (
               <p>Loading profile...</p>

@@ -11,6 +11,7 @@ const DashPage = () => {
   const [sortOption, setSortOption] = useState("default");
   const [showFilters, setShowFilters] = useState(false);
   const [username, setUsername] = useState("");
+  const [registerDate, setRegisterDate] = useState(null); // ✅ 新增
 
   useEffect(() => {
     fetchData();
@@ -50,6 +51,7 @@ const DashPage = () => {
         `${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${userId}`
       );
       setUsername(res.data.username);
+      setRegisterDate(res.data.createdAt); // ✅ 这里获取注册时间
     } catch (err) {
       console.error("Failed to load user profile", err);
     }
@@ -57,6 +59,15 @@ const DashPage = () => {
 
   const handleSearch = () => {
     fetchData();
+  };
+
+  const getDaysSinceRegistration = () => {
+    if (!registerDate) return null;
+    const created = new Date(registerDate);
+    const today = new Date();
+    const diffTime = today - created;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
   };
 
   const sortedWikiTopics = [...trendingTopics];
@@ -79,7 +90,21 @@ const DashPage = () => {
         </button>
 
         <h1>Welcome back, {username || "User"}!</h1>
-        <p>Happy studying! 🎓✨</p>
+        <p>
+          {registerDate ? (
+            <>
+              You've been learning with AI Buddy for{" "}
+              <strong>
+                {getDaysSinceRegistration()}{" "}
+                {getDaysSinceRegistration() === 1 ? "day" : "days"}
+              </strong>
+              ! 📚✨
+            </>
+          ) : (
+            <>Happy studying! 🎓✨</>
+          )}
+        </p>
+
 
         {showFilters && (
           <div className="filter-section">

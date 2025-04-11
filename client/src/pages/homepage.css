@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 :root {
-  --font: "Roboto", "Open Sans", Arial, sans-serif;
+  --font: 'Roboto', 'Open Sans', Arial, sans-serif;
 }
 
 body,
@@ -7,6 +9,8 @@ button,
 input,
 select {
   font-family: var(--font);
+  font-size: 1.1rem;
+  color: #ffffff;
 }
 
 body {
@@ -14,14 +18,12 @@ body {
   padding: 0;
   min-height: 100vh;
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
-  color: #fff;
 }
 
 .homepage {
   width: 100%;
   min-height: 100vh;
   padding: 0;
-  color: #fff;
   box-sizing: border-box;
 }
 
@@ -51,9 +53,9 @@ body {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(6px);
 }
 
@@ -61,10 +63,10 @@ body {
 .filter-section select {
   padding: 12px 16px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 1.05rem;
   min-width: 220px;
   line-height: 1.5;
   outline: none;
@@ -72,16 +74,16 @@ body {
 }
 
 .filter-section input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .filter-section button {
   padding: 16px 20px;
   border-radius: 8px;
   background-color: #00bcd4;
-  color: #fff;
+  color: #ffffff;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.1rem;
   border: none;
   transition: background 0.3s;
   display: flex;
@@ -105,40 +107,49 @@ body {
 /* ---------------- CARDS ---------------- */
 .card {
   background: linear-gradient(135deg, rgba(25, 25, 112, 0.6), rgba(0, 212, 255, 0.15));
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 40px;
   padding: 30px 40px;
   margin-bottom: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
   flex: 1;
   min-width: 300px;
   max-width: 500px;
   backdrop-filter: blur(4px);
-  color: #e0e0e0;
+  color: #f8f9fa;
   transition: all 0.3s ease;
 }
 
 .card h2 {
   margin-top: 0;
-  color: #18ceee;
+  font-size: 1.6rem;
+  color: #ffffff;
 }
 
 .card a {
-  color: #00e5ff;
-  text-decoration: underline;
-  font-weight: 500;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  display: inline-block;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
 }
 
 .card a:hover {
-  color: #80ffff;
+  transform: scale(1.05);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
-.card ul {
-  padding-left: 1.2rem;
-}
-
-.card li::marker {
-  color: #00e5ff;
+.card ul li {
+  font-size: 1.15rem;
+  margin: 0.6rem 0;
+  line-height: 1.7;
+  list-style-type: disc;
+  padding-left: 0.5rem;
+  color: #f0f0f0;
 }
 
 /* ---------------- AUTH BUTTONS ---------------- */
@@ -151,18 +162,18 @@ body {
 
 .login-btn,
 .signup-btn {
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 16px;
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 1.1rem;
   border-radius: 8px;
   cursor: pointer;
   border: none;
 }
 
 .login-btn {
-  background-color: #fff;
+  background-color: #ffffff;
   color: #007bff;
-  border: 1px solid #007bff;
+  border: 2px solid #007bff;
 }
 
 .signup-btn {
@@ -173,7 +184,7 @@ body {
 /* ---------------- OTHER SECTIONS ---------------- */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.7fr 1.3fr;
   grid-template-rows: auto auto;
   gap: 24px;
   margin-top: 40px;
@@ -181,7 +192,7 @@ body {
 
 .grid-card {
   background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: #ffffff;
   padding: 24px;
   border-radius: 20px;
   backdrop-filter: blur(4px);
@@ -205,7 +216,7 @@ body {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   text-align: center;
-  color: #fff;
+  color: #ffffff;
 }
 
 .why-section ul {
@@ -215,7 +226,14 @@ body {
 
 .why-section li {
   margin: 0.5rem 0;
-  font-size: 1rem;
+  font-size: 1.15rem;
+  color: #f0f0f0;
+}
+
+.cta-section h2 {
+  margin-bottom: 0.8rem;
+  font-size: 1.6rem;
+  color: #ffffff;
 }
 
 .cta-section button.get-started {
@@ -227,6 +245,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   margin-top: 0.5rem;
+  font-size: 1.1rem;
 }
 
 .cta-section a {
@@ -234,13 +253,9 @@ body {
   text-decoration: underline;
 }
 
-.cta-section h2 {
-  margin-bottom: 0.8rem;
-}
-
 .intro-section {
   margin: 1.5rem auto 0;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   font-weight: 500;
   text-align: center;
   max-width: 800px;
@@ -253,7 +268,7 @@ body {
   bottom: 20px;
   right: 20px;
   text-align: center;
-  color: #fff;
+  color: #ffffff;
   font-weight: bold;
   width: 120px;
   z-index: 999;
@@ -291,15 +306,17 @@ body {
 button {
   font-weight: bold;
   cursor: pointer;
+  font-size: 1.1rem;
 }
 
 a {
-  color: #0066cc;
+  color: #00e5ff;
   text-decoration: underline;
+  font-weight: 500;
 }
 
 .error {
-  color: red;
+  color: #ff5252;
 }
 
 .toggle-search-btn {
@@ -313,12 +330,14 @@ a {
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease;
+  font-size: 1.1rem;
 }
 
 .toggle-search-btn:hover {
   background-color: #0097a7;
 }
 
+/* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 768px) {
   .dashboard-grid {
     display: flex;
