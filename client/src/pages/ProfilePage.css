@@ -1,23 +1,21 @@
 .profile-page {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;         /* 垂直排列内容 */
+  align-items: center;            /* 居中内容 */
+  justify-content: flex-start;
   padding: 2rem;
   color: #fff;
-  height: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-.profile-left {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* 容器最大宽度，防止太宽 */
+.profile-page-grid {
+  width: 100%;
+  max-width: 1000px;
 }
 
-.profile-right {
-  width: 50%;
-}
-
-/* Header row */
+/* Profile Header */
 .profile-header {
   display: flex;
   align-items: center;
@@ -34,11 +32,13 @@
   font-weight: bold;
 }
 
-/* Info */
+/* 个人信息区域 */
 .profile-info p {
   margin: 0.5rem 0;
   font-size: 1.1rem;
 }
+
+/* Section 样式：背景 + 边框 + 模糊 + 阴影 */
 .profile-section {
   background: rgba(255, 255, 255, 0.05);
   padding: 1.5rem;
@@ -49,14 +49,27 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* section 标题 */
 .profile-section h2 {
   margin-bottom: 1rem;
   font-size: 1.4rem;
   color: #18ceee;
 }
 
+/* 居中容器 */
 .profile-header-center,
 .profile-materials-left,
 .profile-materials-right {
   margin-bottom: 2.5rem;
+}
+
+/* 响应式处理（可选） */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 1rem;
+  }
+
+  .profile-page-grid {
+    padding: 0 1rem;
+  }
 }
