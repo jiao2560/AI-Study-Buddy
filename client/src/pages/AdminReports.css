@@ -1,57 +1,78 @@
 .admin-reports-page {
-    padding: 2rem;
-    font-family: sans-serif;
-  }
+  padding: 2rem;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  .report-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-  }
+.admin-reports-page h2 {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: #00eaff;
+}
 
-  .report-table th,
-  .report-table td {
-    border: 1px solid #ccc;
-    padding: 0.5rem;
-    text-align: left;
-  }
+.report-table,
+.user-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
 
-  .report-table th {
-    background-color: #987ce6;
-  }
+.report-table th,
+.user-table th {
+  background-color: rgba(0, 0, 50, 0.6);
+  color: #ffffff;
+  padding: 14px;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+}
 
-  .report-table button {
-    margin-right: 0.5rem;
-    padding: 0.3rem 0.6rem;
-    cursor: pointer;
-  }
-  .user-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-  }
+.report-table td,
+.user-table td {
+  padding: 12px;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-  .user-table th, .user-table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
+.report-table tr:nth-child(even),
+.user-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
 
-  .user-table th {
-    background-color: #673AB7;
-    color: #fff;
-  }
+.report-table button,
+.user-table button {
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px 5px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
 
-  .user-table td {
-    background-color: #312e81;
-    color: #fff;
-  }
+.report-table button:hover,
+.user-table button:hover {
+  background-color: #0097a7;
+}
 
-  .user-table a {
-    color: #60a5fa;
-    text-decoration: none;
-  }
+.user-table a {
+  color: #7dd3fc;
+  text-decoration: underline;
+  font-weight: 500;
+}
 
-  .user-table a:hover {
-    text-decoration: underline;
-  }
+.user-table a:hover {
+  color: #bae6fd;
+}

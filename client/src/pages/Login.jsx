@@ -27,7 +27,7 @@ const Login = () => {
       // ✅ Save token, userId and role to localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("userId", userId);
-      localStorage.setItem("role", role);
+      localStorage.setItem("userRole", role);
 
       setMessage("✅ Login successful!");
 

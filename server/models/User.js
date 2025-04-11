@@ -1,13 +1,16 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const UserSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ["user", "admin"], default: "user" },
-  bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: "StudyMaterial" }] // ✅ new field
-});
+const UserSchema = new mongoose.Schema(
+  {
+    username: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { type: String, enum: ["user", "admin"], default: "user" },
+    bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: "StudyMaterial" }]
+  },
+  { timestamps: true } // Automatically manage createdAt and updatedAt fields
+);
 
 // Hash password before saving
 UserSchema.pre("save", async function (next) {

@@ -7,7 +7,8 @@ const NavBar = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
+  const role = localStorage.getItem("userRole"); // ✅ match login save
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -60,7 +61,8 @@ const NavBar = () => {
             <>
               <div className="nav-item greeting">👋 Hi, {username || "User"}</div>
               <div className="nav-item">
-                <Link to="/profile">Profile</Link>
+              <Link to={`/profile/${localStorage.getItem("userId")}`}>Profile</Link>
+
               </div>
               <button className="logout-btn" onClick={handleLogout}>
                 Logout
