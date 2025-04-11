@@ -365,6 +365,70 @@ In the second iteration of our project, I focused on implementing admin-specific
 
 ![Image](https://github.com/user-attachments/assets/8e214ab1-a465-4c29-92b3-804c9ba17c91)
 
+## 📄 My Contribution (Zhenziye Lin) — Iteration 3
+
+🎥 **Code Walkthrough Video**: [Click to watch](https://drive.google.com/file/d/1WvJvlC5Y5LRGeQCkHaq9qWBTEseQNofJ/view?usp=drive_link)
+
+In the third iteration of our project, I focused on building a dynamic and role-sensitive user profile system, enhancing the admin experience, and integrating personalized user feedback based on registration timestamps.
+
+---
+
+### ✅ Dynamic User Profile View
+
+- Refactored `ProfilePage` to accept dynamic route param: `/profile/:userId`.
+- Implemented `useParams()` to fetch and render profile content based on the user being viewed.
+- Introduced role-aware logic to differentiate between:
+  - A user viewing **their own profile** (with full content + bookmarks).
+  - An **admin viewing someone else’s profile** (read-only summary).
+- Ensured profile pages are clean and permission-sensitive.
+
+---
+
+### ✅ Admin-Specific Behavior Enhancements
+
+- On admin accounts:
+  - Hides `Study Materials` and `Bookmarked` sections from their own profile.
+  - Shows minimal layout with only key info (username, email, role, registration date).
+- Linked user names in `AdminReports` table to their profile page.
+  - Enables direct user inspection by admin.
+
+---
+
+### ✅ Personalized Learning Duration
+
+- Added `createdAt` timestamp to all user accounts (backfilled for existing users).
+- Implemented date-based message on the homepage:
+  > "You've been learning with AI Buddy for **X day(s)**!"
+- Includes plural/singular grammar handling, and fallback in case `createdAt` is missing.
+
+---
+
+### ✅ Navigation & Routing Improvements
+
+- Updated `NavBar` profile link to dynamically point to `/profile/${userId}`.
+- Ensured `localStorage` stores `userId` and `userRole` immediately after login.
+- Validated navigation and rendering behavior for:
+  - Regular users
+  - Admin users viewing their own page
+  - Admin users viewing other users
+
+---
+
+### ✅ Technologies & Tools
+
+- `React Router` for dynamic routes and role-based access
+- `localStorage` for state persistence
+- `useParams`, `useNavigate` for profile redirection and control
+- Conditional JSX rendering to toggle sections based on role
+
+---
+
+### 📷 Screenshots (Iteration 3)
+
+![Image](https://github.com/user-attachments/assets/e65de27c-5ccb-443b-88c2-e6c05aa7fcf3)
+![Image](https://github.com/user-attachments/assets/2340c168-f22b-4cf3-88fa-8373aa7419b3)
+![Image](https://github.com/user-attachments/assets/8fb4dfae-a801-46c9-a7d5-4dff6ac00c85)
+
 ---
 
 ## 🧠 My Contribution (Xinlai Chen)
