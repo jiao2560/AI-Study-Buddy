@@ -31,7 +31,8 @@ function App() {
         />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
-        <Route path="/admin-reports" element={<AdminReports />} />
+<Route path="/admin-reports" element={<AdminReports />} />
+
 
       </Routes>
     </BrowserRouter>

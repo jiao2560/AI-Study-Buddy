@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { fetchStudyMaterials, deleteStudyMaterial } from "../services/api";
 import "./ProfilePage.css";
 import "./StudyMaterials.css";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [ownMaterials, setOwnMaterials] = useState([]);
   const [bookmarkedMaterials, setBookmarkedMaterials] = useState([]);
-  const userId = localStorage.getItem("userId");
+  const { userId } = useParams();
   const navigate = useNavigate();
+
+  // ✅ 判断是否是自己 or 管理员查看别人
+  const localUserId = localStorage.getItem("userId");
+  const localUserRole = localStorage.getItem("role");
+  const isOwnProfile = userId === localUserId;
+  const isAdminViewingOthers = localUserRole === "admin" && !isOwnProfile;
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -19,8 +25,8 @@ const ProfilePage = () => {
         const res = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${userId}`
         );
-        console.log("User Info 👉", res.data); 
-        
+        console.log("User Info 👉", res.data);
+
         setUserInfo(res.data);
         const allMaterialsRes = await fetchStudyMaterials();
         const bookmarked = allMaterialsRes.data.filter((m) =>
@@ -73,14 +79,14 @@ const ProfilePage = () => {
                 <p>
                   <strong>Email:</strong> {userInfo.email}
                 </p>
-                  <p>
-      <strong>Registered:</strong>{" "}
-      {new Date(userInfo.createdAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })}
-    </p>
+                <p>
+                  <strong>Registered:</strong>{" "}
+                  {new Date(userInfo.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
               </div>
             ) : (
               <p>Loading profile...</p>
@@ -88,8 +94,8 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* ✅ Only show the following two blocks if you are not admin */}
-        {userInfo?.role !== "admin" && (
+        {/* ✅ 如果是本人且不是管理员 */}
+        {isOwnProfile && userInfo?.role !== "admin" && (
           <>
             {/* Your Study Materials */}
             <div className="profile-section">
@@ -189,6 +195,31 @@ const ProfilePage = () => {
               </div>
             </div>
           </>
+        )}
+
+        {/* ✅ 如果是管理员在查看别人 */}
+        {isAdminViewingOthers && (
+          <div className="profile-section">
+            <h2>👁️ Admin View: User Info</h2>
+            <p>
+              <strong>Username:</strong> {userInfo.username}
+            </p>
+            <p>
+              <strong>Email:</strong> {userInfo.email}
+            </p>
+            <p>
+              <strong>Role:</strong> {userInfo.role}
+            </p>
+            <p>
+              <strong>Registered:</strong>{" "}
+              {new Date(userInfo.createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+            {/* 你可以加：用户举报数、内容量、活跃状态等 */}
+          </div>
         )}
       </div>
     </div>
