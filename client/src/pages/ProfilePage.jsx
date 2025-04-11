@@ -8,9 +8,9 @@ import "./StudyMaterials.css";
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [ownMaterials, setOwnMaterials] = useState([]);
+  const [bookmarkedMaterials, setBookmarkedMaterials] = useState([]);
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
-  const [bookmarkedMaterials, setBookmarkedMaterials] = useState([]);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -19,6 +19,7 @@ const ProfilePage = () => {
         const res = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/api/users/profile/${userId}`
         );
+        console.log("User Info 👉", res.data); 
         setUserInfo(res.data);
         const allMaterialsRes = await fetchStudyMaterials();
         const bookmarked = allMaterialsRes.data.filter((m) =>
@@ -78,93 +79,108 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Your Materials */}
-        <div className="profile-section">
-          <h2>📘 Your Study Materials</h2>
-          <div className="material-list">
-            {ownMaterials.length === 0 ? (
-              <p style={{ color: "#ccc" }}>
-                You haven't created any materials yet.
-              </p>
-            ) : (
-              ownMaterials.map((m) => (
-                <div className="material-card" key={m._id}>
-                  <h3>{m.title}</h3>
-                  <p>
-                    {m.content.length > 225 ? (
-                      <>
-                        {m.content.slice(0, 225)}...{" "}
-                        <span
-                          className="read-more"
-                          onClick={() => navigate(`/study-materials/${m._id}`)}
-                        >
-                          Read more
-                        </span>
-                      </>
-                    ) : (
-                      m.content
-                    )}
+        {/* ✅ Only show the following two blocks if you are not admin */}
+        {userInfo?.role !== "admin" && (
+          <>
+            {/* Your Study Materials */}
+            <div className="profile-section">
+              <h2>📘 Your Study Materials</h2>
+              <div className="material-list">
+                {ownMaterials.length === 0 ? (
+                  <p style={{ color: "#ccc" }}>
+                    You haven't created any materials yet.
                   </p>
-                  <div className="card-actions">
-                    <button
-                      onClick={() => navigate(`/study-materials/${m._id}`)}
-                    >
-                      👁 View
-                    </button>
-                    <button
-                      onClick={() => navigate(`/study-materials/${m._id}/edit`)}
-                    >
-                      ✏️ Edit
-                    </button>
-                    <button onClick={() => handleDelete(m._id)}>
-                      🗑 Delete
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
+                ) : (
+                  ownMaterials.map((m) => (
+                    <div className="material-card" key={m._id}>
+                      <h3>{m.title}</h3>
+                      <p>
+                        {m.content.length > 225 ? (
+                          <>
+                            {m.content.slice(0, 225)}...{" "}
+                            <span
+                              className="read-more"
+                              onClick={() =>
+                                navigate(`/study-materials/${m._id}`)
+                              }
+                            >
+                              Read more
+                            </span>
+                          </>
+                        ) : (
+                          m.content
+                        )}
+                      </p>
+                      <div className="card-actions">
+                        <button
+                          onClick={() =>
+                            navigate(`/study-materials/${m._id}`)
+                          }
+                        >
+                          👁 View
+                        </button>
+                        <button
+                          onClick={() =>
+                            navigate(`/study-materials/${m._id}/edit`)
+                          }
+                        >
+                          ✏️ Edit
+                        </button>
+                        <button onClick={() => handleDelete(m._id)}>
+                          🗑 Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
 
-        {/* Bookmarked Materials */}
-        <div className="profile-section">
-          <h2>🔖 Bookmarked Materials</h2>
-          <div className="material-list">
-            {bookmarkedMaterials.length === 0 ? (
-              <p style={{ color: "#ccc" }}>
-                You haven’t bookmarked any materials yet.
-              </p>
-            ) : (
-              bookmarkedMaterials.map((m) => (
-                <div className="material-card" key={m._id}>
-                  <h3>{m.title}</h3>
-                  <p>
-                    {m.content.length > 225 ? (
-                      <>
-                        {m.content.slice(0, 225)}...{" "}
-                        <span
-                          className="read-more"
-                          onClick={() => navigate(`/study-materials/${m._id}`)}
-                        >
-                          Read more
-                        </span>
-                      </>
-                    ) : (
-                      m.content
-                    )}
+            {/* Bookmarked Materials */}
+            <div className="profile-section">
+              <h2>🔖 Bookmarked Materials</h2>
+              <div className="material-list">
+                {bookmarkedMaterials.length === 0 ? (
+                  <p style={{ color: "#ccc" }}>
+                    You haven’t bookmarked any materials yet.
                   </p>
-                  <div className="card-actions">
-                    <button
-                      onClick={() => navigate(`/study-materials/${m._id}`)}
-                    >
-                      👁 View
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
+                ) : (
+                  bookmarkedMaterials.map((m) => (
+                    <div className="material-card" key={m._id}>
+                      <h3>{m.title}</h3>
+                      <p>
+                        {m.content.length > 225 ? (
+                          <>
+                            {m.content.slice(0, 225)}...{" "}
+                            <span
+                              className="read-more"
+                              onClick={() =>
+                                navigate(`/study-materials/${m._id}`)
+                              }
+                            >
+                              Read more
+                            </span>
+                          </>
+                        ) : (
+                          m.content
+                        )}
+                      </p>
+                      <div className="card-actions">
+                        <button
+                          onClick={() =>
+                            navigate(`/study-materials/${m._id}`)
+                          }
+                        >
+                          👁 View
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
